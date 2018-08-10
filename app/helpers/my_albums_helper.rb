@@ -1,0 +1,2 @@
+module MyAlbumsHelper
+end

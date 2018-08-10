@@ -1,0 +1,45 @@
+// Place all the styles related to the my_photos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+
+/*-----------------------------------------------------*/
+.photo-background{
+	position: relative;
+	width: 100%;
+	height: 500px;
+	background: linear-gradient(#402B2B, black);
+	z-index: -1;
+}
+.showpage-photo{
+	position: absolute;
+	top: 50px;
+    left: 470px;
+	width: 500px;
+	height: 400px;
+	background-color: pink;
+}
+.photo-details{
+	position: relative;
+	width: 80%;
+	height: 400px;
+	margin: 0 auto;
+	background-color: silver;
+	z-index: -1;
+}
+.photo-slide-left{
+	position: absolute;
+	top: 160px;
+    left: 300px;
+	font-size: 100px;
+	color: rgba(255, 255, 255, 0.4);
+}
+.photo-slide-right{
+	position: absolute;
+	top: 160px;
+    left: 1070px;
+	font-size: 100px;
+	color: rgba(255, 255, 255, 0.4);
+}

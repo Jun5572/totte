@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  detail: MyText
+  type: 1
+  open_date: 2018-08-09 02:31:54
+  close_date: 2018-08-09 02:31:54
+  place_id: 1
+  user_id: 1
+  company_id: 1
+  interest_count: 1
+
+two:
+  name: MyString
+  detail: MyText
+  type: 1
+  open_date: 2018-08-09 02:31:54
+  close_date: 2018-08-09 02:31:54
+  place_id: 1
+  user_id: 1
+  company_id: 1
+  interest_count: 1
