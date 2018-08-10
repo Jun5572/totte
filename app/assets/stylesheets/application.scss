@@ -1,0 +1,139 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@import "semantic-ui";
+@import "semantic-ui/collections/menu";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .7);
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s linear;
+}
+.overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+
+
+
+
+
+
+/*------------------------------------------------------------*/
+body{
+	padding-top: 80px;
+}
+header#header-fixed{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 80px;
+	background: linear-gradient(black, rgba(0, 0, 0, 0.8));
+}
+footer{
+	width: 100%;
+	height: 140px;
+	background: linear-gradient(rgba(0, 0, 0, 0.8), black );
+}
+.main-box{
+	width: 100%;
+}
+.headline-box{
+	padding-top: 10px;
+	color: white;
+	/*background-color:silver;*/
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.headline-icons{
+	display: flex;
+}
+/*totteのロゴ*/
+.brand-logo{
+	width:100px;
+	height:40px;
+	margin-top: 5px;
+}
+.headline-user-icon{
+	margin-top: 10px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: orange;
+}
+.sub-header{
+	width: 100%;
+	padding: 10px;
+}
+.subheader-contents{
+	width:80%;
+	margin:0 auto;
+}
+.main-visual{
+	position: relative;
+	top: -80px;
+	left: 0;
+	width: 100%;
+	height: 300px;
+	background-color: orange;
+	z-index: -1;
+}
+.main-visual-edit-button{
+	position: absolute;
+	top: 330px;
+    left: 1390px;
+	color: red;
+	border: solid 1px;
+	z-index: -1;
+}
+.main-contents-box{
+	width: 80%;
+	background-color: rgba(0, 0, 0, 0.2);
+	margin: 0 auto;
+}
+.photo-contents-box{
+	width: 60%;
+	/*background-color: rgba(0, 0, 0, 0.2);*/
+	margin: 0 auto;
+	display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

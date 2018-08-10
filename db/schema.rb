@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_09_000642) do
+ActiveRecord::Schema.define(version: 2018_08_09_030821) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,6 +27,126 @@ ActiveRecord::Schema.define(version: 2018_08_09_000642) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "album_items", force: :cascade do |t|
+    t.integer "album_id"
+    t.integer "photo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "albums", force: :cascade do |t|
+    t.string "title"
+    t.text "introduction"
+    t.string "thumbnail_id"
+    t.integer "user_id"
+    t.integer "event_id"
+    t.integer "like_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cameras", force: :cascade do |t|
+    t.string "make"
+    t.string "model"
+    t.string "lens_info"
+    t.string "lens_make"
+    t.string "lens_model"
+    t.string "thumbnail_id"
+    t.string "url"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "colors", force: :cascade do |t|
+    t.string "name"
+    t.integer "photo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "staff"
+    t.string "url"
+    t.text "introduction"
+    t.integer "place_id"
+    t.string "thumbnail_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.text "detail"
+    t.integer "type", default: 0, null: false
+    t.datetime "open_date"
+    t.datetime "close_date"
+    t.integer "place_id"
+    t.integer "user_id"
+    t.integer "company_id"
+    t.integer "interest_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "exifs", force: :cascade do |t|
+    t.string "make"
+    t.string "model"
+    t.string "lens_info"
+    t.string "lens_make"
+    t.string "lens_model"
+    t.float "alitude"
+    t.string "longitude"
+    t.string "latitude"
+    t.datetime "shooting_date"
+    t.integer "photo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "interests", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "album_id"
+    t.integer "photo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "image_id"
+    t.string "title"
+    t.integer "camera_id"
+    t.integer "user_id"
+    t.integer "event_id"
+    t.integer "company_id"
+    t.integer "color_id"
+    t.integer "like_count", default: 0, null: false
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.string "name"
+    t.string "postal_code"
+    t.string "pref"
+    t.string "city"
+    t.string "address1"
+    t.string "address2"
+    t.integer "event_id"
+    t.integer "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  make: MyString
+  model: MyString
+  lens_info: MyString
+  lens_make: MyString
+  lens_model: MyString
+  thumbnail_id: MyString
+  url: MyString
+  user_id: 1
+
+two:
+  make: MyString
+  model: MyString
+  lens_info: MyString
+  lens_make: MyString
+  lens_model: MyString
+  thumbnail_id: MyString
+  url: MyString
+  user_id: 1

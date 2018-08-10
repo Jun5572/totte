@@ -91,3 +91,6 @@ gem 'kaminari'
 # EXIF情報取得gem
 gem 'exiftool'
 gem 'mini_exiftool'
+
+# semantic-ui
+gem 'semantic-ui-sass'
