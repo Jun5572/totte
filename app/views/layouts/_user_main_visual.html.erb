@@ -1,3 +1,12 @@
-<div class="main-visual">
-画像
+<div class="main-visual-box">
+	<%= attachment_image_tag user, :header_image, fallback: "preset_header_img.jpg", class: "main-visual"%>
+	<% if user == current_user %>
+	<div class="main-visual-edit-button">
+		edit
+	</div>
+	<% else %>
+		<%= link_to user_path(user) do %>
+			<%= attachment_image_tag user, :thumbnail, fallback: 'user_preset_image.png', class: "user-icon-in-main-visual" %>
+		<% end %>
+	<% end %>
 </div>

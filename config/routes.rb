@@ -9,7 +9,10 @@ Rails.application.routes.draw do
     passwords:     'users/passwords',
     registrations: 'users/registrations'
   }
+resources :users
+  get 'users/top' => 'users#top'
 
+  
 resources :companies, only: [:show, :edit]
   # get 'companies/show'
   # get 'companies/edit'
@@ -40,7 +43,7 @@ resources :albums, only: [:index, :show]
   # get 'albums/index'
   # get 'albums/show'
 
-resources :my_photos, only: [:new, :index, :show, :edit] do
+resources :my_photos do
 	resource :categories, only: [:index]
 end
   # get 'my_photos/new'

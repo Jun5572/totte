@@ -5,6 +5,13 @@ ja:
   activerecord:
     attributes:
       user:
+        first_name: "姓"
+        last_name: "名"
+        birth_year: "誕生年"
+        birth_month: "誕生月"
+        birth_day: "誕生日"
+        gender: "性別"
+        nickname: "ニックネーム"
         confirmation_sent_at: "パスワード確認送信時刻"
         confirmation_token: "パスワード確認用トークン"
         confirmed_at: "パスワード確認時刻"
@@ -29,7 +36,7 @@ ja:
         unlock_token: "ロック解除用トークン"
         updated_at: "更新日"
     models:
-      user: "ユーザ"
+      users: "ユーザ"
   devise:
     confirmations:
       confirmed: "アカウントを登録しました。"

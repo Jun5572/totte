@@ -1,9 +1,64 @@
 <section>
 	<div class="main-box">
-		<%= render 'layouts/user_main_visual'  %>
-		<%= render 'layouts/sub_header'  %>
+		<%= render 'layouts/user_main_visual', user: @user%>
+		<%= render 'layouts/sub_header'%>
 		<div class="main-visual-edit-button">
 			edit
 		</div>
+		<div class="main-contents-box" style="display:flex; justify-content:space-around;">
+			<div class="my-photos-box">
+				<!-- each start -->
+				<% @myphotos.each do |myphoto| %>
+					<div class="my-photo-img">
+						<%= attachment_image_tag myphoto, :image, :style => "width:100%;height: 400px;" %>
+						<div class="overlay-fillter-radius-none">
+							<div class="post-user-box">
+								<%= myphoto.title %>
+							</div>
+						</div>
+					</div>
+				<% end %>
+				<!-- each end -->
+				<div class="my-photo-img">
+					img
+					<div class="overlay-fillter-radius-none">
+						<div class="post-user-box">
+							title
+						</div>
+					</div>
+				</div>
+				<div class="my-photo-img">
+					img
+					<div class="overlay-fillter-radius-none">
+						<div class="post-user-box">
+							title
+						</div>
+					</div>
+				</div>
+				<div class="my-photo-img">
+					img
+					<div class="overlay-fillter-radius-none">
+						<div class="post-user-box">
+							title
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </section>
+<script>
+$(function() {
+	$('.my-photo-img').hover(
+		function() {
+			//マウスカーソルが重なった時の処理
+			$(this).find($('.overlay-fillter-radius-none')).fadeIn(200);
+		},
+		function() {
+		//マウスカーソルが離れた時の処理
+			$(this).find($('.overlay-fillter-radius-none')).fadeOut(200);
+		}
+	);
+});
+
+</script>
