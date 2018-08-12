@@ -1,2 +1,61 @@
 <h1>Albums#index</h1>
 <p>Find me in app/views/albums/index.html.erb</p>
+<title>HOME</title>
+<div class="main-box">
+	<%= render 'layouts/sub_header' %>
+	<div class="photo-contents-box">
+<!-- each start -->
+			<div class="album-box">
+				<div class="album-image">
+					<!-- <div class="overlay-fillter-radius-none"> -->
+						<div class="post-user-box">
+							<div class="photo-box-user-icon">
+								<%#= link_to photo_path(@user) do %>
+								<%#= attachment_image_tag @user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
+								<%# end %>
+							</div>
+						</div>
+					<!-- </div> -->
+				</div>
+				<div class="album-summ">
+				summary
+				</div>
+			</div>
+<!-- each end -->
+			<div class="album-box">
+				<div class="album-image">
+					<!-- <div class="overlay-fillter-radius-none"> -->
+						<div class="post-user-box">
+							<div class="photo-box-user-icon">
+								<%#= link_to photo_path(@user) do %>
+								<%#= attachment_image_tag @user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
+								<%# end %>
+							</div>
+						</div>
+					<!-- </div> -->
+				</div>
+				<div class="album-summ">
+				summary
+				</div>
+			</div>
+
+
+
+	</div><!-- content-box end -->
+</div>
+<!-- ------------------------------------- -->
+<script>
+$(function() {
+	$('.img').hover(
+		function() {
+			$(this).find($('.overlay-fillter')).fadeIn(200);
+			//マウスカーソルが重なった時の処理
+		},
+		function() {
+		//マウスカーソルが離れた時の処理
+			$(this).find($('.overlay-fillter')).fadeOut(200);
+		}
+	);
+});
+
+</script>

@@ -5,8 +5,8 @@
 				<img src="/assets/totte-logo.png" class="brand-logo">
 			</div>
 		</div>
-		<div class="headline-user-icon">
-			user_icon
+		<div class="">
+			<%= attachment_image_tag user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "headline-user-icon" %>
 		</div>
 	</div>
 </header><!-- /header -->

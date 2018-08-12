@@ -1,2 +1,8 @@
 <h1>MyPhotos#new</h1>
-<p>Find me in app/views/my_photos/new.html.erb</p>
+<div class="main-box">
+	<%= form_for @myphoto, url: my_photos_path do |f| %>
+		<%= f.attachment_field :image %>
+		<%= f.text_field :title, placeholder: "タイトル" %>
+		<%= f.submit "投稿" %>
+	<% end %>
+</div>

@@ -1,19 +1,39 @@
 <title>HOME</title>
+<div class="main-box">
 	<%= render 'layouts/sub_header' %>
-
 	<div class="photo-contents-box">
 <!-- each start -->
+	<% @photos.each do |photo| %>
 		<div class="content-box">
 			<div class="photo-box">
 				<div class="img">
-				img
+							<%= attachment_image_tag photo, :image, :style => "border-radius:5px; width:400px;height:300px;"%>
+					<div class="overlay-fillter">
+						<div class="post-user-box">
+							<div class="">
+								<%= link_to photo_path(photo.user) do %>
+								<%= attachment_image_tag photo.user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
+								<% end %>
+							</div>
+							<div class="img-summ"><%= photo.title %></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+<!-- each end -->
+		<div class="content-box">
+			<div class="photo-box">
+				<div class="img">
+					<div class="photo-box-user-icon">
+					</div>
 				</div>
 				<div class="img-summ">
 				summary
 				</div>
 			</div>
 		</div>
-		<!-- each end -->
 		<div class="content-box">
 			<div class="photo-box">
 				<div class="img">
@@ -56,3 +76,20 @@
 		</div>
 
 	</div><!-- content-box end -->
+</div>
+<!-- ------------------------------------- -->
+<script>
+$(function() {
+	$('.img').hover(
+		function() {
+			$(this).find($('.overlay-fillter')).fadeIn(200);
+			//マウスカーソルが重なった時の処理
+		},
+		function() {
+		//マウスカーソルが離れた時の処理
+			$(this).find($('.overlay-fillter')).fadeOut(200);
+		}
+	);
+});
+
+</script>
