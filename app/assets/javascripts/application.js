@@ -15,7 +15,7 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require bootstrap-sprockets
+//= require cocoon
 // Loads all Semantic javascripts
 //= require semantic-ui
 //= require_tree .
@@ -39,3 +39,6 @@ $(function() {
     $overlay.removeClass(openClass);
   });
 });
+
+
+

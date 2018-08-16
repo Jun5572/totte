@@ -27,9 +27,11 @@ resources :events
   # get 'events/show'
   # get 'events/edit'
 
-resources :my_albums do
-	resources :my_album_items
-end
+resources :my_albums
+	resource :my_album_items
+  # get 'my_albums/:id/add_photo' => 'my_albums#add_album_item', as: 'add_my_album_item'
+  post 'my_albums/:id/add_photo' => 'my_albums#add_album_item', as: 'add_my_album_item'
+  
   # get 'my_albums/new'
   # get 'my_albums/index'
   # get 'my_albums/show'
@@ -46,6 +48,9 @@ resources :albums, only: [:index, :show]
 resources :my_photos do
 	resource :categories, only: [:index]
 end
+  get 'my_photos/:id/pre' => 'my_photos#pre_photo', as: 'my_photo_pre'
+  get 'my_photos/:id/next' => 'my_photos#next_photo', as: 'my_photo_next'
+
   # get 'my_photos/new'
   # get 'my_photos/index'
   # get 'my_photos/show'

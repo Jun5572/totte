@@ -14,21 +14,27 @@
  *= require_self
  */
 
-@import "bootstrap-sprockets";
+/*@import "bootstrap-sprockets";
 @import "bootstrap";
+*/
+@import "semantic-ui";
+@import "semantic-ui/collections/menu";
 
-/*@import "semantic-ui";
-@import "semantic-ui/collections/menu";*/
-$import-google-fonts: false;
-@import 'semantic-ui';
-
+/*$import-google-fonts: false;*/
+/*@import 'semantic-ui';
+*/
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-
+td, th {
+    padding: 10px 20px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 20px;
+}
 /*-----------------------------------*/
 .devise-form-control {
     display: block;
@@ -131,7 +137,7 @@ footer{
 .main-box{
 	position: relative;
 	width: 100%;
-	background-color: #fafaff;
+	background-color: aliceblue;
 	z-index: 0;
 }
 .headline-box{
@@ -155,8 +161,8 @@ footer{
 }
 .headline-user-icon{
 	margin-top: 10px;
-	width: 40px;
-	height: 40px;
+	width: 45px;
+	height: 45px;
 	border-radius: 50%;
 	/*background-color: orange;*/
 }
@@ -170,12 +176,25 @@ footer{
 }
 .sub-header{
 	width: 100%;
-	padding: 10px;
+	background-color: white;
 	box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2)
 }
 .subheader-contents{
 	width:80%;
 	margin:0 auto;
+}
+.sub-header-buttons{
+	color: black;
+	background-color: transparent;
+	transition: color 100ms, background-color 100ms;
+}
+.sub-header-buttons:hover{
+	background-color: rgb(80, 80, 120);
+	color: white!important;
+}
+.main-visual-box{
+	width: 100%;
+	height: 300px;
 }
 .main-visual{
 	/*background-attachment: fixed;*/
@@ -184,6 +203,12 @@ footer{
 	height: 300px;
 	background-color: orange;
 	/*z-index: -1;*/
+}
+.main-visual2{
+	position: relative;
+	width: 100%;
+	height: 200px;
+	background-color: darkorange;
 }
 .main-visual-edit-button{
 	position: absolute;
@@ -195,7 +220,7 @@ footer{
 }
 .main-contents-box{
 	width: 80%;
-	background-color: rgba(0, 0, 0, 0.2);
+	/*background-color: rgba(0, 0, 0, 0.2);*/
 	margin: 0 auto;
 	padding: 5px;
 }
