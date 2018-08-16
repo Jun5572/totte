@@ -1,14 +1,45 @@
 <div class="sub-header">
 	<div class="subheader-contents" style="display:flex">
 		<%= link_to photos_path do %>
-		<div class="" style="margin:5px 10px 5px 10px;">
-			photos
+		<div class="sub-header-buttons" style="padding:20px;">
+			<p>photos</p>
 		</div>
 		<% end %>
-		<%= link_to albums_path do%>
-		<div class="" style="margin:5px 10px 5px 10px;">
-			albums
+		<%= link_to albums_path do %>
+		<div class="sub-header-buttons" style="padding:20px;">
+			<p>albums</p>
 		</div>
 		<% end %>
+		<div class="ui compact menu sub-header-buttons" style="border-radius:none; border:none; box-shadow:none;">
+	  		<div class="ui simple dropdown item">Photo
+	  			<div class="menu">
+	  				<%= link_to photos_path	do %>
+	      				<div class="item">All Photos</div>
+	      			<% end %>
+	      			<%= link_to photo_path(current_user) do %>
+	      			<div class="item">Your Photos</div>
+	      			<% end %>
+	      			<%= link_to new_my_photo_path do %>
+	      			<div class="item">Post Photo</div>
+	      			<% end %>
+    			</div>
+  			</div>
+		</div>
+
+		<div class="ui compact menu sub-header-buttons" style="border-radius:none; border:none; box-shadow:none;">
+	  		<div class="ui simple dropdown item">Album
+	  			<div class="menu">
+	  				<%= link_to albums_path	do %>
+	      				<div class="item">All Aibums</div>
+	      			<% end %>
+	      			<%= link_to album_path(current_user) do %>
+	      			<div class="item">Your Albums</div>
+	      			<% end %>
+	      			<%= link_to new_my_album_path do %>
+	      			<div class="item">Post Album</div>
+	      			<% end %>
+    			</div>
+  			</div>
+		</div>
 	</div>
 </div>

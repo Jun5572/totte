@@ -1,0 +1,9 @@
+<div class="nasted_fields form-inline">
+	<%#= f.collection_select( :image, photos, :id, :image ) %>
+
+	<div class="form-group">
+		<%= f.label :AlbumItem %><br>
+		<%= f.attachment_field :image, require: true %>
+	</div>
+		<%= link_to_remove_association "削除", f %>
+</div>

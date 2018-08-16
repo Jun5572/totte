@@ -16,3 +16,22 @@
     <%= render 'layouts/footer'  %>
   </body>
 </html>
+
+<script>
+  $('.ui.dropdown')
+  .dropdown()
+;
+
+$('.example .menu .browse')
+  .popup({
+    inline     : true,
+    hoverable  : true,
+    position   : 'bottom left',
+    delay: {
+      show: 300,
+      hide: 800
+    }
+  })
+;
+
+</script>

@@ -78,13 +78,12 @@ gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 
 # bootstrap
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
 
 # binding.pry
 gem 'pry-rails'
 
 # もっとみる機能実装
-gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'kaminari'
 
@@ -97,3 +96,6 @@ gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 gem 'jquery-rails'
 
 gem 'enum_help'
+
+# アルバム作成昨日実装
+gem 'cocoon'
