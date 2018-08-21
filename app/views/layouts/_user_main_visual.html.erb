@@ -1,12 +1,66 @@
-<div class="main-visual-box">
-	<%= attachment_image_tag user, :header_image, fallback: "preset_header_img.jpg", class: "main-visual"%>
-	<% if user == current_user %>
-	<div class="main-visual-edit-button">
-		edit
-	</div>
-	<% else %>
-		<%= link_to user_path(user) do %>
-			<%= attachment_image_tag user, :thumbnail, fallback: 'user_preset_image.png', class: "user-icon-in-main-visual" %>
+<div id="edit-button" class="main-visual-box">
+	<%= attachment_image_tag user, :header_image, fallback: "preset_header_img.jpg", id: "depth", class: "main-visual"%>
+	<div class ="overlay-fillter-main-visual">
+		<div class="user-box">
+			<% if user == current_user %>
+				<%= attachment_image_tag user, :thumbnail, fallback: 'user_preset_image.png', id: "icon", class: "user-icon-in-main-visual" %>
+				<div id="thumb-edit" class="thumb-edit-overlay">edit</div>
+			<% else %>
+				<%= attachment_image_tag user, :thumbnail, fallback: 'user_preset_image.png', class: "user-icon-in-main-visual" %>
+			<% end %>
+			<div class="user-box-letters">
+				<div class="user-nickname"><b><%= user.nickname %></b></div>
+				<div class="" style="padding-bottom:10px;font-size:20px;display:flex;">
+					👍<%= user.likes.count %>
+					📸<%= user.photos.count %>Photos
+					<%= user.albums.count %>Albums
+				</div>
+				<p style="color:silver;font-size:20px;">Joined in<%= user.created_at.strftime('%Y') %></p>
+			</div>
+		</div>
+		<% if user == current_user %>
+		<!-- current_userであれはヘッダーイメージ変更ボタンが現れる -->
+			<div id="fade" class="main-visual-edit-button">
+				<div id="edit"><i class="far fa-edit fa-2x"></i>
+					<div class="ui modal">
+						<i class="close icon"></i>
+						<div class="modal-change-header-image-form">
+							<%= form_for user, url: user_path(user), method: :patch do |f| %>
+								<%= f.attachment_field :header_image %>
+								<%= f.submit 'update' %>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			</div>
 		<% end %>
-	<% end %>
+	</div>
 </div>
+
+<script>
+$(function(){
+	$('#edit').click(function(){
+		$('.ui.modal').modal('show');
+	})
+// ヘッダーイメージホバー時
+	$('#edit-button').hover(
+		function(){
+			$(this).find($('#fade')).stop().fadeIn(100);
+	},
+		function(){
+			$(this).find($('#fade')).stop().fadeOut(100);
+		}
+	);
+
+// ユーザーアイコンホバー時
+	$('#icon').hover(
+		function(){
+			$('.thumb-edit-overlay').fadeIn(100);
+	},
+		function(){
+			$('.thumb-edit-overlay').fadeOut(100);
+		}
+	);
+});
+
+</script>

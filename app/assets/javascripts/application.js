@@ -11,13 +11,13 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
+// require jquery_ujs
 //= require rails-ujs
-//= require activestorage
-//= require turbolinks
 //= require cocoon
 // Loads all Semantic javascripts
 //= require semantic-ui
+//= require activestorage
+//= require turbolinks
 //= require_tree .
 
 
@@ -38,7 +38,36 @@ $(function() {
     $overlayClose.removeClass(openClass);
     $overlay.removeClass(openClass);
   });
+
+
+
+
+  $('.activating.element')
+  .popup()
+;
 });
 
 
+$('.button')
+  .popup({
+    inline: true
+  })
+;
+
+// $(function() {
+//     $(window).scroll(function(){
+//         var y = $(this).scrollTop(); // スクロール値を取得（=Y座標=縦位置）
+//         $('#bg1').css('background-position', '0 ' + parseInt( -y / 50 ) + 'px'); // 1/50のスピード
+//         $('#bg2').css('background-position', '0 ' + parseInt( -y / 10 ) + 'px'); // 1/10のスピード
+//         $('#bg3').css('background-position', '0 ' + parseInt( -y / 2 ) + 'px'); // 1/2のスピード
+//     });
+// });
+
+// $(function() {
+//     $(window).scroll(function(){
+//         var y = $(this).scrollTop(); // スクロール値を取得（=Y座標=縦位置）
+        
+//         $('.main-visual').css('background-position', '0 ' + parseInt( -y / 2 ) + 'px'); // 1/2のスピード
+//     });
+// });
 

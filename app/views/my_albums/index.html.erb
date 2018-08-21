@@ -1,2 +1,84 @@
-<h1>MyAlbums#index</h1>
-<p>Find me in app/views/my_albums/index.html.erb</p>
+<title>Album Index</title>
+<div class="main-box">
+	<div class="main-visual">
+		<img src="album-header9.jpg" style="width: 100%;height: 300px;object-fit: cover;">
+	</div>
+	<%= render 'layouts/sub_header' %>
+	<h2>All User Albums</h2>
+	<div class="photo-contents-box">
+<!-- each start -->
+	<% @albums.each do |album| %>
+		<% if album.album_items.blank? %>
+			<% album.destroy %>
+			<% next %>
+		<% end %>
+			<div class="album-box">
+				<div class="album-image">
+					<%= link_to user_album_path(album.user, album) do %>
+						<div class="album-items-box">
+							<% album.album_items.each do |album_item| %>
+								<%= attachment_image_tag album_item.photo, :image, style: "width:350px; height:250px;", class: "album-items" %>
+							<% end %>
+						</div>
+					<% end %>
+					<div class="overlay-fillter-radius-none">
+						<div class="post-user-box">
+							<div class="photo-box-user-icon">
+								<%= link_to user_path(album.user) do %>
+									<%= attachment_image_tag album.user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="album-summ">
+					<p><%= album.introduction %></p>
+					<p><i class="fas fa-heart"></i><%= album.like_count %></p>
+				</div>
+			</div>
+	<% end %><!-- each end -->
+
+			<div class="album-box">
+				<div class="album-image">
+					<!-- <div class="overlay-fillter-radius-none"> -->
+						<div class="post-user-box">
+							<div class="photo-box-user-icon">
+								<%#= link_to photo_path(@user) do %>
+								<%#= attachment_image_tag @user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
+								<%# end %>
+							</div>
+						</div>
+					<!-- </div> -->
+				</div>
+				<div class="album-summ">
+				summary
+				</div>
+			</div>
+
+
+
+	</div><!-- content-box end -->
+</div>
+<!-- ------------------------------------- -->
+<script>
+$(function() {
+	$('.img').hover(
+		function() {
+			$(this).find($('.overlay-fillter')).fadeIn(200);
+			//マウスカーソルが重なった時の処理
+		},
+		function() {
+		//マウスカーソルが離れた時の処理
+			$(this).find($('.overlay-fillter')).fadeOut(200);
+		}
+	);
+});
+
+
+$('.ui.sticky')
+  .sticky({
+    context: '#example1'
+  })
+;
+
+</script>

@@ -1,8 +1,8 @@
 class Camera < ApplicationRecord
-	attachment :image
+	# attachment :image
 
 
-	has_many :users
+	has_and_belongs_to_many :users
 	has_many :photos
 	has_many :exifs
 end

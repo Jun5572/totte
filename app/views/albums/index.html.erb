@@ -1,31 +1,52 @@
-<title>Album Index</title>
+<title>current_userアルバム投稿アルバム一覧</title>
 <div class="main-box">
-	<div class="main-visual">
-		<img src="album-header9.jpg" style="width: 100%;height: 300px;">
-	</div>
-	<%= render 'layouts/sub_header' %>
-	<h2>All User Albums</h2>
+	<%= render 'layouts/user_main_visual', user: @user%>
+	<%= render 'layouts/sub_header'%>
+	<h2>Your Albums</h2><%= @albums_cnt %>
 	<div class="photo-contents-box">
 <!-- each start -->
+		<% @albums.each do |album| %>
+		<% if album.album_items.blank? %>
+			<% album.destroy %>
+			<% next %>
+		<% end %>
 			<div class="album-box">
 				<div class="album-image">
+					<%= link_to user_album_path(album.user, album) do %>
+						<div class="album-items-box">
+							<% album.album_items.each do |album_item| %>
+								<%= attachment_image_tag album_item.photo, :image, style: "width:350px; height:250px;", class: "album-items" %>
+							<% end %>
+						</div>
+					<% end %>
 					<!-- <div class="overlay-fillter-radius-none"> -->
 						<div class="post-user-box">
 							<div class="photo-box-user-icon">
 								<%#= link_to photo_path(@user) do %>
-								<%#= attachment_image_tag @user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
+								<%= attachment_image_tag album.user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
 								<%# end %>
 							</div>
 						</div>
 					<!-- </div> -->
 				</div>
-				<div class="album-summ">
-				summary
+				<div class="album-summ" style="display: flex;">
+					<div class="">
+						<p><%= album.introduction %>テスト</p>
+						<p><i class="fas fa-heart"></i><%= album.like_count %></p>
+					</div>
+					<%= link_to user_album_path(current_user, album), data: { confirm: "削除します。よろしいですか？"}, method: :delete do %>
+						<i class="far fa-trash-alt fa-2x" style="color: rgba(0, 0, 0, 0.7);"></i>
+					<% end %>
 				</div>
 			</div>
+		<% end %>
 <!-- each end -->
 			<div class="album-box">
 				<div class="album-image">
+					ダミーダミーダミーダミーダミーダミーダミーダミーダミーダミーダミー
+					ダミーダミーダミーダミーダミーダミーダミーダミーダミーダミーダミー
+					ダミーダミーダミーダミーダミーダミーダミーダミーダミーダミーダミー
+					ダミーダミーダミーダミーダミーダミーダミーダミーダミーダミーダミー
 					<!-- <div class="overlay-fillter-radius-none"> -->
 						<div class="post-user-box">
 							<div class="photo-box-user-icon">
@@ -37,7 +58,7 @@
 					<!-- </div> -->
 				</div>
 				<div class="album-summ">
-				summary
+				  tesutsummary
 				</div>
 			</div>
 
@@ -68,3 +89,5 @@ $('.ui.sticky')
 ;
 
 </script>
+
+</div>

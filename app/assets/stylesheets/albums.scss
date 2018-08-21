@@ -19,7 +19,7 @@
 	position: relative;
 	width:100%;
 	height:300px;
-	background-color: pink;
+	background: linear-gradient(to right, gray, white, gray);
 	border-radius: 5px 5px 0 0;
 }
 .album-summ{
@@ -27,4 +27,14 @@
 	height: 50px;
 	background-color: white;
 	border-radius: 0 0 5px 5px;
+}
+.album-items-box{
+	padding: 25px;
+	white-space: nowrap;
+	overflow-y: hidden;
+	overflow-x: scroll;
+}
+.album-items{
+	/*display: flex;*/
+	/*margin: 25px 3px;*/
 }

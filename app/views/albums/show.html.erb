@@ -1,70 +1,23 @@
-<title>current_userアルバム投稿アルバム一覧</title>
-<div class="main-box">
-	<%= render 'layouts/user_main_visual', user: @user%>
+<title>current_userアルバム詳細</title>
+<div class=my-album-main-box>
 	<%= render 'layouts/sub_header'%>
-	<h2>Your Albums</h2>
-	<div class="photo-contents-box">
-<!-- each start -->
-			<div class="album-box">
-				<div class="album-image">
-					<!-- <div class="overlay-fillter-radius-none"> -->
-						<div class="post-user-box">
-							<div class="photo-box-user-icon">
-								<%#= link_to photo_path(@user) do %>
-								<%#= attachment_image_tag @user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
-								<%# end %>
-							</div>
-						</div>
-					<!-- </div> -->
-				</div>
-				<div class="album-summ">
-				summary
-				</div>
+	<div class = "main-contents-box">
+		<div class="my-album-item-header-photo">
+			<%= attachment_image_tag @album.album_items.first.photo, :image, class: "my-album-item-header-photo" %>
+		</div>
+		<div class="my-album-items-box">
+			<% @album_items.each do |album_item| %>
+					<%= attachment_image_tag album_item.photo, :image, class: "my-album-item" %>
+			<% end %>
+			<div class="my-album-item">
+				photo
 			</div>
-<!-- each end -->
-			<div class="album-box">
-				<div class="album-image">
-					<!-- <div class="overlay-fillter-radius-none"> -->
-						<div class="post-user-box">
-							<div class="photo-box-user-icon">
-								<%#= link_to photo_path(@user) do %>
-								<%#= attachment_image_tag @user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
-								<%# end %>
-							</div>
-						</div>
-					<!-- </div> -->
-				</div>
-				<div class="album-summ">
-				summary
-				</div>
+			<div class="my-album-item">
+				photo
 			</div>
-
-
-
-	</div><!-- content-box end -->
-</div>
-<!-- ------------------------------------- -->
-<script>
-$(function() {
-	$('.img').hover(
-		function() {
-			$(this).find($('.overlay-fillter')).fadeIn(200);
-			//マウスカーソルが重なった時の処理
-		},
-		function() {
-		//マウスカーソルが離れた時の処理
-			$(this).find($('.overlay-fillter')).fadeOut(200);
-		}
-	);
-});
-
-
-$('.ui.sticky')
-  .sticky({
-    context: '#example1'
-  })
-;
-
-</script>
-
+			<div class="my-album-item">
+				photo
+			</div>
+		</div>
+	</div>
 </div>

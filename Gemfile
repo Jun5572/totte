@@ -84,7 +84,8 @@ gem "refile-mini_magick"
 gem 'pry-rails'
 
 # もっとみる機能実装
-gem 'jquery-ui-rails'
+# gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
 gem 'kaminari'
 
 # EXIF情報取得gem

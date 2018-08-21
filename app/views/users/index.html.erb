@@ -1,0 +1,52 @@
+<title>HOME全ユーザー写真投稿一覧</title>
+<div class="main-box">
+	<%= render 'layouts/sub_header' %>
+		<!-- each start -->
+	<div class="photo-contents-box">
+		<% @photos.each do |photo| %>
+		<div class="content-box">
+			<div class="photo-box">
+				<div class="img">
+					<%= attachment_image_tag photo, :image, :style => "border-radius:5px; width:400px;height:300px;"%>
+					<%= link_to user_photo_path(photo.user, photo), style: "display:inline-block;" do %>
+					<div class="overlay-fillter">
+						<div class="post-user-box">
+							<%= link_to user_path(photo.user) do %>
+								<%= attachment_image_tag photo.user, :thumbnail, :fill, fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
+								<% end %>
+								<div class="img-summ"><%= photo.title %>
+									<% if photo.user == current_user %>
+										<p class="postphoto-user-name" style="font-size: 13px;">あなた</p>
+									<% else %>
+										<p class="postphoto-user-name" style="font-size: 13px;">by <%= photo.user.nickname %></p>
+									<% end %>
+								</div>
+						</div>
+					</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<% end %>
+	</div>
+	<!-- each end -->
+</div>
+
+<%#= javascript_include_tag 'jquery.infinitescroll' %>
+<!-- ------------------------------------- -->
+<script>
+
+$(function() {
+	$('.img').hover(
+		function() {
+			$(this).find($('.overlay-fillter')).fadeIn(200);
+			//マウスカーソルが重なった時の処理
+		},
+		function() {
+		//マウスカーソルが離れた時の処理
+			$(this).find($('.overlay-fillter')).fadeOut(200);
+		}
+	);
+});
+
+</script>

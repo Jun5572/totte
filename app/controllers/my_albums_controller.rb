@@ -1,12 +1,25 @@
 class MyAlbumsController < ApplicationController
+  before_action :authenticate_user!
+  def index
+    # @user = current_user
+    @albums = Album.all.reverse_order
+  end
+
   def new
+    if session[:photo] == nil
+      session[:photo] = []
+    end
+    @i = 0
+    @count = session[:photo].count
     @user = current_user
     @photos = @user.photos.reverse_order
     @album = current_album
+     puts session[:photo]
+    # @album_items = @album.album_items
     # binding.pry
   end
 
-
+# 作成中のアルバムに写真を追加
   def add_album_item
     @album_item = AlbumItem.new
     @photo = Photo.find(params[:id])
@@ -15,42 +28,51 @@ class MyAlbumsController < ApplicationController
     if @album_items.blank?
       @album_item.photo_id = @photo.id
       @album_item.album_id = current_album.id
-      # binding.pry
       if @album_item.save
-        puts "保存に成功しました"
+        session[:photo].push(@album_item.photo_id)
+        session[:photo] = session[:photo].sort_by{ |u| -u }
         redirect_to new_my_album_path
       else
-        puts "保存されていません"
         redirect_to new_my_album_path
       end
     else
-      puts "既に追加されてる写真です"
       redirect_to new_my_album_path
     end
-
   end
+
+  # 作成中のアルバムから写真を削除
+  def del_album_item
+    @photo = Photo.find(params[:id])
+    @album = current_album
+    @album_item = @album.album_items.find_by(photo_id: @photo.id)
+    if @album_item.destroy
+      session[:photo].delete(@album_item.photo_id)
+      puts session[:photo]
+      # puts 'アルバム写真候補から外れました'
+      redirect_to new_my_album_path
+    end
+  end
+
 
   def create
     @album = current_album
     @album_items = @album.album_items
-    # binding.pry
+
     if @album.save
       p "保存成功！"
       session[:album_id] = nil
-      redirect_to album_path(current_user)
+      session[:photo] = nil
+      redirect_to user_albums_path(current_user)
     else
       p "保存できていません"
     end
   end
 
-  def index
-    @albums = current_user.albums.reverse_order
-  end
-
   def show
-    if User.exists?
-      @user = User.find(params[:id])
-      @albums = @user.albums
+    if Album.exists?
+      @user = current_user
+      @album = Album.find(params[:id])
+      @album_items = @album.album_items
     else
     end
   end
@@ -66,9 +88,6 @@ class MyAlbumsController < ApplicationController
       redirect_to my_albums_path
     else
     end
-  end
-
-  def destroy
   end
 
   private

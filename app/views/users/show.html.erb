@@ -1,1 +1,74 @@
-users#show
+<title>Users#show</title>
+<section>
+	<div class="main-box">
+		<% if current_user.sign_in_count <= 1 && @photos.blank? %>
+		<!-- 初回リンク　ウェルカムページ -->
+			<%= render 'photos/welcome' %>
+		<% else %>
+			<% if @photos.blank? %>
+				<%= render 'layouts/user_main_visual', user: @user%>
+				<%= render 'layouts/sub_header'%>
+				写真がありません
+			<% end %>
+			<%= render 'layouts/user_main_visual', user: @user%>
+			<%= render 'layouts/sub_header'%>
+			<div class="main-contents-box" style="display:flex; justify-content:space-around;">
+				<div class="my-photos-box">
+					<!-- each start -->
+					<% @photos.each do |photo| %>
+						<div class="my-photo-img">
+							<%= link_to user_photo_path(photo.user, photo), style: "display:inline-block; width:100%;height: 400px;" do%>
+								<%= attachment_image_tag photo, :image, :style => "width:100%;height: 400px;" %>
+								<div class="overlay-fillter-radius-none">
+									<div class="post-user-box">
+										<p><%= photo.title %></p>
+										<p><i class="far fa-heart"></i><%= photo.like_count %></p>
+									</div>
+									<% if photo.user == current_user %>
+									<div class="trushbox-icon" data-content="ゴミ箱へ" style="width:50px;height:50px;">
+										<%= link_to user_photo_path(photo.user, photo), method: :delete, data: { confirm: '削除します。よろしいですか？' }, class: "overlay-trashbox-icon" do %>
+											<i class="far fa-trash-alt fa-2x" style="color: rgba(255, 255, 255, 0.7);"></i>
+										<% end %>
+									</div>
+									<% end %><!-- if end -->
+								</div>
+							<% end %>
+						</div>
+					<% end %><!-- each end -->
+				</div>
+			</div>
+		<% end %><!-- end if current_user.sign_in_count <= 1 && @photos.blank? -->
+	</div>
+</section>
+
+
+<script>
+$(function() {
+
+
+	$('.my-photo-img').hover(
+		function() {
+			//マウスカーソルが重なった時の処理
+			$(this).find($('.overlay-fillter-radius-none')).fadeIn(200);
+		},
+		function() {
+		//マウスカーソルが離れた時の処理
+			$(this).find($('.overlay-fillter-radius-none')).fadeOut(200);
+		}
+	);
+
+	
+});
+
+$('.activating.element')
+  .popup()
+;
+
+
+$('.trushbox-icon')
+  .popup({
+    inline: true
+  })
+;
+
+</script>

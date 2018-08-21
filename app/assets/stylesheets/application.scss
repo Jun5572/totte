@@ -49,17 +49,40 @@ td, th {
 }
 .devise-main-box{
 	width: 100%;
-	height: 600px;
+	height: 100%;
 	padding: 20px 0 20px 0;
-	background-color: #fafaff;
-
+	/*color: white;*/
+	/*background-color: aliceblue;*/
+}
+.devise-main-box2{
+	width: 100%;
+	height: 100%;
+	padding: 20px 0 20px 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	/*color: white;*/
+	/*background-color: aliceblue;*/
+}
+.devise-user-icon-box{
+	width: 50%;
+	background-color: red;
+}
+.registration-input-box{
+	padding: 50px;
+	border-radius: 10px;
+	background-color: rgba(255, 255, 255, 0.7);
 }
 .devise-contents-box{
-	width: 35%;
+	/*display: flex;*/
+	/*flex-direction: row;*/
+	/*justify-content: space-around;*/
+	width: 40%;
 	margin: 0 auto;
 	padding: 60px;
 }
 .field{
+
 }
 .devise-form-style{
 	border: none;
@@ -68,7 +91,7 @@ td, th {
 	transition: border-bottom 200ms
 }
 .devise-form-style:hover{
-	border-bottom: solid 1px rgba(100, 100, 100, 0.4);
+	border-bottom: solid 2px rgba(100, 100, 100, 0.4);
 }
 
 .select-form{
@@ -89,12 +112,6 @@ td, th {
 	display: flex;
 	justify-content: flex-end;
 }
-
-
-
-
-
-
 
 .overlay {
   position: fixed;
@@ -131,8 +148,43 @@ header#header-fixed{
 }
 footer{
 	width: 100%;
-	height: 140px;
+	height: 100px;
 	background: linear-gradient(rgba(0, 0, 0, 0.8), black );
+}
+#aaa{
+	
+}
+.modal-change-header-image-form{
+	width:500px;
+	height:400px;
+	background-color: white;
+	border-radius: 10px;
+}
+.first-contact-box{
+	position: relative;
+	width: 100%;
+	/*background-color: rgba(0, 0, 0, 0.5);*/
+	background-size: cover;
+	background-attachment: fixed;
+}
+.overlay-box{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+.lets-massage-box{
+	width: 60%;
+	margin: 0 auto;
+	padding-top: 170px;
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 10px;
+}
+.lets-massage{
+	width: 60%;
+	margin: 40px auto;
 }
 .main-box{
 	position: relative;
@@ -155,8 +207,8 @@ footer{
 }
 /*totteのロゴ*/
 .brand-logo{
-	width:100px;
-	height:40px;
+	width:120px;
+	height:50px;
 	margin-top: 5px;
 }
 .headline-user-icon{
@@ -164,15 +216,28 @@ footer{
 	width: 45px;
 	height: 45px;
 	border-radius: 50%;
-	/*background-color: orange;*/
+	background: linear-gradient(135deg, #64EFA5, #1B87F4);
 }
 .user-icon-in-main-visual{
 	position: absolute;
-	top: 170px;
+	top: 120px;
     left: 40px;
-	width: 100px;
-	height: 100px;
+	width: 150px;
+	height: 150px;
 	border-radius: 50%;
+	background: linear-gradient(135deg, #64EFA5, #1B87F4);
+	z-index: 1;
+}
+.thumb-edit-overlay{
+	position: absolute;
+	top: 120px;
+    left: 40px;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	background-color: rgba(0, 0, 0, 0.6);
+	display: none;
+	z-index: 1;
 }
 .sub-header{
 	width: 100%;
@@ -193,6 +258,7 @@ footer{
 	color: white!important;
 }
 .main-visual-box{
+	position:relative;
 	width: 100%;
 	height: 300px;
 }
@@ -202,7 +268,23 @@ footer{
 	width: 100%;
 	height: 300px;
 	background-color: orange;
+	object-fit: cover;
 	/*z-index: -1;*/
+}
+.user-box{
+	/*display: flex;*/
+	/*flex-direction: row;*/
+    filter: drop-shadow(3px 3px 3px black);
+}
+.user-nickname{
+	padding-bottom: 20px;
+}
+.user-box-letters{
+	position: absolute;
+	top: 150px;
+    left: 210px;
+    font-size:30px;color:
+    rgba(255, 255, 255, 0.9);
 }
 .main-visual2{
 	position: relative;
@@ -212,11 +294,20 @@ footer{
 }
 .main-visual-edit-button{
 	position: absolute;
-	top: 250px;
-    left: 1300px;
-	color: red;
-	border: solid 1px;
+	top: 230px;
+    left: 1350px;
+	color: white;
 	z-index: 0;
+	display:none;
+}
+.user-icon-box-in-modal{
+	margin-right: 30px;
+}
+.user-icon-in-modal{
+	width: 250px;
+	height: 250px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #64EFA5, #1B87F4) ;
 }
 .main-contents-box{
 	width: 80%;
@@ -238,6 +329,7 @@ footer{
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
+	background: linear-gradient(135deg, #64EFA5, #1B87F4) ;
 	/*background-color: orange;*/
 }
 .post-user-box{
@@ -270,5 +362,25 @@ footer{
     display: none;
 }
 .overlay-fillter-main-visual{
-
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    background: linear-gradient(transparent, 70%, black);
+    z-index: 1;
+}
+.user-icon-box{
+	width: 60%;
+	height: 300px;
+	margin: 0 auto;
+	background-color: red;
+}
+.main-contents-box2{
+	width: 40%;
+	/*height: 200px;*/
+	margin: 0 auto;
+	border: solid 1px;
+}
+.user-plofile-box{
 }

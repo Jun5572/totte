@@ -1,0 +1,34 @@
+<title>新規アルバム投稿</title>
+
+<div class="main-box">
+	<div class="main-visual2">
+	</div>
+	<%= render 'layouts/sub_header' %>
+	<div class="main-contents-box">
+		<h2>Item List</h2><%#= binding.pry %>
+		<% if current_album.album_items.blank? %>
+		  <button class="ui inverted violet button disabled">Create Album</button>
+		<% else %>
+		  <%= link_to my_albums_path, method: :post do %>
+			  <button class="ui inverted violet button">Create Album</button>
+		  <% end %>
+		<% end %>
+		<div style="display:flex; flex-direction:row; justify-content:flex-start; flex-wrap: wrap;">
+			<% @photos.each do |photo| %>
+				<%= link_to add_my_album_item_path(photo), method: :post do %>
+					<div class="">
+						<%= attachment_image_tag photo, :image, class: "your-photos-mini" %>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+		<% @album_items.each do |album_item| %>
+			<%= attachment_image_tag album_item.photo, :image, class: "your-photos-mini" %>
+		<% end %>
+	</div>
+</div>
+
+
+<script>
+	
+</script>

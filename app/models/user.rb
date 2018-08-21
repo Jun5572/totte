@@ -2,6 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   attachment :thumbnail
+  attachment :header_image
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
@@ -11,12 +12,22 @@ class User < ApplicationRecord
   has_many :likes
   has_many :albums
 
-  belongs_to :camera
- 	# validates :first_name,
-  		# presence:true
-  		# length: { minimum: 1, maximum: 10}
+  has_and_belongs_to_many :cameras
 
-  	# validates :last_name,
-  		# presence:true
-  		# length: { minimum: 1, maximum: 10}
+
+# varidetes-----------------------------------
+
+	# validates :first_name,
+ #  		presence: true,
+ #  		length: { minimum: 1, maximum: 10}
+
+ #  validates :last_name,
+ #  		presence: true,
+ #  		length: { minimum: 1, maximum: 10}
+
+ #  varidates :nickname,
+ #  		presence: true,
+ #  		uniqueness: true,
+ #  		length: { in: 2..12 }
+
 end

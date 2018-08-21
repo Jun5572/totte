@@ -1,0 +1,24 @@
+<div class="first-contact-box">
+		<img src="/album-header13.jpg" alt="" style="width: 100%">
+			<div class="overlay-box">
+				<div class="lets-massage-box">
+					<p align="center"><font size="7">Hallo, totte!</font></p>
+					<div align="center"><font size="5">さあ、はじめよう</font></div>
+					<div class="lets-massage">
+							<p style="font-size:15px; text-align:center;">こんにちは <%= current_user.nickname %>さん</p>
+							<p style="font-size:15px;">
+							はじめまして。<br>
+							totteにようこそ！<br>
+							世界中の人が <%= current_user.nickname %>さんの撮った作品を心待ちにしているでしょう。<br>
+							<%= current_user.nickname %>さんの何気ない１枚も、素敵な作品の１枚です。<br>
+							下のボタンからまずは作品をアップロードしてみましょう。<br>
+						</p>
+					</div>
+					<div style="text-align: center;">
+						<%= link_to new_photo_path do %>
+							<button class="ui inverted purple button">Upload</button>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
