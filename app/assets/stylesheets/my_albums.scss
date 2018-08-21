@@ -18,3 +18,58 @@
 .your-photos-mini:hover{
 	box-shadow: 0px 0px 5px 3px purple;
 }
+.your-photos-mini-selected{
+	width: 218px;
+	height: 218px;
+	background-color: red;
+	margin: 5px;
+	box-shadow: 0px 0px 5px 5px purple;
+}
+.selected-filter{
+	position: relative;
+	width: 218px;
+	height: 215px;
+	margin: 5px;
+	box-shadow: 0px 0px 5px 5px purple;
+}
+.filter-overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+.my-album-main-box{
+	position: relative;
+	width: 100%;
+	/*background: linear-gradient(to right, gray, white, gray);*/
+	z-index: 0;
+}
+.my-album-item-header-photo{
+	width: 100%;
+	height: 400px;
+	background-color: darkorange;
+}
+	.my-album-items-box{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		width: 90%;
+    	margin: 0 auto;
+		/*height: width;*/
+		/*background-color: gray;*/
+	}
+	.my-album-item{
+		position: relative;
+		width: 50%;
+		height: 350px;
+		padding: 1px;
+    	margin-top: 1px;
+		/*background-color: darkred;*/
+	}
+.my-album-item-title{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}

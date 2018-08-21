@@ -1,0 +1,40 @@
+<!-- モーダル画面 -->
+<div class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">
+    プロフィール編集
+  </div>
+  <div class="image content">
+    <div class="user-icon-box-in-modal">
+      <%= attachment_image_tag current_user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "150x150", class: "user-icon-in-modal" %>
+    </div>
+    <div class="description">
+      <div class="ui header">We've auto-chosen a profile image for you.</div>
+      <form class="ui form">
+  <%= form_for @user, method: :patch, remote: true do |f| %>
+        <div class="field">
+          <input type="text" name="user[nickname]" placeholder="ニックネーム">
+          <%#= f.text_field %>
+        </div>
+        <div class="two fields">
+        <div class="field">
+          <input type="text" name="user[first_name]" placeholder="姓">
+        </div>
+        <div class="field">
+          <input type="text" name="user[last_name]" placeholder="名">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      戻る
+    </div>
+    <button type="submit" class="ui purple right labeled icon submit button">
+      プロフィールを更新
+      <i class="checkmark icon"></i>
+    </button>
+  </div>
+  <% end %>
+  </form>
+</div>

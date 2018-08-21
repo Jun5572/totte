@@ -22,7 +22,7 @@
     margin: auto;
 	width: 700px;
     height: 450px;
-	background-color: pink;
+	/*background-color: pink;*/
 }
 .photo-details{
 	position: relative;
@@ -36,23 +36,37 @@
 }
 .photo-slide-left{
 	position: absolute;
-	top: 0;
-    left: 0;
+	width: 80px;
+	height: 80px;
+	top: 250px;
+    left: 300px;
     right: 0;
     bottom: 0;
-    margin: 250px auto;
+    /*margin: 250px auto;*/
 	font-size: 100px;
 	color: rgba(255, 255, 255, 0.4);
+	transition: left 300ms, width 300ms;
+}
+.photo-slide-left:hover{
+	left: 280px;
+	width:100px;
 }
 .photo-slide-right{
 	position: absolute;
-	top: 0;
-    left: 1380px;
-    right: 0;
+	width: 80px;
+	height: 80px;
+	top: 250px;
+    left: 1080px;
+    /*right: 300px;*/
     bottom: 0;
-    margin: 250px auto;
+    /*margin: 250px auto;*/
 	font-size: 100px;
 	color: rgba(255, 255, 255, 0.4);
+	transition: left 300ms, width 300ms;
+}
+.photo-slide-right:hover{
+	left: 1100px;
+	width:100px;
 }
 .my-photos-box{
 	width: 100%;
@@ -63,8 +77,9 @@
 	position: relative;
 	width: 49%;
 	height: 400px;
-	background-color: aqua;
+	background: linear-gradient(30deg, gray, silver);
 	margin: 3px;
+	box-shadow: 3px 3px 3px gray
 }
 .my-photos-box{
 	display: flex;
@@ -101,7 +116,7 @@
 	height: 130px;
 	margin: 25px;
 	border-radius: 50%;
-	background-color: orange;
+	background: linear-gradient(135deg, #64EFA5, #1B87F4) ;
 	filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.4));
 }
 .user-info-box{

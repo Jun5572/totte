@@ -1,0 +1,8 @@
+<h1>Photos#new</h1>
+<div class="main-box">
+	<%= form_for @photo, url: photos_path do |f| %>
+		<%= f.attachment_field :image %>
+		<%= f.text_field :title, placeholder: "タイトル" %>
+		<%= f.submit "投稿" %>
+	<% end %>
+</div>

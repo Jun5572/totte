@@ -1,5 +1,5 @@
 class AlbumItem < ApplicationRecord
-	attachment :image
+	# attachment :photo
 
 
 	belongs_to :album

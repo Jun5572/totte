@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-	attachment :image
+	# attachment :image
 
 	has_many :photos
 	has_many :interests

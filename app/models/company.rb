@@ -1,5 +1,5 @@
 class Company < ApplicationRecord
-	attachment :image
+	attachment :thumbnail
 
 	has_many :events
 	has_one :place
