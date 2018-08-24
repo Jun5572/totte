@@ -11,9 +11,9 @@
 			<div class="user-box-letters">
 				<div class="user-nickname"><b><%= user.nickname %></b></div>
 				<div class="" style="padding-bottom:10px;font-size:20px;display:flex;">
-					👍<%= user.likes.count %>
-					📸<%= user.photos.count %>Photos
-					<%= user.albums.count %>Albums
+					<div>📸<%= user.photos.count %></div>
+					<div style="margin:0 20px;"><%= user.albums.count %>Albums</div>
+					<div>👍<%= user.likes.count %></div>
 				</div>
 				<p style="color:silver;font-size:20px;">Joined in<%= user.created_at.strftime('%Y') %></p>
 			</div>

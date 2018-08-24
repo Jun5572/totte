@@ -11,7 +11,76 @@
   </head>
 
   <body>
-    <%= render 'layouts/header', user: @user %>
+  <%#= render 'layouts/header', user: @user %>
+  <header id="header-fixed" class="">
+    <% if user_signed_in? && current_user.photos.present? %>
+      <div class="headline-box">
+        <div class="headline-icons">
+          <div class="">
+            <%= link_to users_path do %>
+              <img src="/assets/totte-logo.png" class="brand-logo">
+            <% end %>
+          </div>
+        </div>
+  <!-- お知らせアイコンここから -->
+        <div style="display:flex; justify-content:space-between; width:130px;">
+          <% if current_user.notices.where(read: false).count > 0 %>
+            <span class="ui red circular label" style="position:relative; width:30px; height:10px; right:-20px;">
+              <%= current_user.notices.where(read: false).count %>
+            </span>
+          <% end %>
+            <div class="ui icon left center pointing dropdown" style="margin: auto;">
+              <% if current_user.notices.where(read: false).count > 0 %>
+                <div class=""><span><i class="bell big icon"></i></span></div>
+              <% else %>
+                <div class=""><span><i class="bell outline big icon"></i></span></div>
+              <% end %>
+
+              <div class="menu">
+                <div class="ui message">
+                  <div class="header" align="center"><i class="bell outline icon"></i>お知らせ</div>
+                  <%= render 'notices/notice_info', notices: current_user.notices %>
+                </div>
+              </div>
+            </div>
+  <!-- お知らせアイコンここまで -->
+  <!-- ドロップダウンアイコンここから -->
+          <div class="ui icon top right pointing dropdown">
+            <%= attachment_image_tag current_user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "headline-user-icon" %>
+            <div class="menu" style="box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);padding-bottom:15px;">
+              <div class="header" style="display: flex; flex-direction: row;">
+                <%= attachment_image_tag current_user, :thumbnail, :fill, fallback: 'user_preset_image.png', :size => "40x40", class: "headline-user-icon" %>
+                <div style="padding-top: 25px;font-size: 15px;margin-left:10px;"><%= current_user.nickname %></div>
+                <div class="item">User Infomation</div>
+              </div>
+              <div class="ui divider"></div>
+              <div class="header" align="center"><h4>Setting</h4></div>
+              <div class="header">
+                <%= link_to edit_user_registration_path do %>
+                  <div class="ui inverted purple right floated button" style="margin-bottom: 10px;">
+                    プロフィール編集
+                  </div>
+                <% end %>
+              </div>
+              <div class="header">
+                <%= link_to destroy_user_session_path, class: "ui inverted secondary right floated mini button", data: { confirm: "ログアウトします。よろしいですか？" }, method: :delete do %>
+                  Log out
+                <% end %>
+              </div>
+            </div>
+          </div>
+  <!-- ドロップダウンアイコンここまで -->
+        </div>
+        </div>
+    <% else %>
+      <div class="headline-box">
+        <div class="headline-icons">
+          <div class="">
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </header><!-- /header -->
       <%= yield %>
     <%= render 'layouts/footer'  %>
   </body>

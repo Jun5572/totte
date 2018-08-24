@@ -1,0 +1,6 @@
+<% notices.reverse.each do |notice| %>
+	<div class="notice-list">
+		<%= notice.notice_by.nickname %>さんがあなたの投稿に「 <%= notice.notice_type %> 」しました！
+		<%= link_to "コメントを見る", link_through_path(notice), class: "ui mini inverted purple button"%>
+	</div>
+<% end %>

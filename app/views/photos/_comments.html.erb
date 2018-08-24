@@ -1,0 +1,46 @@
+<!-- コメントeach start -->
+<% unless photo.post_comments.count == 0 %>
+<% photo.post_comments.reverse.each do |pstcmt| %>
+	<div class=" comment-selected">
+		<div class="comment" style="padding-top:15px;">
+			<div class="avatar">
+			<%= link_to user_path(pstcmt.user) do %>
+		  <%= attachment_image_tag pstcmt.user, :thumbnail,fallback: 'user_preset_image.png', class: "icon-shadow",
+													style: "width: 40px;
+												 			height: 40px;
+												 			border-radius: 50%;
+												 			background: linear-gradient(135deg, #64EFA5, #1B87F4);"
+			%>
+			<% end %>
+			</div>
+		  	<div class="content">
+			    <span class="author">
+			    <% if pstcmt.user == current_user %>
+			     <span>あなた</span>
+			    <% else %>
+			    	<%= pstcmt.user.nickname %>
+			    <% end %>
+			    </span>
+			    <div class="metadata">
+			    	<% if pstcmt.created_at.strftime('%m%d') <=> Date.today.strftime('%m%d') %>
+			      	<span class="date">今日 <%= pstcmt.created_at.strftime('%H:%M') %> </span>
+			    	<% elsif pstcmt.created_at.tomorrow.strftime('%m%d') > Date.today.strftime('%m%d') %>
+			    		<span class="date">昨日 <%= pstcmt.created_at.strftime('%H:%M') %></span>
+			    	<% else %>
+			      	<span class="date"><%= pstcmt.created_at.strftime('%m月%d日') %></span>
+			      <% end %>
+			    </div>
+			    <div class="text" style="padding-bottom:15px;"><%= pstcmt.comment %>
+			    	<% unless pstcmt.user == current_user %>
+			    	<!-- <a class="ui purple label">コメント</a> -->
+			      	<a class="reply ui tiny purple right floated button"><font color="white">コメント</font></a>
+			      <% end %>
+			    </div>
+		  	</div>
+		</div>
+	</div>
+<% end %>
+<!-- each end -->
+<% else %>
+	<p align="center" style="margin-top:10px;font-size: 15px;color:gray;">まだコメントはありません</p>
+<% end %>

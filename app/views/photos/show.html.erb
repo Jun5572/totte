@@ -9,25 +9,21 @@
 			<% end %>
 		</div>
 		<% if @photo_cnt > 1 %>
-
-			<% unless @a == 1 %>
-				<%= link_to photo_pre_path(@user, @photo) do %>
+			<% if @photo.pre %>
+				<%= link_to user_photo_path(@user, @photo.pre) do %>
 					<div class="photo-slide-left">
 						<
 					</div>
 				<% end %>
 			<% end %>
-
-			<% unless @a == 2 %>
-				<%= link_to photo_next_path(@user, @photo) do %>
+			<% if @photo.next %>
+				<%= link_to user_photo_path(@user, @photo.next) do %>
 					<div class="photo-slide-right">
 						>
 					</div>
 				<% end %>
 			<% end %>
-
 		<% end %>
-
 	</div>
 	<div class="photos-index">
 		<div class="photo-block">
@@ -41,7 +37,6 @@
 		</div>
 	</div>
 	<div class="user-details">
-		<p>User Infomation</p>
 		<div class="">
 			<%= attachment_image_tag current_user, :thumbnail,:fill,fallback: 'user_preset_image.png', class: "user-icon-circle" %>
 		</div>
@@ -60,43 +55,48 @@
 			<table>
 				<thead>
 					<tr>
-						<th>写真投稿数</th>
-						<th>イベント投稿数</th>
+						<th>写真</th>
+						<th>アルバム</th>
 						<th>いいね</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td><%= @photo_cnt %></td>
-						<td>100</td>
-						<td>100</td>
+						<td><%= @user.albums.count %></td>
+						<td><%= @user.likes.count %></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
 	<div class="photo-details">
-			Photo Infomation
-		<div class="camera-image">
-			CameraImage(B.Ground none)
-			<div class="camera-names">
-				<p><%= @make %></p>
-				<p><%= @model %></p>
+		<div class="comments-box">
+			<div class="ui comments">
+				<!-- コメント投稿フォーム -->
+				<% if @user == current_user %>
+				<% else %>
+					<div class="ui reply tiny form">
+					  <%= form_with model: @post_comment, url: photo_post_comments_path(@photo), id: "ajax" do |f| %>
+					  <%= f.text_area :comment, placeholder: "コメント100文字以内" %>
+						<button data-remote="true" type="submit" class="ui purple labeled icon mini right floated button" style="margin-top:5px;"><i class="icon edit"></i> 送信 </button>
+						<% end %>
+					</div>
+				<% end %>
+				<!-- コメント投稿フォームend -->
+				<h3 class="ui dividing header">Comments</h3>
+				<!-- 以下Ajax -->
+				<div id ="ajax-comments" class="comments-scroll">
+					<%= render 'photos/comments', user: @user, photo: @photo %>
+				</div>
+				<!-- Ajax end -->
 			</div>
 		</div>
 		<div class="exif-contents-box">
-			EXIF Infomation
-			<div>メーカー:</div>
-			<p><%= @make %></p>
-			<div>機種名:</div>
-			<p><%= @model %></p>
-			<div>F値:</div>
-			<p><%= @f_number %></p>
-			<p>etc...</p>
-
+			<%= render 'exif_info' %>
 		</div>
+
 		<div class="mapping-box">
-			Google Map
 			<div class="map-box">
 				<iframe src="https://maps.google.co.jp/maps?output=embed&q=原宿駅&q=35.670821,139.702726&hl=ja" style="width: 100%; height: 100%; border: none;border-radius:5px;"></iframe>
 			</div>

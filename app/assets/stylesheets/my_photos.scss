@@ -27,7 +27,6 @@
 .photo-details{
 	position: relative;
 	width: 80%;
-	height: 400px;
 	border-top: solid 1px silver;
 	margin: 0 auto;
 	/*background-color: silver;*/
@@ -106,7 +105,6 @@
 .user-details{
 	border-top: solid 1px silver;
 	width: 80%;
-	height: 200px;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: row;
@@ -125,9 +123,6 @@
 	margin-top: 25px;
 }
 	.user-name{
-
-	}
-	.user-nickname{
 
 	}
 	.user-join-year{
@@ -154,9 +149,9 @@
 	/*background-color: skyblue;*/
 }
 .map-box{
-	width: 80%;
+	width: 100%;
 	height: 300px;
-	margin: 0 auto;
+	/*margin: 0 auto;*/
 	background-color: white;
 	/*border-radius: 5px;*/
 	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4)
