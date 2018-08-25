@@ -9,8 +9,10 @@ class User < ApplicationRecord
 
 
   has_many :photos
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :albums
+  has_many :post_comments, dependent: :destroy
+  has_many :notices, dependent: :destroy
 
   has_and_belongs_to_many :cameras
 

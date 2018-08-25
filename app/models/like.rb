@@ -1,5 +1,5 @@
 class Like < ApplicationRecord
 	belongs_to :user
 	belongs_to :photo
-	belongs_to :album
+ 	# has_many :notices, dependent: :destroy
 end

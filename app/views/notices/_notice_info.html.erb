@@ -1,0 +1,7 @@
+<div>
+	<% if current_user.notices.where(read: false).count > 0 %>
+		<%= render current_user.notices.where(read: false), notices: current_user.notices %>
+	<% else %>
+		<p style="padding:20px;"><font color="gray">現在お知らせはありません</font></p>
+	<% end %>
+</div>

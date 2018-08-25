@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_21_060125) do
+ActiveRecord::Schema.define(version: 2018_08_23_061606) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -116,10 +116,20 @@ ActiveRecord::Schema.define(version: 2018_08_21_060125) do
 
   create_table "likes", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "album_id"
     t.integer "photo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notices", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "notice_by_id"
+    t.integer "photo_id"
+    t.string "notice_type"
+    t.boolean "read", default: false
+    t.index ["notice_by_id"], name: "index_notices_on_notice_by_id"
+    t.index ["photo_id"], name: "index_notices_on_photo_id"
+    t.index ["user_id"], name: "index_notices_on_user_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -145,6 +155,14 @@ ActiveRecord::Schema.define(version: 2018_08_21_060125) do
     t.string "address2"
     t.integer "event_id"
     t.integer "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "post_comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "photo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

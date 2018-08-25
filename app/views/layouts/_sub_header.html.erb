@@ -2,42 +2,47 @@
 	<div class="subheader-contents" style="display:flex">
 		<%= link_to users_path do %>
 		<div class="sub-header-buttons" style="padding:20px;">
-			<p>photos</p>
+			<p>All Photos</p>
 		</div>
 		<% end %>
 		<%= link_to my_albums_path do %>
 		<div class="sub-header-buttons" style="padding:20px;">
-			<p>albums</p>
+			<p>All Albums</p>
 		</div>
 		<% end %>
+
 		<div class="ui compact menu sub-header-buttons" style="border-radius:none; border:none; box-shadow:none;">
-	  		<div class="ui simple dropdown item">Photo
+	  		<div class="ui simple dropdown item">About YOU
 	  			<div class="menu">
-	  				<%= link_to users_path	do %>
-	      				<div class="item">All Photos</div>
+	  				<div class="item">
+		      			<%= link_to user_path(current_user), style: "color:black;" do %>
+		      			Your Photos
 	      			<% end %>
-	      			<%= link_to user_path(current_user) do %>
-	      			<div class="item">Your Photos</div>
+	      			</div>
+
+					<div class="item">
+		      			<%= link_to user_albums_path(current_user), style: "color:black;" do %>
+		      			 Your Albums
 	      			<% end %>
-	      			<%= link_to new_photo_path do %>
-	      			<div class="item">Post Photo</div>
-	      			<% end %>
+	      			</div>
     			</div>
   			</div>
 		</div>
 
 		<div class="ui compact menu sub-header-buttons" style="border-radius:none; border:none; box-shadow:none;">
-	  		<div class="ui simple dropdown item">Album
+	  		<div class="ui simple dropdown item">
+	  			Post
 	  			<div class="menu">
-	  				<%= link_to my_albums_path	do %>
-	      				<div class="item">All Albums</div>
-	      			<% end %>
-	      			<%= link_to user_albums_path(current_user) do %>
-	      			<div class="item">Your Albums</div>
-	      			<% end %>
-	      			<%= link_to new_my_album_path do %>
-	      			<div class="item">Post Album</div>
-	      			<% end %>
+					<div class="item">
+		  				<%= link_to new_photo_path, style: "color:black;" do %>
+		      			Post Photo
+		      			<% end %>
+	      			</div>
+					<div class="item">
+		      			<%= link_to new_my_album_path, style: "color:black;" do %>
+		      			Post Album
+		      			<% end %>
+	      			</div>
     			</div>
   			</div>
 		</div>

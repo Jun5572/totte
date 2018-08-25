@@ -7,7 +7,8 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
-    @photos = Photo.all.reverse_order
+    @photos = Photo.all.order(created_at: :desc)
+    # @photos = Photo.all.reverse_order
     # infinite_scroll対応
     # @photos = Photo.page(params[:page]).per(4)
   end
@@ -15,7 +16,8 @@ class UsersController < ApplicationController
   def show
     if User.exists?(id: params[:id])
       @user = User.find(params[:id])
-      @photos = @user.photos.reverse_order
+      @photos = @user.photos.order(created_at: :desc)
+      # @like_hash = Like.where(user_id: current_user.id).pluck(:id, :photo_id).to_h
     else
     end
   end
@@ -31,6 +33,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    
   end
 
   private

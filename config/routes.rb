@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  get 'notices/link_through'
 	devise_for :admins, controllers: {
   	sessions: 		 'admins/sessions',
   	passwords:     'admins/passwords',
@@ -35,7 +36,10 @@ end
   resources :album_items
 
 
-resources :photos
+resources :photos do
+  resource :likes, only: [:create, :destroy]
+  resource :post_comments, only:[:create, :destroy]
+end
 resources :my_albums
 
 get 'users/top' => 'users#top'
@@ -43,6 +47,7 @@ post 'my_albums/:album_id/photo/:id/add_photo' => 'my_albums#add_album_item', as
 delete 'my_albums/:album_id/photo/:id/del_photo' => 'my_albums#del_album_item', as: 'del_my_album_item'
 get 'users/:user_id/photos/:id/pre' => 'photos#pre_photo', as: 'photo_pre'
 get 'users/:user_id/photos/:id/next' => 'photos#next_photo', as: 'photo_next'
+get 'notices/:id/link_through' => 'notices#link_through', as: 'link_through'
 resources :categories, only: [:index]
 
 root 'users#show'

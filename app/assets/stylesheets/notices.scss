@@ -1,0 +1,17 @@
+// Place all the styles related to the notices controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+/*--------------------------------------------------------------*/
+
+.notice-list{
+	border-radius:5px;
+	background-color: transparent;
+	transition: background-color 100ms;
+	margin: 10px;
+}
+.notice-list:hover{
+	background-color: rgba(200, 200, 200, 0.4);
+}

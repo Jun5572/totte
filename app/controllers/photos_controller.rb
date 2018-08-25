@@ -24,14 +24,16 @@ class PhotosController < ApplicationController
 
   def show
     # @user = current_user
+    @post_comment = PostComment.new
+
     @user = User.find(params[:user_id])
-    @photo = Photo.find_by(user_id: @user, id: params[:id])
-    @photos = @user.photos
+    @photo = Photo.find(params[:id])
+    @photos = @user.photos.order(created_at: :desc, id: :desc)
     @photo_cnt = @photos.count
     # binding.pry
     require 'mini_exiftool'
     @exif2 = MiniExiftool.new(@photo.image)
-    puts @exif2.to_hash
+    # puts @exif2.to_hash
 
     # 位置情報取得
 
@@ -50,9 +52,10 @@ class PhotosController < ApplicationController
       @f_number = "no data"
     end
 
-    @shooting = @exif2.to_hash["DateTimeOriginal"]
-    if @shooting == nil
-      @shooting = "no data"
+    if @shooting = @exif2.to_hash["DateTimeOriginal"].strftime('%Y/%m/%d').blank?
+      if @shooting == nil
+        @shooting = "no data"
+      end
     end
 
     @camflash = @exif2.to_hash["Flash"]
@@ -99,7 +102,8 @@ class PhotosController < ApplicationController
     if @pre_photo != nil && @pre_photo.user == @user
       redirect_to user_photo_path(@user, @pre_photo)
     else
-      puts 'この先に画像はありません'
+      puts '前の画像はありません'
+      binding.pry
       @a = 1
       redirect_to user_photo_path(@user, @photo)
       # require 'mini_exiftool'
@@ -117,7 +121,7 @@ class PhotosController < ApplicationController
     if @next_photo != nil && @next_photo.user == @user
       redirect_to user_photo_path(@user, @next_photo)
     else
-      puts 'この先に画像はありません'
+      puts '次の画像はありません'
       @a = 2
       redirect_to user_photo_path(@user, @photo)
       # require 'mini_exiftool'
@@ -127,7 +131,7 @@ class PhotosController < ApplicationController
 
   def destroy
     photo = Photo.find(params[:id])
-    @album_item = AlbumItem.find_by(photo_id: photo.id)
+    # @album_item = AlbumItem.find_by(photo_id: photo.id)
     photo.destroy
     redirect_to user_path(current_user)
   end

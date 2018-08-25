@@ -23,7 +23,7 @@
 	transition: box-shadow 250ms;
 }
 .photo-box:hover{
-	box-shadow: 3px 15px 30px 0px rgba(0, 0, 0, 0.1)
+	box-shadow: 3px 15px 20px 0px rgba(0, 0, 0, 0.3)
 }
 .img{
 	position: relative;
@@ -60,13 +60,14 @@
 .camera-image{
 	position: relative;
 	width: 300px;
-	height: 300px;
-	background-color: yellow;
-	/*border-radius: 50%;*/
 	margin: 10px;
 }
-.photo-datas-box{
-
+.icon-shadow{
+	box-shadow: none;
+	transition: box-shadow 200ms;
+}
+.icon-shadow:hover{
+	box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.5);
 }
 .overlay-trashbox-icon{
 	position: absolute;
@@ -81,4 +82,11 @@
 	bottom: 8px;
 	right: 8px;
 	filter:none;
+}
+.comments-scroll{
+	width: 100%;
+	height: 400px;
+	margin-bottom: 50px;
+	overflow-x: auto;
+	overflow-y: scroll;
 }

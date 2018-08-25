@@ -1,0 +1,37 @@
+// Place all the styles related to the PostComments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+
+
+
+.comments-box{
+	/*position: relative;*/
+	width: 400px;
+	/*background-color: yellow;*/
+	/*border-radius: 50%;*/
+	margin: 10px 0s;
+}
+.comment-selected{
+	background-color: transparent;
+	transition: background-color 200ms ;
+	border-radius: 5px;
+}
+.comment-selected:hover{
+	background-color: rgba(200, 200, 200, 0.2);
+}
+.comment-avatar{
+width:40px;
+height:40px;
+border-radius:50%;
+background: linear-gradient(135deg, #64EFA5, #1B87F4);
+}
+.hover{
+	background-color: transparent;
+	transition: background-color 100ms;
+}
+.hover:hover{
+	background-color: gray;
+}

@@ -40,11 +40,22 @@ $(function() {
   });
 
 
-
-
   $('.activating.element')
-  .popup()
-;
+  .popup();
+
+// コメント投稿Ajax
+$(document).on("ajax:success", "#ajax", function(e) {
+  $('#ajax-comments').html(e.detail[2]["response"]);
+  $("textarea").val('')
+});
+
+
+
+// いいね投稿Ajax
+// $(document).on("ajax:success", "#like", function(e) {
+//   $('#like).html(e.detail[2]["response"]);
+// });
+
 });
 
 
@@ -53,6 +64,16 @@ $('.button')
     inline: true
   })
 ;
+
+
+
+
+
+
+
+
+
+
 
 // $(function() {
 //     $(window).scroll(function(){
