@@ -25,7 +25,7 @@ class PhotosController < ApplicationController
   def show
     # @user = current_user
     @post_comment = PostComment.new
-
+    @notices = Notice.where(user_id: current_user)
     @user = User.find(params[:user_id])
     @photo = Photo.find(params[:id])
     @photos = @user.photos.order(created_at: :desc, id: :desc)
@@ -33,9 +33,24 @@ class PhotosController < ApplicationController
     # binding.pry
     require 'mini_exiftool'
     @exif2 = MiniExiftool.new(@photo.image)
-    # puts @exif2.to_hash
+    puts @exif2.to_hash
+
 
     # 位置情報取得
+    lat = @exif2.to_hash["GPSLatitude"]
+    lng = @exif2.to_hash["GPSLongitude"]
+    unless lat.blank?
+      lat = lat.delete("\'\"")
+      lat = lat.split(' ')
+      @lat = lat[0].to_f + ( lat[2].to_f * 60 + lat[3].to_f) / 3600
+    end
+
+    unless lng.blank?
+      lng = lng.delete("\'\"")
+      lng = lng.split(' ')
+      @lng = lng[0].to_f + ( lng[2].to_f * 60 + lng[3].to_f) / 3600
+    end
+
 
     @make = @exif2.to_hash["Make"]
     if @make == nil
@@ -52,10 +67,10 @@ class PhotosController < ApplicationController
       @f_number = "no data"
     end
 
-    if @shooting = @exif2.to_hash["DateTimeOriginal"].strftime('%Y/%m/%d').blank?
-      if @shooting == nil
-        @shooting = "no data"
-      end
+    if @exif2.to_hash["DateTimeOriginal"] == nil
+      @shooting = @exif2.to_hash["DateTimeOriginal"].strftime('%Y/%m/%d')
+    else
+      @shooting = "no data"
     end
 
     @camflash = @exif2.to_hash["Flash"]
@@ -103,7 +118,6 @@ class PhotosController < ApplicationController
       redirect_to user_photo_path(@user, @pre_photo)
     else
       puts '前の画像はありません'
-      binding.pry
       @a = 1
       redirect_to user_photo_path(@user, @photo)
       # require 'mini_exiftool'

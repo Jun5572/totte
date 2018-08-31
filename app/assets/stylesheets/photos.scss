@@ -8,7 +8,9 @@
 
 /*---------------------------------------------------------------------*/
 
-
+.margins{
+	margin-left:5px;
+}
 .content-box{
 	width: 400px;
 	height: 450px;
@@ -29,7 +31,6 @@
 	position: relative;
 	width:100%;
 	height:300px;
-	background-color: pink;
 	border-radius: 5px;
 }
 .img-summ{

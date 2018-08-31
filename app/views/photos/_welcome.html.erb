@@ -15,10 +15,37 @@
 						</p>
 					</div>
 					<div style="text-align: center;">
-						<%= link_to new_photo_path do %>
-							<button class="ui inverted purple button">Upload</button>
-						<% end %>
+							<button id="post-photo-modal" class="ui inverted purple button">写真を投稿する</button>
 					</div>
 				</div>
 			</div>
 		</div>
+
+
+		<div id="modal" class="ui mini modal" style="padding-bottom:10px;">
+			<div class="header" align="center">写真投稿</div>
+				<i class="close icon"></i>
+				<div class="content">
+			  			<%= form_for photo, url: photos_path do |f| %>
+						<%= f.attachment_field :image, style: "" %>
+						<div class="ui form" style="margin: 10px auto;">
+							<%= f.label :title, "写真のタイトル" %>
+							<%= f.text_field :title, placeholder: "タイトル", class: "field"%>
+						</div>
+							<button type="submit" class="ui purple mini button">投稿</button>
+						<% end %>
+				<div class="actions">
+					<button class="ui deny right floated button">戻る</button>
+				</div>
+		  	</div>
+		</div>
+
+
+<script>
+
+	$('#post-photo-modal').click(function() {
+		  $('#modal')
+  			.modal('show');
+	});
+
+</script>

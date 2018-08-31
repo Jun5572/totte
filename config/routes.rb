@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
   
+  namespace :admins do
+    resources :users do
+      resources :photos
+    end
+    # get 'photos/index'
+    # get 'photos/show'
+  end
+  get 'admins/top' => 'admins/users#top', as:'top_admins_path'
+  # namespace :admins do
+  #   resources :albums do
+  #     resources :photos
+  #   end
+  # end
+
   get 'notices/link_through'
 	devise_for :admins, controllers: {
   	sessions: 		 'admins/sessions',
@@ -50,7 +64,7 @@ get 'users/:user_id/photos/:id/next' => 'photos#next_photo', as: 'photo_next'
 get 'notices/:id/link_through' => 'notices#link_through', as: 'link_through'
 resources :categories, only: [:index]
 
-root 'users#show'
+root 'users#top'
   # get 'events/new'
   # get 'events/index'
   # get 'events/show'

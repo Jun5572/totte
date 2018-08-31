@@ -1,47 +1,34 @@
 <title>HOME全ユーザー写真投稿一覧</title>
 <div class="main-box">
-	<%= render 'layouts/sub_header' %>
-		<!-- each start -->
-	<div class="photo-contents-box">
-		<% @photos.each do |photo| %>
-		<div class="content-box">
-			<div class="photo-box">
-				<div class="img">
-				<%= link_to user_photo_path(photo.user, photo), style: "display:inline-block;
-				position:absolute;
-				top: 0;
-				left: 0;
-				width:100%;
-				height:100%;" do %>
-					<%= attachment_image_tag photo, :image, :style => "border-radius:5px; width:400px;height:300px;"%>
-					<div class="overlay-fillter">
-						<div class="post-user-box2">
-							<%= link_to user_path(photo.user) do %>
-								<%= attachment_image_tag photo.user, :thumbnail, :fill, fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
-							<% end %>
-							<div class="img-summ"><%= photo.title %>
-								<% if photo.user == current_user %>
-									<p class="postphoto-user-name" style="font-size: 13px;">あなた</p>
-								<% else %>
-									<p class="postphoto-user-name" style="font-size: 13px;">by <%= photo.user.nickname %></p>
-								<% end %>
-							</div>
-						</div>
-					</div>
-				<% end %>
-				</div>
-			</div>
-		</div>
-		<% end %>
-	</div>
-	<!-- each end -->
+	<%= render 'layouts/sub_header', photo: @photo %>
+	<!-- <div id="infinit"> -->
+		<!-- <div class="page"> -->
+		<%= render 'index', photos: @photos %>
+		<!-- </div> -->
+	<!-- </div> -->
 </div>
 
 <%#= javascript_include_tag 'jquery.infinitescroll' %>
 <!-- ------------------------------------- -->
+<!-- <script src="jquery-3.3.1.min.js"></script>
+<script src="app.js"></script> -->
 <script>
 
 $(function() {
+
+
+	// $("#infinit .page").infinitescroll({
+	//     loading: {
+	//       img:     "http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_blue_48.gif",
+	//       msgText: "loading..."
+	//     },
+	//     navSelector: "nav.pagination",
+	//     nextSelector: "nav.pagination a[rel=next]",
+	//     itemSelector: "#infinit div.photo-contents-box" /* このDOMに差し掛かった時に、次のページのロードが始まる*/
+	// });
+
+// ----------------------------------------------
+
 	$('.img').hover(
 		function() {
 			$(this).find($('.overlay-fillter')).stop().fadeIn(200);
@@ -52,6 +39,7 @@ $(function() {
 			$(this).find($('.overlay-fillter')).stop().fadeOut(200);
 		}
 	);
+
 });
 
 </script>

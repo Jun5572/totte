@@ -1,19 +1,20 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user!, except: [:top,]
+  before_action :authenticate_user!, except: [:top]
 
 	def top
 	end
 
   def index
     @user = current_user
+    @photo = Photo.new
     @photos = Photo.all.order(created_at: :desc)
-    # @photos = Photo.all.reverse_order
-    # infinite_scroll対応
-    # @photos = Photo.page(params[:page]).per(4)
+    # @photos = Photo.all.order(created_at: :desc).page(params[:page]).per(10)
+
   end
 
   def show
+      @photo = Photo.new
     if User.exists?(id: params[:id])
       @user = User.find(params[:id])
       @photos = @user.photos.order(created_at: :desc)
@@ -28,8 +29,10 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    user.update(user_params)
-    redirect_back fallback_location: { controller: 'users', action: 'show' }
+    if user.update(user_params)
+    # redirect_back fallback_location: { controller: 'users', action: 'show' }
+    redirect_to user_path(user)
+    end
   end
 
   def destroy
@@ -40,6 +43,6 @@ class UsersController < ApplicationController
 
 
   def user_params
-    params.require(:user).permit(:first_mane, :last_name, :nickname, :header_image)
+    params.require(:user).permit(:first_mane, :last_name, :nickname, :email, :header_image, :thumbnail)
   end
 end

@@ -8,6 +8,7 @@ class AlbumsController < ApplicationController
   end
 
   def index
+    @photo = Photo.new
     @user = User.find(params[:user_id])
     @albums = current_user.albums.reverse_order
   end

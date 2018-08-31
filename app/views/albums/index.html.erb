@@ -1,10 +1,13 @@
 <title>current_userアルバム投稿アルバム一覧</title>
 <div class="main-box">
 	<%= render 'layouts/user_main_visual', user: @user%>
-	<%= render 'layouts/sub_header'%>
+	<%= render 'layouts/sub_header', photo: @photo%>
 	<h2>Your Albums</h2><%= @albums_cnt %>
 	<div class="photo-contents-box">
 <!-- each start -->
+	<% if @albums.blank?%>
+	<p style="padding:100px; font-size:20px; color:gray;" >No album</p>
+	<% else %>
 		<% @albums.each do |album| %>
 		<% if album.album_items.blank? %>
 			<% album.destroy %>
@@ -41,26 +44,7 @@
 			</div>
 		<% end %>
 <!-- each end -->
-			<div class="album-box">
-				<div class="album-image">
-					ダミーダミーダミーダミーダミーダミーダミーダミーダミーダミーダミー
-					ダミーダミーダミーダミーダミーダミーダミーダミーダミーダミーダミー
-					ダミーダミーダミーダミーダミーダミーダミーダミーダミーダミーダミー
-					ダミーダミーダミーダミーダミーダミーダミーダミーダミーダミーダミー
-					<!-- <div class="overlay-fillter-radius-none"> -->
-						<div class="post-user-box">
-							<div class="photo-box-user-icon">
-								<%#= link_to photo_path(@user) do %>
-								<%#= attachment_image_tag @user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
-								<%# end %>
-							</div>
-						</div>
-					<!-- </div> -->
-				</div>
-				<div class="album-summ">
-				  tesutsummary
-				</div>
-			</div>
+	<% end %><!-- if end -->
 
 
 

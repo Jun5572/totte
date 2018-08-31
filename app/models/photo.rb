@@ -1,5 +1,6 @@
 class Photo < ApplicationRecord
 	attachment :image
+  # attachment :thumbnail
 
 
 	belongs_to :user
@@ -8,6 +9,11 @@ class Photo < ApplicationRecord
   has_many :albums, through: :album_items
   has_many :likes, dependent: :destroy
   has_many :notices, dependent: :destroy
+
+
+  validates :image, presence: true
+  validates :title, presence: true, length: { minimum: 2, maximum: 20}
+
 
 
 # １つ前の画像を呼び出すメソッド

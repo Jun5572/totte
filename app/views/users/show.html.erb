@@ -2,16 +2,16 @@
 <section>
 	<div class="main-box">
 		<% if current_user.sign_in_count <= 1 && @photos.blank? %>
-		<!-- 初回リンク　ウェルカムページ -->
-			<%= render 'photos/welcome' %>
+	<!-- 初回リンク　ウェルカムページ -->
+			<%= render 'photos/welcome', photo: @photo %>
 		<% else %>
 			<% if @photos.blank? %>
 				<%= render 'layouts/user_main_visual', user: @user%>
-				<%= render 'layouts/sub_header'%>
+				<%= render 'layouts/sub_header', photo: @photo %>
 				写真がありません
 			<% end %>
 			<%= render 'layouts/user_main_visual', user: @user%>
-			<%= render 'layouts/sub_header'%>
+			<%= render 'layouts/sub_header', photo: @photo%>
 			<div class="main-contents-box" style="display:flex; justify-content:space-around;">
 				<div class="my-photos-box">
 					<!-- each start -->
@@ -21,16 +21,12 @@
 								<%= attachment_image_tag photo, :image, :style => "width:100%;height: 400px;" %>
 								<div class="overlay-fillter-radius-none">
 									<div class="post-user-box">
-										<span id="like_<%= photo.id %>">
 											<p class="photo-title"><%= photo.title %></p>
 											<!-- いいねAjax -->
 											<div class="like-box">
-												<span id="like_<%= photo.id %>">
-													<%= render 'users/likes', photo: photo %>
-												</span>
+												<%= render 'likes/likes', photo: photo %>
 											</div>
 											<!-- いいねAjax end -->
-										</span>
 									</div>
 									<% if photo.user == current_user %>
 									<div class="trushbox-icon" style="width:50px;height:50px;">

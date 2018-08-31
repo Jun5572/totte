@@ -1,10 +1,23 @@
+<% if user_signed_in? %>
 <div id="edit-button" class="main-visual-box">
 	<%= attachment_image_tag user, :header_image, fallback: "preset_header_img.jpg", id: "depth", class: "main-visual"%>
 	<div class ="overlay-fillter-main-visual">
 		<div class="user-box">
 			<% if user == current_user %>
+			<div class="">
 				<%= attachment_image_tag user, :thumbnail, fallback: 'user_preset_image.png', id: "icon", class: "user-icon-in-main-visual" %>
-				<div id="thumb-edit" class="thumb-edit-overlay">edit</div>
+				<i id="sss" class="far fa-edit fa-2x user-icon-edit-button"></i>
+				<div id="ddd" class="ui mini modal">
+					<i class="close icon"></i>
+						<div class="" align="center">プロフィールアイコン変更
+							<div class="ui divider"></div>
+									<%= form_for(user) do |f| %>
+										<%= f.attachment_field :thumbnail %>
+										<%= f.submit 'update', class: "ui inverted purple button" %>
+									<% end %>
+						</div>
+				</div>
+			</div>
 			<% else %>
 				<%= attachment_image_tag user, :thumbnail, fallback: 'user_preset_image.png', class: "user-icon-in-main-visual" %>
 			<% end %>
@@ -13,22 +26,26 @@
 				<div class="" style="padding-bottom:10px;font-size:20px;display:flex;">
 					<div>📸<%= user.photos.count %></div>
 					<div style="margin:0 20px;"><%= user.albums.count %>Albums</div>
-					<div>👍<%= user.likes.count %></div>
+					<div class="">👍<%= user.likes.count %></div>
 				</div>
 				<p style="color:silver;font-size:20px;">Joined in<%= user.created_at.strftime('%Y') %></p>
 			</div>
 		</div>
 		<% if user == current_user %>
 		<!-- current_userであれはヘッダーイメージ変更ボタンが現れる -->
-			<div id="fade" class="main-visual-edit-button">
+			<div id="fade" class="main-visual-edit-button" style="cursor: pointer;">
 				<div id="edit"><i class="far fa-edit fa-2x"></i>
-					<div class="ui modal">
+					<div id="header-image-edit-modal" class="ui mini modal">
 						<i class="close icon"></i>
-						<div class="modal-change-header-image-form">
-							<%= form_for user, url: user_path(user), method: :patch do |f| %>
+						<div class="content">
+							<div class="ui header">
+								<%= form_for user, url: user_path(user), method: :patch do |f| %>
 								<%= f.attachment_field :header_image %>
-								<%= f.submit 'update' %>
+								<div class="actions">
+									<%= f.submit 'update', class: "ui inverted purple button" %>
+								</div>
 							<% end %>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -36,31 +53,41 @@
 		<% end %>
 	</div>
 </div>
+<% end %>
 
 <script>
 $(function(){
+
 	$('#edit').click(function(){
-		$('.ui.modal').modal('show');
-	})
+		$('#header-image-edit-modal').modal('show');
+	});
+
+	$('#sss').click(function(){
+		$('#ddd').modal('show');
+	});
+
 // ヘッダーイメージホバー時
 	$('#edit-button').hover(
 		function(){
 			$(this).find($('#fade')).stop().fadeIn(100);
+			// $('.thumb-edit-overlay').fadeIn(100);
 	},
 		function(){
 			$(this).find($('#fade')).stop().fadeOut(100);
-		}
-	);
+			// $('.thumb-edit-overlay').fadeOut(100);
+	});
 
 // ユーザーアイコンホバー時
-	$('#icon').hover(
+
+
+	$('#edit-button').hover(
 		function(){
-			$('.thumb-edit-overlay').fadeIn(100);
+			$('#sss').fadeIn(100);
 	},
 		function(){
-			$('.thumb-edit-overlay').fadeOut(100);
+			$('#sss').fadeOut(100);
 		}
 	);
-});
 
+});
 </script>
