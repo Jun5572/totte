@@ -29,6 +29,15 @@
 					<% end %>
 				</div>
 				<div class="header">
+					<% if session[:album_id] != nil %>
+					<button id="modal-confirm" class="ui inverted secondary button" type="button">ログアウト</button>
+					<div class=" ui basic modal">
+						<div class="ui icon header">
+    						<i class="archive icon"></i>
+    						Archive Old Messages
+  						</div>
+					</div>
+					<% else %>
 					<%= link_to destroy_user_session_path, class: "ui inverted secondary button", data: { confirm: "ログアウトします。よろしいですか？" }, method: :delete do %>
 						Log out
 					<% end %>
@@ -52,9 +61,3 @@
 
 <!-- モーダルview -->
 <%#= render 'layouts/user_edit_modal', user: @user %>
-<!-- <script>
-	$('#profile-edit-button').click(function() {
-  $('.ui.modal')
-  .modal('show');
-});
-</script> -->

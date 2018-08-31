@@ -1,6 +1,7 @@
 class MyAlbumsController < ApplicationController
   before_action :authenticate_user!
   def index
+    @photo = Photo.new
     # @user = current_user
     @albums = Album.all.reverse_order
   end
@@ -12,6 +13,7 @@ class MyAlbumsController < ApplicationController
     @i = 0
     @count = session[:photo].count
     @user = current_user
+    @photo = Photo.new
     @photos = @user.photos.reverse_order
     @album = current_album
      puts session[:photo]

@@ -3,14 +3,15 @@
 <div class="main-box">
 	<!-- <div class="main-visual2">
 	</div> -->
-	<%= render 'layouts/sub_header' %>
+	<%= render 'layouts/sub_header', photo: @photo %>
 	<div class="main-contents-box">
 		<h2>Item List</h2><div>選択中の写真<%= @count %>/10枚</div>
+		<%# binding.pry %>
 		<% if current_album.album_items.blank? %>
-		  <button class="ui inverted violet button disabled">Create Album</button>
+		  <button class="ui inverted violet button disabled">画像を選択してください</button>
 		<% else %>
 		  <%= link_to my_albums_path, method: :post do %>
-			  <button class="ui inverted violet button">Create Album</button>
+			  <button class="ui inverted violet button">アルバムにする</button>
 		  <% end %>
 		<% end %>
 		<div style="display:flex; flex-direction:row; justify-content:flex-start; flex-wrap: wrap;">

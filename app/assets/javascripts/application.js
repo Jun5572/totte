@@ -18,6 +18,8 @@
 //= require semantic-ui
 //= require activestorage
 //= require turbolinks
+// require jquery.infinitescroll
+// require "infinite-scroll.pkgd.min"
 //= require_tree .
 
 

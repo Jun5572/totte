@@ -1,2 +1,15 @@
-top.html.erb
-<%= link_to "新規登録", new_user_registration_path %>
+<div class="top-bg">
+	<div class="contents-box">
+		<div style=";padding-top:200px;margin: 0 auto;" align="center">
+			<img src="/assets/totte-logo.png">
+		</div>
+		<div class="buttons" style="margin-top:30px;">
+			<%= link_to new_user_registration_path do %>
+				<div type="" class="entrance-button">新規登録</div>
+			<% end %>
+			<%= link_to new_user_session_path do %>
+				<div type="" class="entrance-button">サインイン</div>
+			<% end %>
+		</div>
+	</div>
+</div>

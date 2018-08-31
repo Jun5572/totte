@@ -1,50 +1,141 @@
-<div class="sub-header">
-	<div class="subheader-contents" style="display:flex">
-		<%= link_to users_path do %>
-		<div class="sub-header-buttons" style="padding:20px;">
-			<p>All Photos</p>
-		</div>
-		<% end %>
-		<%= link_to my_albums_path do %>
-		<div class="sub-header-buttons" style="padding:20px;">
-			<p>All Albums</p>
-		</div>
-		<% end %>
+<div id="chaser">
+	<div class="sub-header">
+		<div class="subheader-contents" style="display:flex">
 
-		<div class="ui compact menu sub-header-buttons" style="border-radius:none; border:none; box-shadow:none;">
-	  		<div class="ui simple dropdown item">About YOU
-	  			<div class="menu">
-	  				<div class="item">
-		      			<%= link_to user_path(current_user), style: "color:black;" do %>
-		      			Your Photos
-	      			<% end %>
-	      			</div>
+			<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none;">
+		  		<div class="ui simple dropdown item sub-header-buttons">YOU
+		  			<div class="menu">
 
-					<div class="item">
-		      			<%= link_to user_albums_path(current_user), style: "color:black;" do %>
-		      			 Your Albums
-	      			<% end %>
-	      			</div>
-    			</div>
-  			</div>
-		</div>
-
-		<div class="ui compact menu sub-header-buttons" style="border-radius:none; border:none; box-shadow:none;">
-	  		<div class="ui simple dropdown item">
-	  			Post
-	  			<div class="menu">
-					<div class="item">
-		  				<%= link_to new_photo_path, style: "color:black;" do %>
-		      			Post Photo
+		  				<%= link_to user_path(current_user), style: "color:black;" do %>
+			  				<div class="item sub-header-buttons">
+				      			Your Photos
+			      			</div>
 		      			<% end %>
-	      			</div>
-					<div class="item">
+
+						<%= link_to user_albums_path(current_user), style: "color:black;" do %>
+						<div class="item sub-header-buttons">
+			      			 Your Albums
+		      			</div>
+		      			<% end %>
+	    			</div>
+	  			</div>
+			</div>
+
+			<%= link_to users_path do %>
+			<div class="sub-header-buttons" style="padding:20px;">
+				<p>All Photos</p>
+			</div>
+			<% end %>
+
+			<%= link_to my_albums_path do %>
+			<div class="sub-header-buttons" style="padding:20px;">
+				<p>All Albums</p>
+			</div>
+			<% end %>
+
+			<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none;">
+		  		<div class="ui simple dropdown item sub-header-buttons">
+		  			Post
+		  			<div class="menu">
+		  				<div id="post-photo-modal">
+		  					<div class="item sub-header-buttons">
+			      				Post Photo
+		      				</div>
+		  				</div>
 		      			<%= link_to new_my_album_path, style: "color:black;" do %>
-		      			Post Album
+							<div class="item sub-header-buttons">
+				      			Post Album
+			      			</div>
 		      			<% end %>
-	      			</div>
-    			</div>
-  			</div>
+	    			</div>
+	  			</div>
+			</div>
+
+			<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none;">
+		  		<div class="ui simple dropdown item sub-header-buttons">
+		  			Your Activity
+	  			</div>
+			</div>
 		</div>
 	</div>
-</div>
+
+
+
+	<div id="modal" class="ui mini modal" style="padding-bottom:10px;">
+		<div class="header" align="center">写真投稿</div>
+		<i class="close icon"></i>
+		<div class="content">
+	  			<%= form_for photo, url: photos_path do |f| %>
+				<%= f.attachment_field :image, style: "" %>
+				<div class="ui form" style="margin: 10px auto;">
+					<%= f.label :title, "写真のタイトル" %>
+					<%= f.text_field :title, placeholder: "タイトル", class: "field", maximum: "20"%>
+				</div>
+					<button type="submit" class="ui purple mini button">投稿</button>
+				<% end %>
+		<div class="actions">
+			<button class="ui deny right floated button">戻る</button>
+		</div>
+	  </div>
+	</div>
+</div><!-- id end -->
+
+
+
+
+
+<script>
+
+	$('#post-photo-modal').click(function() {
+		  $('#modal')
+  			.modal('show');
+	});
+
+</script>
+
+<script>
+	$(function(){
+
+	var nav = $('#chaser');
+	var nav2 = $('.main-visual')
+
+    // メニューのtop座標を取得する
+    var offsetTop = nav.offset().top;
+
+    var floatMenu = function() {
+        // スクロール位置がメニューのtop座標を超えたら固定にする
+        if ($(window).scrollTop() > 300) {
+            nav.addClass('fixed');
+            nav2.css('margin-bottom','80px');
+        } else {
+            nav.removeClass('fixed');
+            nav2.css('margin-bottom','');
+        }
+    }
+    $(window).scroll(floatMenu);
+    $('body').bind('touchmove', floatMenu);
+
+	});
+
+</script>
+
+<style>
+
+.fixed {
+    position: fixed;
+    width: 100%;
+    top: 80px;
+    z-index: 1;
+}
+.padding {
+	margin-bottom: 60px;
+}
+
+</style>
+
+
+
+
+
+
+

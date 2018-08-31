@@ -4,4 +4,8 @@ class AlbumItem < ApplicationRecord
 
 	belongs_to :album
 	belongs_to :photo
+
+
+  	validates :photo, presence: true
+
 end

@@ -36,6 +36,30 @@ td, th {
     font-size: 20px;
 }
 /*-----------------------------------*/
+.contents-box{
+	width: 60%;
+	margin: 0 auto;
+}
+.top-bg{
+	width:100%;
+	height: 700px;
+	background: linear-gradient(135deg, #64EFA5, #1B87F4);
+}
+.entrance-button{
+	width: 150px;
+	margin: 0 auto;
+	border: solid 2px white;
+	border-radius: 5px;
+	padding: 10px;
+	text-align: center;
+	color: white;
+	margin-bottom:20px;
+	transition: background-color 200ms;
+}
+.entrance-button:hover{
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
 .devise-form-control {
     display: block;
     width: 100%;
@@ -49,7 +73,7 @@ td, th {
 }
 .devise-main-box{
 	width: 100%;
-	height: 100%;
+	height: 630px;
 	padding: 20px 0 20px 0;
 	/*color: white;*/
 	/*background-color: aliceblue;*/
@@ -149,7 +173,7 @@ header#header-fixed{
 footer{
 	width: 100%;
 	height: 100px;
-	background: linear-gradient(aliceblue, 30%, black );
+	background: linear-gradient(aliceblue, 30%, black);
 }
 
 .modal-change-header-image-form{
@@ -215,10 +239,13 @@ footer{
 	height: 45px;
 	border-radius: 50%;
 	background: linear-gradient(135deg, #64EFA5, #1B87F4);
+	object-fit: cover;
 }
 .user-nickname{
 	padding-bottom: 45px;
+	font-size: 40px;
 }
+
 .user-icon-in-main-visual{
 	position: absolute;
 	top: 120px;
@@ -227,18 +254,17 @@ footer{
 	height: 150px;
 	border-radius: 50%;
 	background: linear-gradient(135deg, #64EFA5, #1B87F4);
-	z-index: 1;
+	object-fit: cover;
+	/*z-index: 1;*/
 }
 .thumb-edit-overlay{
 	position: absolute;
-	top: 120px;
-    left: 40px;
-	width: 150px;
-	height: 150px;
+	top: 0px;
+    left: 0px;
 	border-radius: 50%;
 	background-color: rgba(0, 0, 0, 0.6);
 	display: none;
-	z-index: 1;
+	z-index: 2;
 }
 .sub-header{
 	width: 100%;
@@ -252,11 +278,12 @@ footer{
 .sub-header-buttons{
 	margin: 0 auto;
 	color: black;
+	border-radius:0px!important;
 	background-color: transparent;
 	transition: color 100ms, background-color 100ms;
 }
 .sub-header-buttons:hover{
-	background-color: rgb(80, 80, 120);
+	background-color: rgb(80, 80, 120)!important;
 	color: white!important;
 }
 .main-visual-box{
@@ -269,7 +296,6 @@ footer{
 	position: relative;
 	width: 100%;
 	height: 300px;
-	background-color: orange;
 	object-fit: cover;
 	/*z-index: -1;*/
 }
@@ -290,7 +316,6 @@ footer{
 	position: relative;
 	width: 100%;
 	height: 200px;
-	background-color: darkorange;
 }
 .main-visual-edit-button{
 	position: absolute;
@@ -331,8 +356,8 @@ footer{
 	border-radius: 50%;
 	background: linear-gradient(135deg, #64EFA5, #1B87F4) ;
 	box-shadow: none;
+	object-fit: cover;
 	transition: box-shadow 200ms;
-	/*background-color: orange;*/
 }
 .photo-box-user-icon:hover{
 	box-shadow: 0px 0px 5px 3px rgba(255,255,255,0.5);
@@ -417,4 +442,12 @@ footer{
     left: 30px;
     color: white;
     font-size: 15px;
+}
+.user-icon-edit-button{
+	position: absolute;
+    top: 180px;
+    left: 100px;
+    color: rgb(255, 255, 255);
+    display: none;
+    cursor: pointer;
 }
