@@ -12,7 +12,7 @@ class Photo < ApplicationRecord
 
 
   validates :image, presence: true
-  validates :title, presence: true, length: { minimum: 2, maximum: 20}
+  validates :title, presence: true, length: { minimum: 2, maximum: 20 }
 
 
 
@@ -30,9 +30,9 @@ class Photo < ApplicationRecord
 
 
   # いいね！
-  def liked_by?(user)
-    likes.where(user_id: user.id).exists?
-  end
+  # def liked_by?(user)
+  #   likes.where(user_id: user.id).exists?
+  # end
 
   def like_user(user_id)
     likes.find_by(user_id: user_id)

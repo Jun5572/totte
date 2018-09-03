@@ -100,3 +100,6 @@ gem 'enum_help'
 
 # アルバム作成昨日実装
 gem 'cocoon'
+
+# フォロー、フォロワー機能
+gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'

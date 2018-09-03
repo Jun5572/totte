@@ -4,6 +4,7 @@
 
 			<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none;">
 		  		<div class="ui simple dropdown item sub-header-buttons">YOU
+		  			<i class="dropdown icon"></i>
 		  			<div class="menu">
 
 		  				<%= link_to user_path(current_user), style: "color:black;" do %>
@@ -36,6 +37,7 @@
 			<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none;">
 		  		<div class="ui simple dropdown item sub-header-buttons">
 		  			Post
+		  			<i class="dropdown icon"></i>
 		  			<div class="menu">
 		  				<div id="post-photo-modal">
 		  					<div class="item sub-header-buttons">
@@ -52,8 +54,43 @@
 			</div>
 
 			<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none;">
-		  		<div class="ui simple dropdown item sub-header-buttons">
+		  		<div class="ui dropdown item sub-header-buttons">
 		  			Your Activity
+		  			<i class="dropdown icon"></i>
+		  			<div class="menu">
+		  				<div class=" ui header">最近のアクティビティ</div>
+			  			<%= render 'users/my_activity' %>
+		  			</div>
+	  			</div>
+			</div>
+
+			<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none;">
+		  		<div class="ui dropdown item sub-header-buttons">
+		  			Followers
+		  			<i class="dropdown icon"></i>
+		  			<div class="menu">
+		  				<div class="ui header" align="center">あなたがフォローしている人</div>
+		  				<div class="ui left icon input">
+	      					<i class="search icon"></i>
+	      					<input type="text" name="search" placeholder="検索">
+    					</div>
+		  				<%= render 'users/follower_index' %>
+		  			</div>
+	  			</div>
+			</div>
+
+			<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none;">
+		  		<div class="ui dropdown item sub-header-buttons">
+		  			Followed by
+		  			<i class="dropdown icon"></i>
+		  			<div class="menu">
+		  				<div class="ui header" align="center">あなたをフォローしている人</div>
+		  				<div class="ui left icon input">
+		  					<i class="search icon"></i>
+		  					<input type="text" name="search" placeholder="検索">
+		  				</div>
+		  				<%= render 'users/followed_by_index' %>
+		  			</div>
 	  			</div>
 			</div>
 		</div>
@@ -66,7 +103,7 @@
 		<i class="close icon"></i>
 		<div class="content">
 	  			<%= form_for photo, url: photos_path do |f| %>
-				<%= f.attachment_field :image, style: "" %>
+				<%= f.attachment_field :image %>
 				<div class="ui form" style="margin: 10px auto;">
 					<%= f.label :title, "写真のタイトル" %>
 					<%= f.text_field :title, placeholder: "タイトル", class: "field", maximum: "20"%>

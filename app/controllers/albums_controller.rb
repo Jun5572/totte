@@ -59,7 +59,7 @@ class AlbumsController < ApplicationController
 		if User.exists?(id: params[:user_id])
 	  		@user = User.find(params[:user_id])
         @album = Album.find(params[:id])
-        @photo = @album.album_items.first
+        @photo = Photo.new
         @album.thumbnail_id = @photo
         @album_items = @album.album_items
   		else

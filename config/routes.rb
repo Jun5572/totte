@@ -30,6 +30,7 @@ resources :users do
     resources :cameras, only: [:index, :show]
     resources :events
     resources :photos
+    resource :follows, only: [:create, :destroy]
     resources :albums do
       resources :my_photos
     end

@@ -31,9 +31,13 @@
 				      	<% end %>
 				    </div>
 				    <div class="text" style="padding-bottom:15px;"><%= simple_format(pstcmt.comment) %>
-				    	<% unless pstcmt.user == current_user %>
-				    	<!-- <a class="ui purple label">コメント</a> -->
-				      	<a class="reply ui tiny purple right floated button"><font color="white">返信</font></a>
+				    	<% if pstcmt.user == current_user %>
+				    		<%= link_to photo_post_comments_path(pstcmt.photo), method: :delete, remote: true do%>
+					      		<a class="reply ui tiny black right floated button"><font color="white">削除</font></a>
+					      	<% end %>
+				    	<% else %>
+				   	 		<!-- <a class="ui purple label">コメント</a> -->
+					      	<a class="reply ui tiny purple right floated button"><font color="white">返信</font></a>
 				      <% end %>
 				    </div>
 			  	</div>

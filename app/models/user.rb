@@ -16,15 +16,8 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :cameras
 
-  # validates :nickname, uniqueness: true, length: { minimum: 2, maximum: 10}
-  # validates :thumbnail, presence: true
-  # validates :first_name, presence: true, length: { minimum: 1, maximum: 10}
-  # validates :last_name, presence: true, length: { minimum: 1, maximum: 10}
-  # validates :birth_year, presence: true
-  # validates :birth_month, presence: true
-  # validates :birth_day, presence: true
-
-
+  acts_as_followable # フォロワー機能
+  acts_as_follower   # フォロー機能
 
 
 # varidetes-----------------------------------

@@ -1,6 +1,6 @@
 <title>current_userアルバム詳細</title>
 <div class=my-album-main-box>
-	<%= render 'layouts/sub_header'%>
+	<%= render 'layouts/sub_header', photo: @photo%>
 	<div class = "main-contents-box">
 		<div class="my-album-item-header-photo">
 			<%= attachment_image_tag @album.album_items.first.photo, :image, class: "my-album-item-header-photo" %>

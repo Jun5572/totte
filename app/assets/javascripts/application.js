@@ -77,6 +77,7 @@ $('.button')
 
 
 
+
 // $(function() {
 //     $(window).scroll(function(){
 //         var y = $(this).scrollTop(); // スクロール値を取得（=Y座標=縦位置）

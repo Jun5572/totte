@@ -1,5 +1,9 @@
 <title>HOME全ユーザー写真投稿一覧</title>
 <div class="main-box">
+	<div class="main-visual">
+		<!-- <img src="header-image.jpg" style="width: 100%;height: 300px;object-fit: cover;"> -->
+		<%= attachment_image_tag @rand_photo, :image, class: "main-visual" %>
+	</div>
 	<%= render 'layouts/sub_header', photo: @photo %>
 	<!-- <div id="infinit"> -->
 		<!-- <div class="page"> -->

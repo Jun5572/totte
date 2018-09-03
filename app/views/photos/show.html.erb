@@ -30,7 +30,9 @@
 	</div>
 	<div class="user-details">
 		<div class="">
-			<%= attachment_image_tag current_user, :thumbnail, fallback: 'user_preset_image.png', class: "user-icon-circle" %>
+			<%= link_to user_path(@user) do %>
+				<%= attachment_image_tag @user, :thumbnail, fallback: 'user_preset_image.png', class: "user-icon-circle" %>
+			<% end %>
 		</div>
 		<div class="user-info-box">
 			<h2><%= @user.nickname %></h2>
@@ -45,9 +47,11 @@
 			<table>
 				<thead>
 					<tr>
-						<th>写真</th>
-						<th>アルバム</th>
+						<th>投稿枚数</th>
+						<th>アルバム投稿数</th>
 						<th>いいね</th>
+						<th>フォロー数</th>
+						<th>フォロワー数</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -55,6 +59,8 @@
 						<td><%= @photo_cnt %></td>
 						<td><%= @user.albums.count %></td>
 						<td><%= @user.notices.count %></td>
+						<td><%= @user.follow_count %></td>
+						<td><%= @user.followers_count %></td>
 					</tr>
 				</tbody>
 			</table>
@@ -95,6 +101,12 @@
 					<span class="margins"><%= @make %></span><br>
 					<label><b>機種名:</b></label>
 					<span class="margins"><%= @model %></span><br>
+					<label><b>レンズ:</b></label>
+					<span class="margins"><%= @lens_spec %></span><br>
+					<label><b>レンズメーカー:</b></label>
+					<span class="margins"><%= @lens_make %></span><br>
+					<label><b>レンズモデル:</b></label>
+					<span class="margins"><%= @lens_model %></span><br>
 					<label><b>ISO感度:</b></label>
 					<span class="margins"><%= @iso %></span><br>
 					<label><b>F値:</b></label>
@@ -105,8 +117,7 @@
 					<span class="margins"><%= @camflash %></span><br>
 					<label><b>写真サイズ:</b></label>
 					<span class="margins"><%= @photo_size %></span><br>
-					<label><b>レンズ:</b></label>
-					<span class="margins"><%= @lens_spec %></span><br>
+					
 					<label><b>シーンモード:</b></label>
 					<span class="margins"><%= @scene_mode %></span><br>
 				</div>
@@ -119,7 +130,7 @@
 					<iframe src="https://maps.google.co.jp/maps?output=embed&q=原宿駅&q=<%= @lat %>,<%= @lng %>&hl=ja" style="width: 100%; height: 100%; border: none;border-radius:5px;"></iframe>
 				<% else %>
 					<div class="" style="text-align:center:width:100%;height:100%;background-color:gray;">
-						<div>sorry, no GPS data</div>
+						<div style="text-align:center; padding-top:200px; font-size:30px;">sorry, no GPS data</div>
 					</div>
 				<% end %>
 			</div>

@@ -9,7 +9,7 @@
 				<i id="sss" class="far fa-edit fa-2x user-icon-edit-button"></i>
 				<div id="ddd" class="ui mini modal">
 					<i class="close icon"></i>
-						<div class="" align="center">プロフィールアイコン変更
+						<div class="" align="center">アイコン変更
 							<div class="ui divider"></div>
 									<%= form_for(user) do |f| %>
 										<%= f.attachment_field :thumbnail %>
@@ -24,11 +24,27 @@
 			<div class="user-box-letters">
 				<div class="user-nickname"><b><%= user.nickname %></b></div>
 				<div class="" style="padding-bottom:10px;font-size:20px;display:flex;">
-					<div>📸<%= user.photos.count %></div>
-					<div style="margin:0 20px;"><%= user.albums.count %>Albums</div>
-					<div class="">👍<%= user.likes.count %></div>
+					<div class="">👍いいね数　<%= user.likes.count %></div>
+					<div class="" style="margin:0 20px;"><i class="fas fa-user"></i>フォロー　<%= user.follow_count %> </div>
+					<div class=""><i class="fas fa-users"></i>フォロワー　<%= user.followers_count %> </div>
 				</div>
-				<p style="color:silver;font-size:20px;">Joined in<%= user.created_at.strftime('%Y') %></p>
+				<span style="color:silver;font-size:20px;">Joined in<%= user.created_at.strftime('%Y') %></span>
+				<div class="" style="margin-left:10px;display:inline-flex;">
+					<% if user != current_user %>
+						<% if current_user.following? user %>
+							<%= link_to user_follows_path(user), method: :delete do %>
+								<button class="ui animated fade purple tiny button" tabindex="0">
+									<div class="visible content">フォロー中</div>
+									<div class="hidden content">フォローをやめる</div>
+								</button>
+							<% end %>
+						<% else %>
+							<%= link_to user_follows_path(user), method: :post do %>
+							<div class="ui inverted purple mini button" style="font-size:13px;">フォローする</div>
+							<% end %>
+						<% end %>
+					<% end %>
+				</div>
 			</div>
 		</div>
 		<% if user == current_user %>
