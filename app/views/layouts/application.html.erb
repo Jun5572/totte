@@ -13,9 +13,7 @@
   </head>
 
   <body>
-  <%#= render 'layouts/header', user: @user %>
   <header id="header-fixed" class="">
-    <%# binding.pry %>
   <% if admin_signed_in? %>
   <div class="">
     管理者でログイン中
@@ -39,31 +37,41 @@
             <% end %>
           </div>
         </div>
+
+  <!-- 検索フォームここから -->
+        <div style="display:flex; justify-content:space-between; width:350px;">
+          <div class="ui tiny search" style="margin: auto;">
+          <div class="ui icon input">
+            <input class="prompt" type="text" placeholder= "ニックネームで検索">
+            <i class="search icon"></i>
+          </div>
+          <div class="results"></div>
+        </div>
+  <!-- 検索フォームend -->
   <!-- お知らせアイコンここから -->
-        <div style="display:flex; justify-content:space-between; width:130px;">
           <% if current_user.notices.where(read: false).count > 0 %>
             <span class="ui red circular label" style="position:relative; width:10px; height:10px; right:-20px;">
               <%= current_user.notices.where(read: false).count %>
             </span>
           <% end %>
-            <div class="ui icon left center pointing dropdown" style="margin: auto;">
-              <% if current_user.notices.where(read: false).count > 0 %>
-                <div id="test" class=""><span><i class="bell big icon"></i></span></div>
-              <% else %>
-                <div class=""><span><i class="bell outline big icon"></i></span></div>
-              <% end %>
+          <div class="ui icon left top pointing dropdown" style="margin: auto;">
+            <% if current_user.notices.where(read: false).count > 0 %>
+              <div id="test" class=""><span><i class="bell big icon"></i></span></div>
+            <% else %>
+              <div class=""><span><i class="bell outline big icon"></i></span></div>
+            <% end %>
 
-              <div class="menu">
-                <div class="ui message">
-                  <% unless current_user.notices.where(read: false).count > 0 %>
-                    <div class="header" align="center"><i class="bell outline icon"></i>お知らせ</div>
-                  <% else %>
-                    <div class="header" align="center"><i class="bell outline icon"></i>新着お知らせ<b><%= current_user.notices.where(read: false).count %></b>件</div>
-                  <% end %>
-                  <%= render 'notices/notice_info', notices: current_user.notices %>
-                </div>
+            <div class="menu">
+              <div class="ui message">
+                <% unless current_user.notices.where(read: false).count > 0 %>
+                  <div class="header" align="center"><i class="bell outline icon"></i>お知らせ</div>
+                <% else %>
+                  <div class="header" align="center"><i class="bell outline icon"></i>新着お知らせ<b><%= current_user.notices.where(read: false).count %></b>件</div>
+                <% end %>
+                <%= render 'notices/notice_info', notices: current_user.notices %>
               </div>
             </div>
+          </div>
   <!-- お知らせアイコンここまで -->
   <!-- ドロップダウンアイコンここから -->
           <div class="ui icon top right pointing dropdown">
@@ -135,7 +143,7 @@
   <% end %><!-- if admin_signed_in? end -->
   </header><!-- /header -->
       <%= yield %>
-    <%= render 'layouts/footer'  %>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
 
@@ -144,6 +152,33 @@
 <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzZ0PKG68JfsiFmA2jrlBBUPXyjtrJqzU&callback=initMap"
   type="text/javascript"></script> -->
 <script>
+
+  var users =[
+                <% User.all.each do |user| %>
+                  <% unless user.nickname == nil %>
+                    { title: '<%= attachment_image_tag user, :thumbnail, style: "width:20px;height:20px;border-radius:50%;object-fit:cover;"%>'+'<%= user.nickname.to_s %>' },
+                  <% else %>
+                    <% next %>
+                  <% end %>
+                <% end %>
+              ];
+
+  $('.ui.tiny.search').search({
+    source: users,
+    error : {
+              source      : 'Cannot search. No source used, and Semantic API module was not included',
+              noResults   : '該当ユーザーはいません',
+              logging     : 'Error in debug logging, exiting.',
+              noTemplate  : 'A valid template name was not specified.',
+              serverError : 'There was an issue with querying the server.',
+              maxResults  : 'Results must be an array to use maxResults setting',
+              method      : 'The method you called is not defined.'
+            }
+  });
+
+
+
+
 
   $('.ui.dropdown')
   .dropdown();

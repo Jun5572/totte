@@ -67,7 +67,7 @@ class PhotosController < ApplicationController
       @f_number = "no data"
     end
 
-    if @exif2.to_hash["DateTimeOriginal"] == nil
+    unless @exif2.to_hash["DateTimeOriginal"] == nil
       @shooting = @exif2.to_hash["DateTimeOriginal"].strftime('%Y/%m/%d')
     else
       @shooting = "no data"
@@ -91,6 +91,16 @@ class PhotosController < ApplicationController
     @lens_spec = @exif2.to_hash["LensSpec"]
     if @lens_spec == nil
       @lens_spec = "no data"
+    end
+
+    @lens_model = @exif2.to_hash["LensModel"]
+    if @lens_model == nil
+      @lens_model = "no data"
+    end
+
+    @lens_make = @exif2.to_hash["LensMake"]
+    if @lens_make == nil
+      @lens_make = "no data"
     end
 
     @scene_mode = @exif2.to_hash["SceneCaptureType"]

@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def index
     @user = current_user
     @photo = Photo.new
+    @rand_photo = Photo.order("RANDOM()").first
     @photos = Photo.all.order(created_at: :desc)
     # @photos = Photo.all.order(created_at: :desc).page(params[:page]).per(10)
 

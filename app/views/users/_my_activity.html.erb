@@ -1,0 +1,7 @@
+	<% Notice.where(notice_by: current_user).reverse.first(10).each do |notice| %>
+			<%= link_to user_photo_path(notice.user_id, notice.photo), class: "item" do %>
+				<div class="list">
+					<b><%= notice.user.nickname %></b>さんに<b><%= notice.notice_type %></b>しました
+				</div>
+			<% end %>
+	<% end %>

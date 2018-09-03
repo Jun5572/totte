@@ -30,12 +30,18 @@
 }
 
 td, th {
-    padding: 10px 20px;
+    padding: 5px 15px;
     margin: 0 auto;
     text-align: center;
-    font-size: 20px;
+    font-size: 15px;
 }
 /*-----------------------------------*/
+.strech{
+	width:100px!important;
+}
+.strech:hover{
+
+}
 .contents-box{
 	width: 60%;
 	margin: 0 auto;
@@ -274,6 +280,21 @@ footer{
 .subheader-contents{
 	width:80%;
 	margin:0 auto;
+}
+.sub-header-dropdown-user-icon{
+	width: 30px!important;
+	height: 30px!important;
+	border-radius: 50%!important;
+	background: linear-gradient(135deg, #64EFA5, #1B87F4) ;
+	object-fit: cover;
+}
+.filter-drop-shadow{
+	filter: drop-shadow(2px 2px 2px transparent);
+	transition: 200ms;
+}
+.filter-drop-shadow:hover{
+	filter: drop-shadow(1px 1px 1px gray);
+
 }
 .sub-header-buttons{
 	margin: 0 auto;
