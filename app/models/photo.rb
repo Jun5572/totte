@@ -2,7 +2,6 @@ class Photo < ApplicationRecord
 	attachment :image
   # attachment :thumbnail
 
-
 	belongs_to :user
 	has_many :album_items, dependent: :destroy
   has_many :post_comments, dependent: :destroy
@@ -10,9 +9,12 @@ class Photo < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :notices, dependent: :destroy
 
-
   validates :image, presence: true
   validates :title, presence: true, length: { minimum: 2, maximum: 20 }
+
+
+  paginates_per 10
+  default_scope{ order(created_at: :DESC) }
 
 
 

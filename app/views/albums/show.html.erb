@@ -1,23 +1,19 @@
-<title>current_userアルバム詳細</title>
-<div class=my-album-main-box>
+<title>アルバム詳細</title>
+<div class=my-album-main-box style="background-color:aliceblue;">
 	<%= render 'layouts/sub_header', photo: @photo%>
 	<div class = "main-contents-box">
 		<div class="my-album-item-header-photo">
-			<%= attachment_image_tag @album.album_items.first.photo, :image, class: "my-album-item-header-photo" %>
+			<%= attachment_image_tag @album.album_items.order("RANDOM()").first.photo, :image, class: "my-album-item-header-photo" %>
+			<div class="my-album-item-header-photo-filter">
+				<div style="text-align:center;padding-top:200px;">
+					<font color="silver" size="5">ここにタイトルがきます</font><%= @album.title %>
+				</div>
+			</div>
 		</div>
 		<div class="my-album-items-box">
 			<% @album_items.each do |album_item| %>
 					<%= attachment_image_tag album_item.photo, :image, class: "my-album-item" %>
 			<% end %>
-			<div class="my-album-item">
-				photo
-			</div>
-			<div class="my-album-item">
-				photo
-			</div>
-			<div class="my-album-item">
-				photo
-			</div>
 		</div>
 	</div>
 </div>

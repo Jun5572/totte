@@ -58,7 +58,7 @@
 		  			Your Activity
 		  			<i class="dropdown icon"></i>
 		  			<div class="menu">
-		  				<div class=" ui header">最近のアクティビティ</div>
+		  				<div class=" ui header" align="center">最近のアクティビティ</div>
 			  			<%= render 'users/my_activity' %>
 		  			</div>
 	  			</div>
@@ -69,12 +69,14 @@
 		  			Followers
 		  			<i class="dropdown icon"></i>
 		  			<div class="menu">
-		  				<div class="ui header" align="center">あなたがフォローしている人</div>
-		  				<div class="ui left icon input">
-	      					<i class="search icon"></i>
-	      					<input type="text" name="search" placeholder="検索">
-    					</div>
-		  				<%= render 'users/follower_index' %>
+		  				<div class="ui header" align="center">あなたがフォローしているユーザー</div>
+		  				<% if current_user.follow_count == 0 %>
+			  				<div class="item">
+			  					フォローしているユーザーはいません
+			  				</div>
+			  			<% else %>
+			  				<%= render 'users/follower_index' %>
+		  				<% end %>
 		  			</div>
 	  			</div>
 			</div>
@@ -84,12 +86,14 @@
 		  			Followed by
 		  			<i class="dropdown icon"></i>
 		  			<div class="menu">
-		  				<div class="ui header" align="center">あなたをフォローしている人</div>
-		  				<div class="ui left icon input">
-		  					<i class="search icon"></i>
-		  					<input type="text" name="search" placeholder="検索">
-		  				</div>
-		  				<%= render 'users/followed_by_index' %>
+		  				<div class="ui header" align="center">あなたをフォローしているユーザー</div>
+		  				<% if current_user.followers_count == 0 %>
+		  					<div class="item">
+	  							<font color="gray">フォロワーはいません</font>
+		  					</div>
+		  				<% else %>
+			  				<%= render 'users/followed_by_index' %>
+		  				<% end %>
 		  			</div>
 	  			</div>
 			</div>
@@ -105,8 +109,8 @@
 	  			<%= form_for photo, url: photos_path do |f| %>
 				<%= f.attachment_field :image %>
 				<div class="ui form" style="margin: 10px auto;">
-					<%= f.label :title, "写真のタイトル" %>
-					<%= f.text_field :title, placeholder: "タイトル", class: "field", maximum: "20"%>
+					<%= f.label :title, "写真のタイトル（２０文字以内）" %>
+					<%= f.text_field :title, placeholder: "タイトル（２０文字以内）", class: "field", maxlength: "20"%>
 				</div>
 					<button type="submit" class="ui purple mini button">投稿</button>
 				<% end %>

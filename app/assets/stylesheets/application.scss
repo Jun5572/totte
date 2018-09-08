@@ -263,6 +263,13 @@ footer{
 	object-fit: cover;
 	/*z-index: 1;*/
 }
+
+.user-show-photo-box{
+		display:inline-block;
+		width:100%;
+		height: 400px;
+}
+
 .thumb-edit-overlay{
 	position: absolute;
 	top: 0px;
@@ -409,7 +416,7 @@ footer{
 	width: 100%;
 	height: 100%;
 	border-radius: 5px;
-    background: linear-gradient(transparent, 90%, black);
+    background: linear-gradient(transparent, 70%, black);
     display: none;
 }
 .overlay-fillter-radius-none{
@@ -417,8 +424,8 @@ footer{
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 400px;
-    background: linear-gradient(transparent, 90%, black);
+	height: 100%;
+    background: linear-gradient(transparent, 70%, black);
     display: none;
 }
 .overlay-fillter-main-visual{
@@ -471,4 +478,461 @@ footer{
     color: rgb(255, 255, 255);
     display: none;
     cursor: pointer;
+}
+
+
+
+/*レスポンシブ対応*/
+@media screen and (max-width:1024px) {
+	.strech{
+		width:100px!important;
+	}
+	.strech:hover{
+
+	}
+	.contents-box{
+		width: 60%;
+		margin: 0 auto;
+	}
+	.top-bg{
+		width:100%;
+		height: 700px;
+		background: linear-gradient(135deg, #64EFA5, #1B87F4);
+	}
+	.entrance-button{
+		width: 150px;
+		margin: 0 auto;
+		border: solid 2px white;
+		border-radius: 5px;
+		padding: 10px;
+		text-align: center;
+		color: white;
+		margin-bottom:20px;
+		transition: background-color 200ms;
+	}
+	.entrance-button:hover{
+		background-color: rgba(255, 255, 255, 0.3);
+	}
+
+	.devise-form-control {
+	    display: block;
+	    width: 100%;
+	    height: 34px;
+	    padding: 6px 12px;
+	    font-size: 14px;
+	    line-height: 1.428571429;
+	    color: #555555;
+	    background-image: none;
+	    margin-bottom: 10px;
+	}
+	.devise-main-box{
+		width: 100%;
+		height: 630px;
+		padding: 20px 0 20px 0;
+		/*color: white;*/
+		/*background-color: aliceblue;*/
+	}
+	.devise-main-box2{
+		width: 100%;
+		height: 100%;
+		padding: 20px 0 20px 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		/*color: white;*/
+		/*background-color: aliceblue;*/
+	}
+	.devise-user-icon-box{
+		width: 50%;
+		background-color: red;
+	}
+	.registration-input-box{
+		padding: 50px;
+		border-radius: 10px;
+		background-color: rgba(255, 255, 255, 0.7);
+	}
+	.devise-contents-box{
+		/*display: flex;*/
+		/*flex-direction: row;*/
+		/*justify-content: space-around;*/
+		width: 40%;
+		margin: 0 auto;
+		padding: 60px;
+	}
+	.field{
+
+	}
+	.devise-form-style{
+		border: none;
+		border-bottom: solid 1px rgba(100, 100, 100, 0.15);
+		background-color: transparent;
+		transition: border-bottom 200ms
+	}
+	.devise-form-style:hover{
+		border-bottom: solid 2px rgba(100, 100, 100, 0.4);
+	}
+
+	.select-form{
+		border: solid 1px;
+	}
+	.birth-box{
+		display: flex;
+		flex-direction: row;
+		margin-bottom: 10px;
+	}
+	.username-box{
+		display: flex;
+		flex-direction: row;
+		padding-right: 5px;
+		margin-bottom: 10px;
+	}
+	.devise-sign-up-button{
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.overlay {
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  z-index: 2;
+	  width: 100%;
+	  height: 100%;
+	  background: rgba(0, 0, 0, .7);
+	  opacity: 0;
+	  visibility: hidden;
+	  transition: .3s linear;
+	}
+	.overlay.is-open {
+	  opacity: 1;
+	  visibility: visible;
+	}
+
+
+
+	/*------------------------------------------------------------*/
+	body{
+		padding-top: 80px;
+	}
+	header#header-fixed{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 80px;
+		background: linear-gradient(black, rgba(0, 0, 0, 0.8));
+		box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.4);
+		z-index: 1;
+	}
+	footer{
+		width: 100%;
+		height: 100px;
+		background: linear-gradient(aliceblue, 30%, black);
+	}
+
+	.modal-change-header-image-form{
+		width:500px;
+		height:400px;
+		background-color: white;
+		border-radius: 10px;
+	}
+	.first-contact-box{
+		position: relative;
+		width: 100%;
+		/*background-color: rgba(0, 0, 0, 0.5);*/
+		background-size: cover;
+		background-attachment: fixed;
+	}
+	.overlay-box{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+	.lets-massage-box{
+		width: 60%;
+		margin: 0 auto;
+		padding-top: 170px;
+		color: rgba(255, 255, 255, 0.8);
+		font-size: 10px;
+	}
+	.lets-massage{
+		width: 60%;
+		margin: 40px auto;
+	}
+	.main-box{
+		position: relative;
+		width: 100%;
+		background-color: aliceblue;
+		z-index: 0;
+	}
+	.headline-box{
+		padding-top: 10px;
+		color: white;
+		/*background-color:silver;*/
+		width: 90%;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.headline-icons{
+		display: flex;
+	}
+	/*totteのロゴ*/
+	.brand-logo{
+		width:120px;
+		height:50px;
+		margin-top: 5px;
+	}
+	.headline-user-icon{
+		margin-top: 10px;
+		width: 45px;
+		height: 45px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #64EFA5, #1B87F4);
+		object-fit: cover;
+	}
+	.user-nickname{
+		padding-bottom: 45px;
+		font-size: 40px;
+	}
+
+	.user-icon-in-main-visual{
+		position: absolute;
+		top: 120px;
+	    left: 40px;
+		width: 150px;
+		height: 150px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #64EFA5, #1B87F4);
+		object-fit: cover;
+		/*z-index: 1;*/
+	}
+	.thumb-edit-overlay{
+		position: absolute;
+		top: 0px;
+	    left: 0px;
+		border-radius: 50%;
+		background-color: rgba(0, 0, 0, 0.6);
+		display: none;
+		z-index: 2;
+	}
+	.sub-header{
+		width: 100%;
+		background-color: white;
+		box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2)
+	}
+	.subheader-contents{
+		width:80%;
+		margin:0 auto;
+	}
+	.sub-header-dropdown-user-icon{
+		width: 30px!important;
+		height: 30px!important;
+		border-radius: 50%!important;
+		background: linear-gradient(135deg, #64EFA5, #1B87F4) ;
+		object-fit: cover;
+	}
+	.filter-drop-shadow{
+		filter: drop-shadow(2px 2px 2px transparent);
+		transition: 200ms;
+	}
+	.filter-drop-shadow:hover{
+		filter: drop-shadow(1px 1px 1px gray);
+
+	}
+	.sub-header-buttons{
+		margin: 0 auto;
+		color: black;
+		border-radius:0px!important;
+		background-color: transparent;
+		transition: color 100ms, background-color 100ms;
+	}
+	.sub-header-buttons:hover{
+		background-color: rgb(80, 80, 120)!important;
+		color: white!important;
+	}
+	.main-visual-box{
+		position:relative;
+		width: 100%;
+		height: 300px;
+	}
+	.main-visual{
+		/*background-attachment: fixed;*/
+		position: relative;
+		width: 100%;
+		height: 300px;
+		object-fit: cover;
+		/*z-index: -1;*/
+	}
+	.user-box{
+		/*display: flex;*/
+		/*flex-direction: row;*/
+	    filter: drop-shadow(3px 3px 3px black);
+	}
+	.user-show-photo-box{
+		display:inline-block;
+		width:100%;
+		height: 350px;
+	}
+
+	.user-box-letters{
+		position: absolute;
+		top: 150px;
+	    left: 210px;
+	    font-size:30px;color:
+	    rgba(255, 255, 255, 0.9);
+	}
+	.main-visual2{
+		position: relative;
+		width: 100%;
+		height: 200px;
+	}
+	.main-visual-edit-button{
+		position: absolute;
+		top: 230px;
+	    left: 1350px;
+		color: white;
+		z-index: 0;
+		display:none;
+	}
+	.user-icon-box-in-modal{
+		margin-right: 30px;
+	}
+	.user-icon-in-modal{
+		width: 250px;
+		height: 250px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #64EFA5, #1B87F4) ;
+	}
+	.main-contents-box{
+		width: 80%;
+		/*background-color: rgba(0, 0, 0, 0.2);*/
+		margin: 0 auto;
+		padding: 5px;
+	}
+	.photo-contents-box{
+		width: 80%;
+		/*background-color: rgba(0, 0, 0, 0.2);*/
+		margin: 0 auto;
+		display: flex;
+	    flex-direction: row;
+	    justify-content: space-around;
+	    flex-wrap: wrap;
+	}
+	.photo-box-user-icon{
+		position: absolute;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #64EFA5, #1B87F4) ;
+		box-shadow: none;
+		object-fit: cover;
+		transition: box-shadow 200ms;
+	}
+	.photo-box-user-icon:hover{
+		box-shadow: 0px 0px 5px 3px rgba(255,255,255,0.5);
+	}
+	.post-user-box2{
+		display: flex;
+	    flex-direction: row;
+	    justify-content: space-around;
+	    color: white;
+	    position: absolute;
+	    bottom: 20px;
+	    left: 0px;
+	    width: 100%;
+	}
+	.post-user-box{
+		display: flex;
+		flex-direction: row;
+		color: white;
+		bottom: 10px;
+		right: 180px;
+		width: 100%;
+		/*background-color: silver;*/
+	}
+	.overlay-fillter{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 5px;
+	    background: linear-gradient(transparent, 70%, black);
+	    display: none;
+	}
+	.overlay-fillter-radius-none{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	    background: linear-gradient(transparent, 70%, black);
+	    display: none;
+	}
+	.overlay-fillter-main-visual{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	    background: linear-gradient(transparent, 70%, black);
+	    z-index: 1;
+	}
+	.user-icon-box{
+		width: 60%;
+		height: 300px;
+		margin: 0 auto;
+		background-color: red;
+	}
+	.main-contents-box2{
+		width: 40%;
+		/*height: 200px;*/
+		margin: 0 auto;
+		border: solid 1px;
+	}
+	.like-box{
+		position: absolute;
+	    bottom: 15px;
+	    right: 50px;
+	    /*width: 30px;*/
+	    /*height: 10px;*/
+	    z-index: 1;
+	}
+	.create-like-icon{
+		filter: none;
+		transition: 100ms;
+	}
+	.create-like-icon:hover{
+		filter: drop-shadow(0px 0px 3px red);
+	}
+	.photo-title{
+		position: absolute;
+	    bottom: 30px;
+	    left: 30px;
+	    color: white;
+	    font-size: 15px;
+	}
+	.user-icon-edit-button{
+		position: absolute;
+	    top: 180px;
+	    left: 100px;
+	    color: rgb(255, 255, 255);
+	    display: none;
+	    cursor: pointer;
+	}
+}
+
+/* タブレット縦置きサイズ(768px)程度の画面の大きさ以下に適用される設定です */
+@media screen and (max-width:768px) {
+
+}
+
+/* スマートフォンサイズ(425px)程度の画面の大きさ以下に適用される設定です */
+@media screen and (max-width:425px) {
+
 }

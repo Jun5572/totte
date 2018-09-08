@@ -17,8 +17,8 @@ class PhotosController < ApplicationController
     if photo.save
       redirect_to user_path(current_user)
     else
-      puts "画像を保存できませんでした"
-      render :new
+      flash[:notice] = "画像を投稿できませんでした。タイトルが20文字以内か確認してください。"
+      redirect_to user_path(current_user)
     end
   end
 

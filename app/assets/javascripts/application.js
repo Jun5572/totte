@@ -42,17 +42,14 @@ $(function() {
   });
 
 
-  $('.activating.element')
-  .popup();
+  // $('.activating.element')
+  // .popup();
 
 // コメント投稿Ajax
-$(document).on("ajax:success", "#ajax", function(e) {
-  $('#ajax-comments').html(e.detail[2]["response"]);
-  $("textarea").val('')
-});
-
-
-
+  $(document).on("ajax:success", "#ajax", function(e) {
+    $('#ajax-comments').html(e.detail[2]["response"]);
+    $("textarea").val('')
+  });
 // いいね投稿Ajax
 // $(document).on("ajax:success", "#like", function(e) {
 //   $('#like).html(e.detail[2]["response"]);
@@ -61,11 +58,11 @@ $(document).on("ajax:success", "#ajax", function(e) {
 });
 
 
-$('.button')
-  .popup({
-    inline: true
-  })
-;
+// $('.button')
+//   .popup({
+//     inline: true
+//   })
+// ;
 
 
 

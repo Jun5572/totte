@@ -2,7 +2,7 @@
   <div class="devise-main-box2">
     <div class="devise-contents-box">
       <div class="registration-input-box" style="">
-      <h2>プロフィール編集</h2>
+      <h2 align="center">プロフィール編集</h2>
         <%#= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= form_for(@user) do |f| %>
           <%= devise_error_messages! %>
@@ -15,8 +15,8 @@
             </div>
           </div>
           <div class="nickname-box">
-            <%= f.label :nickname %>
-            <%= f.text_field :nickname, autofocus: true, :placeholder => "ニックネーム", class: "devise-form-control devise-form-style" %>
+            <%= f.label :nickname, "ニックネーム（２文字以上１０文字以下）" %>
+            <%= f.text_field :nickname, autofocus: true, :placeholder => "ニックネーム（２文字以上１０文字以下）", class: "devise-form-control devise-form-style", minlength: 2, maxlength: 10 %>
           </div>
             <div class="field">
               <%= f.label :email %>

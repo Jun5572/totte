@@ -2,53 +2,57 @@
 <div class="main-box">
 	<%= render 'layouts/user_main_visual', user: @user%>
 	<%= render 'layouts/sub_header', photo: @photo%>
-	<h2>Your Albums</h2><%= @albums_cnt %>
-	<div class="photo-contents-box">
+	<h2>Your Albums</h2>
+	<div class="photo-contents-box" style="padding-bottom:100px;">
 <!-- each start -->
 	<% if @albums.blank?%>
-	<p style="padding:100px; font-size:20px; color:gray;" >No album</p>
+		<p style="padding:100px; font-size:20px; color:gray;" >No album</p>
 	<% else %>
-		<% @albums.each do |album| %>
-		<% if album.album_items.blank? %>
-			<% album.destroy %>
-			<% next %>
-		<% end %>
-			<div class="album-box">
-				<div class="album-image">
-					<%= link_to user_album_path(album.user, album) do %>
-						<div class="album-items-box">
-							<% album.album_items.each do |album_item| %>
-								<%= attachment_image_tag album_item.photo, :image, style: "width:350px; height:250px;", class: "album-items" %>
-							<% end %>
-						</div>
-					<% end %>
-					<!-- <div class="overlay-fillter-radius-none"> -->
-						<div class="post-user-box">
-							<div class="photo-box-user-icon">
-								<%#= link_to photo_path(@user) do %>
-								<%= attachment_image_tag album.user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
-								<%# end %>
+	<div style="display:flex">
+		<div class="ui special cards" style="justify-content: center;">
+			<% @albums.each do |album| %>
+
+				<div class="card" style="margin:15px;">
+					<div class="blurring dimmable image">
+						<div class="ui dimmer">
+							<div class="content">
+								<div class="center">
+									<%= link_to user_album_path(current_user, album) do %>
+									<div class="ui inverted violet button" style="filter:drop-shadow(3px 3px 1px gray);">詳細を見る</div>
+									<% end %>
+								</div>
 							</div>
 						</div>
-					<!-- </div> -->
-				</div>
-				<div class="album-summ" style="display: flex;">
-					<div class="">
-						<p><%= album.introduction %>テスト</p>
-						<p><i class="fas fa-heart"></i><%= album.like_count %></p>
+						<!-- <img src="album-header7.jpg"> -->
+						<%= attachment_image_tag album.album_items.order("RANDOM()").first.photo, :image, style: "position:relative;" %>
 					</div>
-					<%= link_to user_album_path(current_user, album), data: { confirm: "削除します。よろしいですか？"}, method: :delete do %>
-						<i class="far fa-trash-alt fa-2x" style="color: rgba(0, 0, 0, 0.7);"></i>
-					<% end %>
+					<div class="content">
+						<div>
+							<%= link_to user_path(album.user) do %>
+							<%= attachment_image_tag album.user, :thumbnail, fallback: 'user_preset_image.png', style: "width:40px;height:40px;object-fit:cover;", class: "ui avatar" %>
+							<% end %>
+							<span class="header"><%= album.title %></span>
+						</div>
+						<div class="meta">
+							<div class="date" align="right"><%= album.created_at.strftime('%Y年%-m月%-d日') %>に作成</div>
+						</div>
+					</div>
+					<div class="extra content" style="display:flex;justify-content: space-between;">
+						<div>
+							<i class="large images outline icon"></i>アルバム枚数<%= album.album_items.count %>枚
+						</div>
+						<div>
+							<i class="large thumbs up outline icon"></i>
+							<%= album.like_count %>
+						</div>
+						<%= link_to "削除", my_album_path(album), align: "right", method: :delete %>
+					</div>
 				</div>
-			</div>
-		<% end %>
-<!-- each end -->
+			<% end %><!-- each end -->
+		</div>
+	</div>
+
 	<% end %><!-- if end -->
-
-
-
-	</div><!-- content-box end -->
 </div>
 <!-- ------------------------------------- -->
 <script>
@@ -69,8 +73,12 @@ $(function() {
 $('.ui.sticky')
   .sticky({
     context: '#example1'
-  })
-;
+  });
+
+
+$('.special.cards .image').dimmer({
+  on: 'hover'
+});
 
 </script>
 

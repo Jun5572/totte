@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+<title>Totte</title>
   <head>
-    <title>Totte</title>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
     <!-- <script src="jquery.js"></script> -->
     <!-- <script src="jquery.infinitescroll.min.js"></script> -->
   </head>
@@ -38,15 +40,23 @@
           </div>
         </div>
 
-  <!-- 検索フォームここから -->
-        <div style="display:flex; justify-content:space-between; width:350px;">
-          <div class="ui tiny search" style="margin: auto;">
-          <div class="ui icon input">
-            <input class="prompt" type="text" placeholder= "ニックネームで検索">
-            <i class="search icon"></i>
+        <% if flash[:notice] %>
+          <div class="ui negative floating message">
+            <i class="ui close icon"></i>
+            <a class="ui red circular label">!</a>
+            <%= flash[:notice] %>
           </div>
-          <div class="results"></div>
-        </div>
+        <% end %>
+
+  <!-- 検索フォームここから -->
+        <div style="display:flex; justify-content:space-between; width: 380px;">
+          <div class="ui tiny search" style="margin: auto;">
+            <div class="ui icon input">
+              <input class="prompt" type="text" placeholder= "ニックネームで検索">
+              <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+          </div>
   <!-- 検索フォームend -->
   <!-- お知らせアイコンここから -->
           <% if current_user.notices.where(read: false).count > 0 %>
@@ -66,7 +76,7 @@
                 <% unless current_user.notices.where(read: false).count > 0 %>
                   <div class="header" align="center"><i class="bell outline icon"></i>お知らせ</div>
                 <% else %>
-                  <div class="header" align="center"><i class="bell outline icon"></i>新着お知らせ<b><%= current_user.notices.where(read: false).count %></b>件</div>
+                  <div class="header" align="center"><i class="bell outline icon"></i>新着お知らせ<b> <%= current_user.notices.where(read: false).count %></b>件</div>
                 <% end %>
                 <%= render 'notices/notice_info', notices: current_user.notices %>
               </div>
@@ -156,12 +166,11 @@
   var users =[
                 <% User.all.each do |user| %>
                   <% unless user.nickname == nil %>
-                    { title: '<%= attachment_image_tag user, :thumbnail, style: "width:20px;height:20px;border-radius:50%;object-fit:cover;"%>'+'<%= user.nickname.to_s %>' },
-                  <% else %>
-                    <% next %>
+                    { title: "<%= user.nickname %>" },
                   <% end %>
                 <% end %>
               ];
+
 
   $('.ui.tiny.search').search({
     source: users,
@@ -173,10 +182,9 @@
               serverError : 'There was an issue with querying the server.',
               maxResults  : 'Results must be an array to use maxResults setting',
               method      : 'The method you called is not defined.'
-            }
+            },
+    minCharacters: 2,
   });
-
-
 
 
 
@@ -189,9 +197,21 @@
     .modal('show');
   });
 
+
   $('#test')
   .transition('bounce');
 
 
+  $('.message .close')
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade');
+  });
+
+
 </script>
+
+
+
 
