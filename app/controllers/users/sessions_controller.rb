@@ -14,10 +14,10 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  #   # session[:album_id] = nil
-  # end
+  def destroy
+    super
+    session[:album_id] = nil
+  end
 
   # protected
 

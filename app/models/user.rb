@@ -1,6 +1,17 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+# ------------------検索-----------------------------------------------------------
+
+  def self.search(search) #self.でクラスメソッドとしている
+    if search # Controllerから渡されたパラメータが!= nilの場合は、titleカラムを部分一致検索
+      User.where(['name LIKE ?', "%#{search}%"])
+    else
+
+    end
+  end
+
+# -------------------------------------------------------------------------------
   attachment :thumbnail
   attachment :header_image
 
@@ -22,17 +33,17 @@ class User < ApplicationRecord
 
 # varidetes-----------------------------------
 
-	# validates :first_name,
- #  		presence: true,
- #  		length: { minimum: 1, maximum: 10}
+	validates :first_name,
+  		presence: true,
+  		length: { minimum: 1, maximum: 10}
 
- #  validates :last_name,
- #  		presence: true,
- #  		length: { minimum: 1, maximum: 10}
+  validates :last_name,
+  		presence: true,
+  		length: { minimum: 1, maximum: 10}
 
- #  varidates :nickname,
- #  		presence: true,
- #  		uniqueness: true,
- #  		length: { in: 2..12 }
+  validates :nickname,
+  		presence: true,
+  		uniqueness: true,
+  		length: { in: 2..10 }
 
 end

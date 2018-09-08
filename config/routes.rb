@@ -63,6 +63,7 @@ delete 'my_albums/:album_id/photo/:id/del_photo' => 'my_albums#del_album_item', 
 get 'users/:user_id/photos/:id/pre' => 'photos#pre_photo', as: 'photo_pre'
 get 'users/:user_id/photos/:id/next' => 'photos#next_photo', as: 'photo_next'
 get 'notices/:id/link_through' => 'notices#link_through', as: 'link_through'
+get 'users/search' => 'users#search', as: 'user_search'
 resources :categories, only: [:index]
 
 root 'users#top'

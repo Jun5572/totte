@@ -1,25 +1,27 @@
 <title>新規アルバム投稿</title>
 
 <div class="main-box">
-	<!-- <div class="main-visual2">
-	</div> -->
 	<%= render 'layouts/sub_header', photo: @photo %>
-	<div class="main-contents-box">
-		<h2>Item List</h2><div>選択中の写真<%= @count %>/10枚</div>
-		<%# binding.pry %>
+	<div class="main-contents-box" style="padding-bottom:100px;">
+		<h2 align="center">アルバム作成</h2>
+		<div align="center">選択中の写真　<%= @count %>枚</div>
 		<% if current_album.album_items.blank? %>
-		  <button class="ui inverted violet button disabled">画像を選択してください</button>
+			<button class="ui inverted violet button disabled" style="margin:15px;">画像を選択してください</button>
 		<% else %>
-		  <%= link_to my_albums_path, method: :post do %>
-			  <button class="ui inverted violet button">アルバムにする</button>
-		  <% end %>
+		<%= form_for @album, url: my_albums_path, method: :post do |f| %>
+			<%#= link_to my_albums_path, method: :post do %>
+				<button type=submit class="ui inverted violet button">アルバムにする</button>
+		<%= f.text_field :title %>
+				
+			<%# end %>
 		<% end %>
-		<div style="display:flex; flex-direction:row; justify-content:flex-start; flex-wrap: wrap;">
+		<% end %>
+		<div style="display:flex; flex-direction:row; justify-content:flex-start; flex-wrap:wrap;">
 			<% @photos.each do |photo| %>
-				<% if session[:photo][@i] == photo.id %>
+				<% if session[:photo][@num] == photo.id %>
 					<!-- 選択中の画像の表示 -->
-					<% session[:photo][@i] %>
-					<% @i += 1 %>
+					<%= session[:photo][@num] %>
+					<%= @num += 1 %>
 					<div class="selected-filter">
 						<%= attachment_image_tag photo, :image, style: "width: 100%; height: 100%"; %>
 						<div class="filter-overlay">

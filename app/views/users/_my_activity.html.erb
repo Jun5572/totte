@@ -1,7 +1,18 @@
+<% if Notice.where(notice_by: current_user).count == 0 %>
+	<div class="item">
+		<div class="list">
+			<font color="gray">アクティビティはありません</font>
+		</div>
+	</div>
+<% else %>
 	<% Notice.where(notice_by: current_user).reverse.first(10).each do |notice| %>
 			<%= link_to user_photo_path(notice.user_id, notice.photo), class: "item" do %>
-				<div class="list">
-					<b><%= notice.user.nickname %></b>さんに<b><%= notice.notice_type %></b>しました
+				<div class="list" style="display:flex; justify-content: space-between;">
+					<div style="margin:auto 0;">
+						<b><%= notice.user.nickname %></b>さんの写真に「<b><%= notice.notice_type %></b>」しました
+					</div>
+					<%= attachment_image_tag notice.photo, :image, style: "margin-left:3px; width:40px; height:40px; object-fit:cover;" %>
 				</div>
 			<% end %>
 	<% end %>
+<% end %>

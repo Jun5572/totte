@@ -1,5 +1,6 @@
 class MyAlbumsController < ApplicationController
   before_action :authenticate_user!
+
   def index
     @photo = Photo.new
     # @user = current_user
@@ -10,35 +11,39 @@ class MyAlbumsController < ApplicationController
     if session[:photo] == nil
       session[:photo] = []
     end
-    @i = 0
+    @photo = Photo.new
+    @num = 0
     @count = session[:photo].count
     @user = current_user
-    @photo = Photo.new
     @photos = @user.photos.reverse_order
     @album = current_album
-     puts session[:photo]
+      puts session[:photo]
     # @album_items = @album.album_items
-    # binding.pry
   end
 
 # 作成中のアルバムに写真を追加
   def add_album_item
-    @album_item = AlbumItem.new
-    @photo = Photo.find(params[:id])
     @album = current_album
-    @album_items = @album.album_items.find_by(photo_id: @photo.id)
-    if @album_items.blank?
-      @album_item.photo_id = @photo.id
-      @album_item.album_id = current_album.id
-      if @album_item.save
-        session[:photo].push(@album_item.photo_id)
-        session[:photo] = session[:photo].sort_by{ |u| -u }
-        redirect_to new_my_album_path
-      else
-        redirect_to new_my_album_path
-      end
+    if @album.blank?
+      redirect_to user_path(current_user)
     else
-      redirect_to new_my_album_path
+      @album_item = AlbumItem.new
+      @photo = Photo.find(params[:id])
+      # @album_items = @album.album_items.find_by(photo_id: @photo.id)
+      if @album_items.blank?
+        @album_item.photo_id = @photo.id
+        @album_item.album_id = current_album.id
+        if @album_item.save
+          session[:photo].push(@album_item.photo_id)
+          session[:photo] = session[:photo].sort_by{ |u| -u }
+
+          redirect_to new_my_album_path
+        else
+          redirect_to new_my_album_path
+        end
+      else
+        redirect_to user_path(current_user)
+      end
     end
   end
 
@@ -49,7 +54,6 @@ class MyAlbumsController < ApplicationController
     @album_item = @album.album_items.find_by(photo_id: @photo.id)
     if @album_item.destroy
       session[:photo].delete(@album_item.photo_id)
-      puts session[:photo]
       # puts 'アルバム写真候補から外れました'
       redirect_to new_my_album_path
     end
@@ -61,12 +65,12 @@ class MyAlbumsController < ApplicationController
     @album_items = @album.album_items
 
     if @album.save
-      p "保存成功！"
       session[:album_id] = nil
       session[:photo] = nil
       redirect_to user_albums_path(current_user)
     else
       p "保存できていません"
+      redirect_to user_albums_path(current_user)
     end
   end
 
@@ -91,6 +95,15 @@ class MyAlbumsController < ApplicationController
     else
     end
   end
+
+  def destroy
+    @album = Album.find(params[:id])
+    @album_items = @album.album_items
+    if @album.destroy
+      redirect_to user_albums_path(current_user)
+    end
+  end
+
 
   private
 

@@ -1,8 +1,13 @@
 <% notices.reverse.each do |notice| %>
 	<div class="notice-list">
 		<% if notice.read == false && notice.notice_type == "コメント" || notice.notice_type == "いいね！" %>
-			<%= notice.notice_by.nickname %>さんがあなたの写真に「 <%= notice.notice_type %> 」しました！
-			<%= link_to "確認する", link_through_path(notice), class: "ui mini inverted purple button"%>
+			<div style="display:flex;">
+				<div style="margin: auto;"><b><%= notice.notice_by.nickname %></b>さんがあなたの投稿に「 <b><%= notice.notice_type %></b> 」しました！</div>
+				<%= link_to link_through_path(notice) do %>
+					<%= attachment_image_tag notice.photo, :image, style: "width:50px; height:50px;object-fit:cover;" %>
+				<% end %>
+			</div>
+			<%#= link_to "確認する", link_through_path(notice), class: "ui mini inverted purple button"%>
 		<% elsif notice.read == false && notice.notice_type == "フォロー" %>
 			<%= notice.notice_by.nickname %>さんがあなたを「 <%= notice.notice_type %> 」しました！
 		<% else %>

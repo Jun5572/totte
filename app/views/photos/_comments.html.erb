@@ -27,7 +27,7 @@
 				    	<% elsif pstcmt.created_at.tomorrow.strftime('%m%d') > Date.today.strftime('%m%d') %>
 				    		<span class="date">昨日 <%= pstcmt.created_at.strftime('%H:%M') %></span>
 				    	<% else %>
-				      		<span class="date"><%= pstcmt.created_at.strftime('%m月%d日') %></span>
+				      		<span class="date"><%= pstcmt.created_at.strftime('%-m月%-d日') %></span>
 				      	<% end %>
 				    </div>
 				    <div class="text" style="padding-bottom:15px;"><%= simple_format(pstcmt.comment) %>
@@ -37,7 +37,6 @@
 					      	<% end %>
 				    	<% else %>
 				   	 		<!-- <a class="ui purple label">コメント</a> -->
-					      	<a class="reply ui tiny purple right floated button"><font color="white">返信</font></a>
 				      <% end %>
 				    </div>
 			  	</div>

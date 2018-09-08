@@ -11,6 +11,7 @@ class AlbumsController < ApplicationController
     @photo = Photo.new
     @user = User.find(params[:user_id])
     @albums = current_user.albums.reverse_order
+    @albums_cnt = @albums.count
   end
 
   def add_album_item
@@ -47,14 +48,6 @@ class AlbumsController < ApplicationController
     end
   end
 
-  # def show
-  #   if Album.exists?
-  #     @user = current_user
-  #     @album = Album.find(params[:id])
-  #     @album_items = @album.album_items
-  #   else
-  #   end
-  # end
   def show
 		if User.exists?(id: params[:user_id])
 	  		@user = User.find(params[:user_id])
@@ -83,14 +76,6 @@ class AlbumsController < ApplicationController
     if @album.update
       redirect_to my_albums_path
     else
-    end
-  end
-
-  def destroy
-    @album = Album.find(params[:id])
-    @album_items = @album.album_items
-    if @album.destroy
-      redirect_to user_albums_path(current_user)
     end
   end
 

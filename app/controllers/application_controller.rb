@@ -9,28 +9,33 @@ class ApplicationController < ActionController::Base
 		# binding.pry
 		if session[:album_id] != nil
 			if Album.find_by(id: session[:album_id]).blank?
-				session.delete(:album_id)
+				session[:album_id] = nil
 				@album = Album.create(user_id: current_user.id)
 				session[:album_id] = @album.id
 				puts session[:album_id]
+				puts "aaa"
 			else
 				@album = Album.find(session[:album_id])
-				puts session[:album_id]
+				# puts session[:album_id]
+				puts "bbb"
 			end
 		else
-			@album = Album.create(user_id: current_user.id, title: "new_album" + Date.today.strftime('%Y%m%d'))
+			@album = Album.create(user_id: current_user.id)
 			session[:album_id] = @album.id
 			puts session[:album_id]
+			puts "ccc"
 		end
+		puts "ddd"
 		puts @album
 		return @album
+		# unless session[:album_id] == nil
+  #     		@album = Album.find(session[:album_id])
+  #   	else
+  #    		@album = Album.create(user_id: current_user.id)
+  #     		session[:album_id] = @album.id
+  #   	end
+  #   	return @album
 	end
-		 # if session[:album_id] != nil
-   #    		@album = Album.find(session[:album_id])
-   #  	else
-   #   		@album = Album.create(user_id: current_user.id)
-   #    		session[:album_id] = @album.id
-   #  	end
 
 
 # --------------------------------------------------------------------

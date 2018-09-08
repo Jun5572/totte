@@ -1,62 +1,60 @@
 <title>Album Index</title>
 <div class="main-box">
 	<div class="main-visual">
-		<img src="album-header9.jpg" style="width: 100%;height: 300px;object-fit: cover;">
+		<img id="a-m-v" src="album-header99.jpg" style="width:100%; height:300px; object-fit:cover; display:none;">
 	</div>
 	<%= render 'layouts/sub_header', photo: @photo %>
 	<h2>All User Albums</h2>
-	<div class="photo-contents-box">
-<!-- each start -->
-	<% @albums.each do |album| %>
-		<% if album.album_items.blank? %>
-			<% album.destroy %>
-			<% next %>
-		<% end %>
-			<div class="album-box">
-				<div class="album-image">
-					<%= link_to user_album_path(album.user, album) do %>
-						<div class="album-items-box">
-							<% album.album_items.each do |album_item| %>
-								<%= attachment_image_tag album_item.photo, :image, style: "width:350px; height:250px;", class: "album-items" %>
-							<% end %>
-						</div>
-					<% end %>
-					<div class="overlay-fillter-radius-none">
-						<div class="post-user-box">
-							<div class="photo-box-user-icon">
-								<%= link_to user_path(album.user) do %>
-									<%= attachment_image_tag album.user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
-								<% end %>
+	<div class="photo-contents-box" style="padding:100px;">
+	<% if @albums.blank? %>
+		<div class="">
+			<font size="6" color="gray">No Albums</font>
+		</div>
+	<% else %>
+		<div class="ui special cards">
+			<% @albums.each do |album| %>
+
+				<div class="card " style="margin:15px;filter: drop-shadow(3px 3px 5px gray);">
+					<div class="blurring dimmable image">
+						<div class="ui dimmer">
+							<div class="content">
+								<div class="center">
+									<%= link_to user_album_path(album.user, album) do %>
+									<div class="ui inverted violet button" style="filter:drop-shadow(3px 3px 1px gray);">詳細を見る</div>
+									<% end %>
+								</div>
 							</div>
+						</div>
+						<!-- <img src="album-header7.jpg"> -->
+						<%= attachment_image_tag album.album_items.first.photo, :image, style: "position:relative;" %>
+					</div>
+					<div class="content">
+						<div>
+							<%= link_to user_path(album.user) do %>
+							<%= attachment_image_tag album.user, :thumbnail, fallback: 'user_preset_image.png', style: "width:40px;height:40px;object-fit:cover;", class: "ui avatar" %>
+							<% end %>
+							<span class="header">ここにタイトルがきます<%= album.title %></span>
+						</div>
+						<div class="meta">
+							<div class="date" align="right"><%= album.created_at.strftime('%Y年%-m月%-d日') %>に作成</div>
+							<div align="right">by <%= album.user.nickname %></div>
+						</div>
+					</div>
+					<div class="extra content" style="display:flex;justify-content: space-between;">
+						<div>
+							<i class="large images outline icon"></i>アルバム枚数<%= album.album_items.count %>枚
+						</div>
+						<div>
+							<i class="large thumbs up outline icon"></i>
+							<%= album.like_count %>
 						</div>
 					</div>
 				</div>
-				<div class="album-summ">
-					<p><%= album.introduction %></p>
-					<p><i class="fas fa-heart"></i><%= album.like_count %></p>
-				</div>
-			</div>
-	<% end %><!-- each end -->
 
-			<div class="album-box">
-				<div class="album-image">
-					<!-- <div class="overlay-fillter-radius-none"> -->
-						<div class="post-user-box">
-							<div class="photo-box-user-icon">
-								<%#= link_to photo_path(@user) do %>
-								<%#= attachment_image_tag @user, :thumbnail,:fill,fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
-								<%# end %>
-							</div>
-						</div>
-					<!-- </div> -->
-				</div>
-				<div class="album-summ">
-				summary
-				</div>
-			</div>
-
-
-
+			<% end %>
+		</div>
+	<% end %>
+<!-- each start -->
 	</div><!-- content-box end -->
 </div>
 <!-- ------------------------------------- -->
@@ -78,7 +76,14 @@ $(function() {
 $('.ui.sticky')
   .sticky({
     context: '#example1'
-  })
-;
+  });
+
+
+$('.special.cards .image').dimmer({
+  on: 'hover'
+});
+
+
+$('#a-m-v').fadeIn(2000);
 
 </script>

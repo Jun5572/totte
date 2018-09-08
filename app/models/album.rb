@@ -1,6 +1,6 @@
 class Album < ApplicationRecord
 	# attachment :thumbnail
-	attachment :image
+	# attachment :image
 	# attachment :photo
 
 	belongs_to :user
@@ -8,5 +8,5 @@ class Album < ApplicationRecord
 	has_many :album_items, dependent: :destroy, inverse_of: :album
 	# accepts_nested_attributes_for :album_items, allow_destroy: true
 
-  # validates :title, presence: true, length: { minimum: 2, maximum: 20}
+  validates :title, presence: true, length: { minimum: 2, maximum: 20}
 end
