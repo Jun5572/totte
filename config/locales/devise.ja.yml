@@ -37,7 +37,7 @@ ja:
         updated_at: "更新日"
         camera: "カメラ"
     models:
-      users: "ユーザ"
+      users: "ユーザー"
   devise:
     confirmations:
       confirmed: "アカウントを登録しました。"
@@ -122,7 +122,7 @@ ja:
       already_signed_out: "既にログアウト済みです。"
       new:
         sign_in: "ログイン"
-      signed_in: "ログインしました。"
+      signed_in: "ログインしました"
       signed_out: "ログアウトしました。"
     shared:
       links:

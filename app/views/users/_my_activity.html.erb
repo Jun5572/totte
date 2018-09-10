@@ -5,14 +5,29 @@
 		</div>
 	</div>
 <% else %>
-	<% Notice.where(notice_by: current_user).reverse.first(10).each do |notice| %>
+	<% Notice.where(notice_by: current_user).reverse.each do |notice| %>
+		<% if notice.notice_type == "コメント" || notice.notice_type == "いいね！" %>
+
 			<%= link_to user_photo_path(notice.user_id, notice.photo), class: "item" do %>
 				<div class="list" style="display:flex; justify-content: space-between;">
 					<div style="margin:auto 0;">
-						<b><%= notice.user.nickname %></b>さんの写真に「<b><%= notice.notice_type %></b>」しました
+						<b><%= notice.user.nickname %></b>さんの投稿に「<b><%= notice.notice_type %></b>」しました
 					</div>
 					<%= attachment_image_tag notice.photo, :image, style: "margin-left:3px; width:40px; height:40px; object-fit:cover;" %>
 				</div>
+			<% end %><!-- link_to end -->
+
+		<% else %>
+
+			<%= link_to user_path(notice.user), class: "item" do %>
+				<div class="list" style="display:flex; justify-content: space-between;">
+					<div style="margin: auto 0;">
+						<b><%= notice.user.nickname %></b>さんを「<b><%= notice.notice_type %></b>」しました
+					</div>
+					<%= attachment_image_tag notice.user, :thumbnail, style: "margin-left:3px; width:40px; height:40px; object-fit:cover; border-radius:50%;" %>
+				</div>
 			<% end %>
-	<% end %>
+
+		<% end %><!-- if end -->
+	<% end %><!-- each end -->
 <% end %>

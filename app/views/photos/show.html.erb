@@ -49,7 +49,8 @@
 					<tr>
 						<th>投稿枚数</th>
 						<th>アルバム投稿数</th>
-						<th>いいね</th>
+						<th>いいねした数</th>
+						<th>いいねされた数</th>
 						<th>フォロー数</th>
 						<th>フォロワー数</th>
 					</tr>
@@ -58,7 +59,8 @@
 					<tr>
 						<td><%= @photo_cnt %></td>
 						<td><%= @user.albums.count %></td>
-						<td><%= @user.notices.count %></td>
+						<td><%= @user.likes.count %></td>
+						<td><%= @user.photos.pluck(:like_count).sum %></td>
 						<td><%= @user.follow_count %></td>
 						<td><%= @user.followers_count %></td>
 					</tr>
@@ -74,7 +76,7 @@
 				<% else %>
 					<div class="ui reply tiny form">
 					  <%= form_with model: @post_comment, url: photo_post_comments_path(@photo), id: "ajax" do |f| %>
-					  <%= f.text_area :comment, placeholder: "コメント100文字以内", style: "" %>
+					  <%= f.text_area :comment, placeholder: "コメント100文字以内", style: "", minlength: 2, maxlength: 100 %>
 						<button data-remote="true" type="submit" class="ui purple labeled icon mini right floated button" style="margin-top:5px;"><i class="icon edit"></i> 送信 </button>
 						<% end %>
 					</div>
@@ -93,8 +95,14 @@
 			</div>
 		</div>
 		<div>
-			<div align="center" style="margin: 15px 0 0 10px; font-size:30px;">EXIF</div>
-				<font size="1">EXIFって何？</font>
+			<div align="center" style="margin: 15px 0 10px 10px; font-size:30px;">EXIF情報</div>
+				<div class="some-wrapping-div">
+  					<p align="center"><font color="#1e70bf" data-position="right center" id="exif-popup" size="2" style="border-bottom:solid 1px;cursor:pointer;">EXIF情報って何？</font></p>
+				</div>
+				<div class="ui custom popup"><b>Exchangeable image file format</b><br>
+					（エクスチェンジャブル・イメージ・ファイル・フォーマット）は、富士フイルムが開発し、当時の日本電子工業振興協会 (JEIDA)で規格化された、写真用のメタデータを含む画像ファイルフォーマット。デジタルカメラの画像の保存に使われる。略称はExifで「エグジフ」（もしくは「イグジフ」）。
+					<%= link_to "Exifとは - IT用語辞典 Weblio辞書", "https://www.weblio.jp/content/Exif", target: ["_blank"] %>
+				</div>
 			<div class="exif-contents-box">
 				<div class="">
 					<label><b>メーカー:</b></label>
@@ -137,6 +145,19 @@
 		</div>
 	</div>
 </div>
+
+
+
+<script>
+
+	$('#exif-popup')
+  .popup({
+    popup : $('.custom.popup'),
+    on    : 'click'
+  })
+;
+
+</script>
 
 
 

@@ -9,12 +9,14 @@
 				<i id="sss" class="far fa-edit fa-2x user-icon-edit-button"></i>
 				<div id="ddd" class="ui mini modal">
 					<i class="close icon"></i>
-						<div class="" align="center">アイコン変更
+						<div class="content" align="center">
+							<div class="ui header">アイコン変更</div>
 							<div class="ui divider"></div>
-									<%= form_for(user) do |f| %>
-										<%= f.attachment_field :thumbnail %>
-										<%= f.submit 'update', class: "ui inverted purple button" %>
-									<% end %>
+							<%= form_for(user) do |f| %>
+							<%= f.label :thumbnail, "ファイルを選択", class: "ui purple fluid button" %>
+								<%= f.attachment_field :thumbnail, style: "opacity:0;" %>
+								<%= f.submit 'update', class: "ui inverted secondary fluid button" %>
+							<% end %>
 						</div>
 				</div>
 			</div>
@@ -23,9 +25,9 @@
 			<% end %>
 			<div class="user-box-letters">
 				<div class="user-nickname"><b><%= user.nickname %></b></div>
-				<div class="" style="padding-bottom:10px;font-size:20px;display:flex;">
-					<div class="">👍いいね数　<%= user.likes.count %></div>
-					<div class="" style="margin:0 20px;"><i class="fas fa-user"></i>フォロー　<%= user.follow_count %> </div>
+				<div class="user-infomation-mainvisual" style="padding-bottom:10px;font-size:20px;display:flex;">
+					<div class="">👍いいね数　<%= @likes_count %></div>
+					<div class="" style="margin:0 20px;"><i class="fas fa-user"></i>フォロー中　<%= user.follow_count %> </div>
 					<div class=""><i class="fas fa-users"></i>フォロワー　<%= user.followers_count %> </div>
 				</div>
 				<span style="color:silver;font-size:15px;">Joined in<%= user.created_at.strftime('%Y') %></span>
@@ -54,12 +56,14 @@
 					<div id="header-image-edit-modal" class="ui mini modal">
 						<i class="close icon"></i>
 						<div class="content">
-							<div class="ui header">
+							<div class="ui header" align="center">背景を変更
+								<div class ="ui divider"></div>
 								<%= form_for user, url: user_path(user), method: :patch do |f| %>
-								<%= f.attachment_field :header_image %>
-								<div class="actions">
-									<%= f.submit 'update', class: "ui inverted purple button" %>
-								</div>
+								<%= f.label :header_image, "写真を選択する", class: "ui fluid purple button" %>
+								<%= f.attachment_field :header_image, style: "opacity:0;" %>
+								<!-- <div class="actions"> -->
+									<%= f.submit 'update', class: "ui inverted secondary fluid button" %>
+								<!-- </div> -->
 							<% end %>
 							</div>
 						</div>

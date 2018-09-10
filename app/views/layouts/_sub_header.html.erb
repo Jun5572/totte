@@ -9,13 +9,13 @@
 
 		  				<%= link_to user_path(current_user), style: "color:black;" do %>
 			  				<div class="item sub-header-buttons">
-				      			Your Photos
+				      			My Photos
 			      			</div>
 		      			<% end %>
 
 						<%= link_to user_albums_path(current_user), style: "color:black;" do %>
 						<div class="item sub-header-buttons">
-			      			 Your Albums
+			      			 My Albums
 		      			</div>
 		      			<% end %>
 	    			</div>
@@ -23,15 +23,15 @@
 			</div>
 
 			<%= link_to users_path do %>
-			<div class="sub-header-buttons" style="padding:20px;">
-				<p>All Photos</p>
-			</div>
+				<div class="sub-header-buttons" style="padding:20px;">
+					<p>All Photos</p>
+				</div>
 			<% end %>
 
 			<%= link_to my_albums_path do %>
-			<div class="sub-header-buttons" style="padding:20px;">
-				<p>All Albums</p>
-			</div>
+				<div class="sub-header-buttons" style="padding:20px;">
+					<p>All Albums</p>
+				</div>
 			<% end %>
 
 			<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none;">
@@ -57,7 +57,7 @@
 		  		<div class="ui dropdown item sub-header-buttons">
 		  			Your Activity
 		  			<i class="dropdown icon"></i>
-		  			<div class="menu">
+		  			<div class="menu" style="height:300px; overflow-y:auto;">
 		  				<div class=" ui header" align="center">最近のアクティビティ</div>
 			  			<%= render 'users/my_activity' %>
 		  			</div>
@@ -66,13 +66,16 @@
 
 			<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none;">
 		  		<div class="ui dropdown item sub-header-buttons">
-		  			Followers
+		  			<% unless current_user.follow_count == 0 %>
+		  				<b><%= current_user.follow_count %> </b>
+		  			<% end %>
+		  			Follows
 		  			<i class="dropdown icon"></i>
-		  			<div class="menu">
+		  			<div class="menu" style="height:250px; overflow-y:auto;">
 		  				<div class="ui header" align="center">あなたがフォローしているユーザー</div>
 		  				<% if current_user.follow_count == 0 %>
 			  				<div class="item">
-			  					フォローしているユーザーはいません
+			  					<font color="gray">フォローしているユーザーはいません</font>
 			  				</div>
 			  			<% else %>
 			  				<%= render 'users/follower_index' %>
@@ -83,9 +86,12 @@
 
 			<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none;">
 		  		<div class="ui dropdown item sub-header-buttons">
-		  			Followed by
+		  			<% unless current_user.followers_count == 0 %>
+		  				<b><%= current_user.followers_count %> </b>
+		  			<% end %>
+		  			Follower
 		  			<i class="dropdown icon"></i>
-		  			<div class="menu">
+		  			<div class="menu" style="height:250px; overflow-y: auto;">
 		  				<div class="ui header" align="center">あなたをフォローしているユーザー</div>
 		  				<% if current_user.followers_count == 0 %>
 		  					<div class="item">
@@ -106,16 +112,18 @@
 		<div class="header" align="center">写真投稿</div>
 		<i class="close icon"></i>
 		<div class="content">
-	  			<%= form_for photo, url: photos_path do |f| %>
-				<%= f.attachment_field :image %>
-				<div class="ui form" style="margin: 10px auto;">
-					<%= f.label :title, "写真のタイトル（２０文字以内）" %>
-					<%= f.text_field :title, placeholder: "タイトル（２０文字以内）", class: "field", maxlength: "20"%>
-				</div>
-					<button type="submit" class="ui purple mini button">投稿</button>
-				<% end %>
+  			<%= form_for photo, url: photos_path do |f| %>
+  			<div class="">1. 写真を選択してください</div>
+  			<%= f.label :image, "写真を選択", class: "ui purple fluid button" %>
+			<%= f.attachment_field :image, style: "opacity:0;" %>
+			<div class="ui form" style="margin: 10px auto;">
+				<%= f.label :title, "2. 写真のタイトル決めましょう（２０文字以内）" %>
+				<%= f.text_field :title, placeholder: "タイトル（２０文字以内）", class: "field", maxlength: "20"%>
+			</div>
+				<button type="submit" class="ui purple fluid button">投稿</button>
+			<% end %>
 		<div class="actions">
-			<button class="ui deny right floated button">戻る</button>
+			<button class="ui deny secondary inverted button">戻る</button>
 		</div>
 	  </div>
 	</div>

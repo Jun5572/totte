@@ -10,10 +10,11 @@
 .your-photos-mini{
 	width: 218px;
 	height: 218px;
-	background-color: red;
+	/*background-color: red;*/
 	margin: 5px;
 	box-shadow: 3px 3px 5px gray;
 	transition: box-shadow 50ms;
+	object-fit: cover;
 }
 .your-photos-mini:hover{
 	box-shadow: 0px 0px 5px 3px purple;

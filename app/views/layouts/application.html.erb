@@ -39,24 +39,33 @@
             <% end %>
           </div>
         </div>
-
-        <% if flash[:notice] %>
+        <% if flash[:caution] %>
           <div class="ui negative floating message">
             <i class="ui close icon"></i>
             <a class="ui red circular label">!</a>
+            <%= flash[:caution] %>
+          </div>
+        <% elsif flash[:notice] %>
+          <div class="ui positive floating message">
+            <i class="ui close icon"></i>
             <%= flash[:notice] %>
           </div>
         <% end %>
 
   <!-- 検索フォームここから -->
-        <div style="display:flex; justify-content:space-between; width: 380px;">
+  <%= form_tag user_search_path, method: :post do %>
+        <div style="display:flex; justify-content:space-between; width: 350px;">
           <div class="ui tiny search" style="margin: auto;">
-            <div class="ui icon input">
-              <input class="prompt" type="text" placeholder= "ニックネームで検索">
-              <i class="search icon"></i>
+            <div class="ui input">
+              <input class="prompt" name="search" id="search" type="text" placeholder= "ニックネームで検索">
+                <%#= text_field_tag :search, params[:search], class: "prompt" %>
+                <%= button_tag type: "submit", style: "position:relative;border:none;" do %>
+                <i class="search icon" style="position:absolute; top:10px; right:5px; cursor:pointer;"></i>
+                <% end %>
             </div>
             <div class="results"></div>
           </div>
+          <% end %>
   <!-- 検索フォームend -->
   <!-- お知らせアイコンここから -->
           <% if current_user.notices.where(read: false).count > 0 %>
@@ -77,6 +86,7 @@
                   <div class="header" align="center"><i class="bell outline icon"></i>お知らせ</div>
                 <% else %>
                   <div class="header" align="center"><i class="bell outline icon"></i>新着お知らせ<b> <%= current_user.notices.where(read: false).count %></b>件</div>
+                  <p align="center">画像をクリックすると、詳細ページにリンクします</p>
                 <% end %>
                 <%= render 'notices/notice_info', notices: current_user.notices %>
               </div>

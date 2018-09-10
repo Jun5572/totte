@@ -1,8 +1,8 @@
 class LikesController < ApplicationController
 
 # ----------------------------------------------------------------------------
-	after_action :create_notice, only: [:create]
 	before_action :set_variables
+	after_action :create_notice, only: [:create]
 
 
 	def create

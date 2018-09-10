@@ -17,7 +17,7 @@ class PhotosController < ApplicationController
     if photo.save
       redirect_to user_path(current_user)
     else
-      flash[:notice] = "画像を投稿できませんでした。タイトルが20文字以内か確認してください。"
+      flash[:caution] = "画像を投稿できませんでした。タイトルが20文字以内か確認してください。"
       redirect_to user_path(current_user)
     end
   end
@@ -33,7 +33,7 @@ class PhotosController < ApplicationController
     # binding.pry
     require 'mini_exiftool'
     @exif2 = MiniExiftool.new(@photo.image)
-    puts @exif2.to_hash
+    # puts @exif2.to_hash
 
 
     # 位置情報取得
@@ -127,7 +127,6 @@ class PhotosController < ApplicationController
     if @pre_photo != nil && @pre_photo.user == @user
       redirect_to user_photo_path(@user, @pre_photo)
     else
-      puts '前の画像はありません'
       @a = 1
       redirect_to user_photo_path(@user, @photo)
       # require 'mini_exiftool'
@@ -145,7 +144,6 @@ class PhotosController < ApplicationController
     if @next_photo != nil && @next_photo.user == @user
       redirect_to user_photo_path(@user, @next_photo)
     else
-      puts '次の画像はありません'
       @a = 2
       redirect_to user_photo_path(@user, @photo)
       # require 'mini_exiftool'

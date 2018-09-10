@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 	def top
 	end
 
+
   def index
     @user = current_user
     @photo = Photo.new
@@ -15,7 +16,12 @@ class UsersController < ApplicationController
 
   def search
     @user = current_user
-    @result= User.search(params[:search])
+    @result = User.find_by('nickname LIKE ?', "%#{params[:search]}%")
+    if @result == nil
+      redirect_back(fallback_location: user_path(current_user))
+    else
+      redirect_to user_path(@result.id)
+    end 
   end
 
   def show
@@ -23,7 +29,8 @@ class UsersController < ApplicationController
     if User.exists?(id: params[:id])
       @user = User.find(params[:id])
       @photos = @user.photos.order(created_at: :desc)
-      # @like_hash = Like.where(user_id: current_user.id).pluck(:id, :photo_id).to_h
+      # @like_hash = Like.where(user_id: current_user.id ).pluck(:id, :photo_id).size
+      @likes_count = Photo.where(user_id: @user.id).pluck(:like_count).sum
     else
     end
   end
