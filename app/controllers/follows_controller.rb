@@ -31,8 +31,7 @@ class FollowsController < ApplicationController
 
 		def create_follow_notice
 			return if @get_user == current_user
-				@user = User.find(params[:user_id])
-				Notice.create( user_id: @user.id, notice_by_id: current_user.id, photo_id: 0.to_i, notice_type: "フォロー" )
+				Notice.create( user_id: @get_user.id, notice_by_id: current_user.id, photo_id: @get_user.photos.first.id, notice_type: "フォロー" )
 		end
 
 		def follow_params

@@ -4,10 +4,10 @@ class User < ApplicationRecord
 # ------------------検索-----------------------------------------------------------
 
   def self.search(search) #self.でクラスメソッドとしている
-    if search # Controllerから渡されたパラメータが!= nilの場合は、titleカラムを部分一致検索
+     if search # Controllerから渡されたパラメータが!= nilの場合は、titleカラムを部分一致検索
       User.where(['name LIKE ?', "%#{search}%"])
     else
-
+      # User.all
     end
   end
 
@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   has_many :photos
   has_many :likes, dependent: :destroy
-  has_many :albums
+  has_many :albums, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :notices, dependent: :destroy
 

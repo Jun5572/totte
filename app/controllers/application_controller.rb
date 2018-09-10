@@ -20,7 +20,10 @@ class ApplicationController < ActionController::Base
 				puts "bbb"
 			end
 		else
-			@album = Album.create(user_id: current_user.id)
+			# @album = Album.create(user_id: current_user.id)
+			@album = Album.new(user_id: current_user.id)
+			@album.save
+			puts @album.errors.full_messages
 			session[:album_id] = @album.id
 			puts session[:album_id]
 			puts "ccc"

@@ -39,7 +39,7 @@ class AlbumsController < ApplicationController
   def create
     @album = current_album
     @album_items = @album.album_items
-    if @album.save
+    if @album.update
       p "保存成功！"
       session[:album_id] = nil
       redirect_to album_path(current_user)

@@ -1,27 +1,27 @@
 <title>新規アルバム投稿</title>
-
 <div class="main-box">
 	<%= render 'layouts/sub_header', photo: @photo %>
 	<div class="main-contents-box" style="padding-bottom:100px;">
 		<h2 align="center">アルバム作成</h2>
 		<div align="center">選択中の写真　<%= @count %>枚</div>
-		<% if current_album.album_items.blank? %>
+		<% if @count == 0 %>
 			<button class="ui inverted violet button disabled" style="margin:15px;">画像を選択してください</button>
 		<% else %>
-		<%= form_for @album, url: my_albums_path, method: :post do |f| %>
-			<%#= link_to my_albums_path, method: :post do %>
-				<button type=submit class="ui inverted violet button">アルバムにする</button>
-		<%= f.text_field :title %>
-				
-			<%# end %>
-		<% end %>
+			<%= form_for @album, url: my_album_path(current_album), method: :patch do |f| %>
+				<%#= link_to my_albums_path, method: :post do %>
+			<%= f.text_field :title %>
+					<!-- <button type=submit class="ui inverted violet button">アルバムにする</button> -->
+					<%= f.submit "アルバムにする", class: "ui inverted violet button" %>
+				<%# end %>
+			<% end %>
 		<% end %>
 		<div style="display:flex; flex-direction:row; justify-content:flex-start; flex-wrap:wrap;">
 			<% @photos.each do |photo| %>
 				<% if session[:photo][@num] == photo.id %>
 					<!-- 選択中の画像の表示 -->
-					<%= session[:photo][@num] %>
-					<%= @num += 1 %>
+					<% session[:photo][@num] %>
+					<% @num %>
+					<% @num = @num + 1 %>
 					<div class="selected-filter">
 						<%= attachment_image_tag photo, :image, style: "width: 100%; height: 100%"; %>
 						<div class="filter-overlay">
@@ -33,7 +33,7 @@
 				<% next %>
 				<% end %>
 					<%= link_to add_my_album_item_path(current_album, photo), method: :post do %>
-						<div><%= attachment_image_tag photo, :image, class: "your-photos-mini" %></div>
+						<div><%= attachment_image_tag photo, :image, id: "vvv", class: "your-photos-mini" %></div>
 					<% end %>
 			<% end %>
 		</div>
@@ -53,6 +53,11 @@ $(function() {
 			$(this).find($('.overlay-fillter')).fadeOut(200);
 		}
 	);
+
+	$('#vvv').click(function(){
+		$(this).find($('.overlay-trashbox-icon')).fadeIn(200);
+		// $(this).find($('.overlay-trashbox-icon')).fadeOut(200);
+	});
 });
 
 </script>

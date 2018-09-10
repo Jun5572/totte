@@ -12,11 +12,13 @@ class MyAlbumsController < ApplicationController
       session[:photo] = []
     end
     @photo = Photo.new
+    # @num = params[:num].to_i
     @num = 0
-    @count = session[:photo].count
+    @album = current_album
+    # @count = session[:photo].count
+    @count = current_album.album_items.count
     @user = current_user
     @photos = @user.photos.reverse_order
-    @album = current_album
       puts session[:photo]
     # @album_items = @album.album_items
   end
@@ -35,7 +37,7 @@ class MyAlbumsController < ApplicationController
         @album_item.album_id = current_album.id
         if @album_item.save
           session[:photo].push(@album_item.photo_id)
-          session[:photo] = session[:photo].sort_by{ |u| -u }
+          session[:photo] = session[:photo].sort_by{ |u| u }
 
           redirect_to new_my_album_path
         else
@@ -89,9 +91,11 @@ class MyAlbumsController < ApplicationController
   end
 
   def update
-    @album = Album.find(params[:id])
-    if @album.update
-      redirect_to my_albums_path
+    @album = current_album
+    if @album.update(album_params)
+      session[:album_id] = nil
+      session[:photo] = nil
+      redirect_to user_albums_path(current_user)
     else
     end
   end

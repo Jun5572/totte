@@ -1,15 +1,29 @@
 <% notices.reverse.each do |notice| %>
 	<div class="notice-list">
 		<% if notice.read == false && notice.notice_type == "コメント" || notice.notice_type == "いいね！" %>
-			<div style="display:flex;">
-				<div style="margin: auto;"><b><%= notice.notice_by.nickname %></b>さんがあなたの投稿に「 <b><%= notice.notice_type %></b> 」しました！</div>
+			<div style="display:flex;justify-content: space-between;">
+				<div style="margin: auto 5px;"><b><%= notice.notice_by.nickname %>さん</b>があなたの投稿に「 <b><%= notice.notice_type %></b> 」しました！</div>
 				<%= link_to link_through_path(notice) do %>
-					<%= attachment_image_tag notice.photo, :image, style: "width:50px; height:50px;object-fit:cover;" %>
+					<%= attachment_image_tag notice.photo, :image, style: "width:40px; height:40px;object-fit:cover;" %>
 				<% end %>
 			</div>
 			<%#= link_to "確認する", link_through_path(notice), class: "ui mini inverted purple button"%>
 		<% elsif notice.read == false && notice.notice_type == "フォロー" %>
-			<%= notice.notice_by.nickname %>さんがあなたを「 <%= notice.notice_type %> 」しました！
+			<div style="display:flex;justify-content: space-between;">
+				<%= link_to user_path(notice.notice_by) do %>
+					<%= attachment_image_tag notice.notice_by, :thumbnail, style: "width:40px; height:40px;object-fit:cover;border-radius:50%;"%>
+				<% end %>
+				<div style="margin: auto 10px;"><b><%= notice.notice_by.nickname %>さん</b>があなたを <b><%= notice.notice_type %></b> しました！</div>
+				<% unless current_user.following? notice.notice_by %>
+					<%= link_to link_through_path(notice) do %>
+						<button class="ui inverted violet mini button">フォローバック</button>
+					<% end %>
+				<% else %>
+					<%= link_to link_through_path(notice) do %>
+						<button class="ui inverted secondary mini button">確認</button>
+					<% end %>
+				<% end %>
+			</div>
 		<% else %>
 		<% end %>
 	</div>

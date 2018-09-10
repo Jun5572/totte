@@ -35,6 +35,9 @@ td, th {
     text-align: center;
     font-size: 15px;
 }
+td{
+	font-size: 25px;
+}
 /*-----------------------------------*/
 .strech{
 	width:100px!important;
@@ -267,7 +270,7 @@ footer{
 .user-show-photo-box{
 		display:inline-block;
 		width:100%;
-		height: 400px;
+		height: 100%;
 }
 
 .thumb-edit-overlay{
@@ -293,6 +296,7 @@ footer{
 	height: 30px!important;
 	border-radius: 50%!important;
 	background: linear-gradient(135deg, #64EFA5, #1B87F4) ;
+	margin-right: 5px!important;
 	object-fit: cover;
 }
 .filter-drop-shadow{
@@ -482,8 +486,21 @@ footer{
 
 
 
+
+
+
+
 /*レスポンシブ対応*/
+
+
+
+
+
+
+
+
 @media screen and (max-width:1024px) {
+
 	.strech{
 		width:100px!important;
 	}
@@ -776,7 +793,7 @@ footer{
 	.user-show-photo-box{
 		display:inline-block;
 		width:100%;
-		height: 350px;
+		height: 100%;
 	}
 
 	.user-box-letters{
@@ -934,5 +951,20 @@ footer{
 
 /* スマートフォンサイズ(425px)程度の画面の大きさ以下に適用される設定です */
 @media screen and (max-width:425px) {
-
+		.main-box{
+			position: relative;
+			width: 100%;
+			background-color: aliceblue;
+			z-index: 0;
+		}
+		.main-contents-box{
+			width: 95%;
+			/*background-color: rgba(0, 0, 0, 0.2);*/
+			margin: 0 auto;
+			padding: 5px;
+		}
+		.user-nickname{
+			padding-bottom: 20px;
+			font-size: 40px;
+		}
 }
