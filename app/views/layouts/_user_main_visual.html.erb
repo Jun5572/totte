@@ -4,33 +4,34 @@
 	<div class ="overlay-fillter-main-visual">
 		<div class="user-box">
 			<% if user == current_user %>
-			<div class="">
 				<%= attachment_image_tag user, :thumbnail, fallback: 'user_preset_image.png', id: "icon", class: "user-icon-in-main-visual" %>
-				<i id="sss" class="far fa-edit fa-2x user-icon-edit-button"></i>
-				<div id="ddd" class="ui mini modal">
-					<i class="close icon"></i>
-						<div class="content" align="center">
-							<div class="ui header">アイコン変更</div>
-							<div class="ui divider"></div>
-							<%= form_for(user) do |f| %>
-							<%= f.label :thumbnail, "ファイルを選択", class: "ui purple fluid button" %>
-								<%= f.attachment_field :thumbnail, style: "opacity:0;" %>
-								<%= f.submit 'update', class: "ui inverted secondary fluid button" %>
-							<% end %>
-						</div>
+				<div class="sidplay">
+					<i id="sss" class="far fa-edit fa-2x user-icon-edit-button"></i>
+
+					<div id="ddd" class="ui mini modal">
+						<i class="close icon"></i>
+							<div class="content">
+								<div class="ui header">アイコン変更</div>
+								<div class="ui divider"></div>
+								<%= form_for(user) do |f| %>
+								<%= f.label :thumbnail, "ファイルを選択", class: "ui purple fluid button" %>
+									<%= f.attachment_field :thumbnail, style: "opacity:0;" %>
+									<%= f.submit 'update', class: "ui inverted secondary fluid button" %>
+								<% end %>
+							</div>
+					</div>
 				</div>
-			</div>
 			<% else %>
 				<%= attachment_image_tag user, :thumbnail, fallback: 'user_preset_image.png', class: "user-icon-in-main-visual" %>
 			<% end %>
 			<div class="user-box-letters">
 				<div class="user-nickname"><b><%= user.nickname %></b></div>
-				<div class="user-infomation-mainvisual" style="padding-bottom:10px;font-size:20px;display:flex;">
-					<div class="">👍いいね数　<%= @likes_count %></div>
-					<div class="" style="margin:0 20px;"><i class="fas fa-user"></i>フォロー中　<%= user.follow_count %> </div>
-					<div class=""><i class="fas fa-users"></i>フォロワー　<%= user.followers_count %> </div>
+				<div class="user-infomation-mainvisual">
+					<div class="" style="margin:0 10px;">👍いいね数　<%= @likes_count %></div>
+					<div class="" style="margin:0 10px;"><i class="fas fa-user"></i>フォロー中　<%= user.follow_count %> </div>
+					<div class="" style="margin:0 10px;"><i class="fas fa-users"></i>フォロワー　<%= user.followers_count %> </div>
 				</div>
-				<span style="color:silver;font-size:15px;">Joined in<%= user.created_at.strftime('%Y') %></span>
+				<span class="join-year">Joined in<%= user.created_at.strftime('%Y') %></span>
 				<div class="" style="margin-left:10px;display:inline-flex;">
 					<% if user != current_user %>
 						<% if current_user.following? user %>
@@ -78,9 +79,6 @@
 <script>
 $(function(){
 
-	$('#edit').click(function(){
-		$('#header-image-edit-modal').modal('show');
-	});
 
 	$('#sss').click(function(){
 		$('#ddd').modal('show');

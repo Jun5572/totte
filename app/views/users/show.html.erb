@@ -12,6 +12,11 @@
 			<% end %>
 			<%= render 'layouts/user_main_visual', user: @user%>
 			<%= render 'layouts/sub_header', photo: @photo%>
+			<% if @user == current_user %>
+				<h2 align="center">My Photos</h2>
+			<% else %>
+				<h2 align="center">Photos</h2>
+			<% end %>
 			<div class="main-contents-box" style="display:flex; justify-content:space-around;">
 				<div class="my-photos-box" style="padding-bottom: 100px;">
 					<!-- each start -->

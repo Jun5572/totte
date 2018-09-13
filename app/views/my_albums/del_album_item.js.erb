@@ -1,0 +1,2 @@
+$("#album_item_<%= @photo.id %>").html("<%= j(render partial: 'my_albums/album_item', locals: { photo: @photo, photos: @photos, num: @num }) %>")
+$("#button").html("<%= j(render partial: 'my_albums/button', locals: { count: @count, album: @album }) %>")

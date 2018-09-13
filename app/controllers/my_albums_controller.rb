@@ -19,7 +19,7 @@ class MyAlbumsController < ApplicationController
     @count = current_album.album_items.count
     @user = current_user
     @photos = @user.photos.reverse_order
-      puts session[:photo]
+      # puts session[:photo]
     # @album_items = @album.album_items
   end
 
@@ -37,8 +37,7 @@ class MyAlbumsController < ApplicationController
         @album_item.album_id = current_album.id
         if @album_item.save
           session[:photo].push(@album_item.photo_id)
-          session[:photo] = session[:photo].sort_by{ |u| u }
-
+          session[:photo] = session[:photo].sort_by{ |u| u }.reverse
           redirect_to new_my_album_path
         else
           redirect_to new_my_album_path
@@ -56,7 +55,6 @@ class MyAlbumsController < ApplicationController
     @album_item = @album.album_items.find_by(photo_id: @photo.id)
     if @album_item.destroy
       session[:photo].delete(@album_item.photo_id)
-      # puts 'アルバム写真候補から外れました'
       redirect_to new_my_album_path
     end
   end

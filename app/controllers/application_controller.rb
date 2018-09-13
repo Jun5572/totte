@@ -13,11 +13,9 @@ class ApplicationController < ActionController::Base
 				@album = Album.create(user_id: current_user.id)
 				session[:album_id] = @album.id
 				puts session[:album_id]
-				puts "aaa"
 			else
 				@album = Album.find(session[:album_id])
 				# puts session[:album_id]
-				puts "bbb"
 			end
 		else
 			# @album = Album.create(user_id: current_user.id)
@@ -26,10 +24,7 @@ class ApplicationController < ActionController::Base
 			puts @album.errors.full_messages
 			session[:album_id] = @album.id
 			puts session[:album_id]
-			puts "ccc"
 		end
-		puts "ddd"
-		puts @album
 		return @album
 		# unless session[:album_id] == nil
   #     		@album = Album.find(session[:album_id])
@@ -62,7 +57,7 @@ class ApplicationController < ActionController::Base
 
   	private
   		def sign_in_required
-  			redirect_to new_user_session_url unless user_signed_in?
+  			redirect_to root_path unless user_signed_in?
   		end
 
 end

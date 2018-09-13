@@ -1,0 +1,172 @@
+<div class="zdo_drawer_menu">
+		<div class="zdo_drawer_bg"></div>
+		<button type="button" class="zdo_drawer_button">
+			<span class="zdo_drawer_bar zdo_drawer_bar1"></span>
+			<span class="zdo_drawer_bar zdo_drawer_bar2"></span>
+			<span class="zdo_drawer_bar zdo_drawer_bar3"></span>
+			<span class="zdo_drawer_menu_text zdo_drawer_text">MENU</span>
+			<span class="zdo_drawer_close zdo_drawer_text">CLOSE</span>
+		</button>
+		<nav class="zdo_drawer_nav_wrapper">
+			<ul class="zdo_drawer_nav">
+				<div class="">
+					<font color="white" style="font-size:20px;">MENU</font>
+				</div>
+				<li>
+						<div class="ui icon top right pointing dropdown">
+			              <%= attachment_image_tag current_user, :thumbnail, fallback: 'user_preset_image.png', :size => "40x40", class: "headline-user-icon" %>
+			            <div class="menu" style="box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);padding-bottom:15px;">
+			              <div class="header" style="display: flex; flex-direction: row;">
+			                <%= link_to user_path(current_user) do %>
+			                  <%= attachment_image_tag current_user, :thumbnail, fallback: 'user_preset_image.png', :size => "40x40", class: "humburger-user-icon", style: "border-radius:50%; object-fit:cover;" %>
+			                <% end %>
+			                <div style="padding-top: 25px;font-size: 15px;margin-left:10px;"><%= current_user.nickname %></div>
+			                <div class="item">User Infomation</div>
+			              </div>
+			              <div class="ui divider"></div>
+			              <div class="header" align="center"><h4>Setting</h4></div>
+			              <div class="header">
+			                <%= link_to edit_user_path(current_user) do %>
+			                  <div class="ui inverted purple fluid button" style="margin-bottom: 10px;">
+			                    プロフィール編集
+			                  </div>
+			                <% end %>
+			              </div>
+			              <% if session[:album_id] != nil %>
+			                <div class="header">
+			                  <button id="modal-confirm" class="ui inverted secondary fluid tiny button" type="button">ログアウト</button>
+			                  <div class=" ui basic mini modal">
+			                    <div class="ui icon header">
+			                        <i class="ui icon fas fa-images fa-2x"></i>
+			                        作成中のアルバムがあります！
+			                    </div>
+			                    <div class="content">
+			                      <p align= "center">
+			                        このままログアウトすると、作成中のアルバムの内容が破棄されます。よろしいですか？
+			                      </p>
+			                    </div>
+			                    <div class="actions" align= "center">
+			                      <%= link_to new_my_album_path do %>
+			                      <div class="ui gray inverted inverted deny button">
+			                         確認する
+			                      </div>
+			                      <% end %>
+			                    <%= link_to destroy_user_session_path, method: :delete do %>
+			                        <div class="ui purple ok inverted button">
+			                        ログアウト
+			                        </div>
+			                    <% end %>
+			                    </div>
+			                  </div>
+			                </div>
+			              <% else %>
+			                <div class="header">
+			                  <%= link_to destroy_user_session_path, class: "ui inverted secondary fluid tiny button", data: { confirm: "ログアウトします。よろしいですか？" }, method: :delete do %>
+			                  ログアウト
+			                  <% end %>
+			                </div>
+			              <% end %>
+			            </div>
+			          </div>
+				</li>
+
+				<li>
+					<%= link_to user_path(current_user) do %>
+		  				<div class="sub-header-buttons">
+			      			<font color="white">My Photos</font>
+		      			</div>
+      				<% end %>
+				</li>
+
+				<li>
+					<%= link_to user_albums_path(current_user) do %>
+						<div class="sub-header-buttons">
+			      			<font color="white">My Albums</font>
+		      			</div>
+		      		<% end %>
+				</li>
+
+				<li>
+					<%= link_to users_path do %>
+						<div class="sub-header-buttons">
+							<font color="white">All Photos</font>
+						</div>
+					<% end %>
+				</li>
+
+				<li>
+					<%= link_to my_albums_path do %>
+						<div class="sub-header-buttons">
+							<font color="white">All Albums</font>
+						</div>
+					<% end %>
+				</li>
+
+				<li>
+					<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none; background-color:black;">
+				  		<div class="ui simple dropdown item sub-header-buttons">
+				  			<font color="white">Post</font>
+				  			<i class="dropdown icon" style="color: white;"></i>
+				  			<div class="menu">
+				  				<div id="post-photo-modal">
+				  					<div class="item sub-header-buttons">
+					      				Post Photo
+				      				</div>
+				  				</div>
+				      			<%= link_to new_my_album_path do %>
+									<div class="item sub-header-buttons">
+						      			Post Album
+					      			</div>
+				      			<% end %>
+			    			</div>
+			  			</div>
+					</div>
+				</li>
+
+				<li>
+					<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none; background-color:black;">
+				  		<div class="ui dropdown item sub-header-buttons">
+				  			<% unless current_user.follow_count == 0 %>
+				  				<b> <font color="white"><%= current_user.follow_count %></font> </b>
+				  			<% end %>
+				  			<font color="white">Follows</font>
+				  			<i class="dropdown icon" style= "color: white"></i>
+				  			<div class="menu" style="max-height:250px; overflow-y:auto;">
+				  				<div class="ui header" align="center">あなたがフォローしているユーザー</div>
+				  				<% if current_user.follow_count == 0 %>
+					  				<div class="item">
+					  					<font color="gray">フォロー中のユーザーはいません</font>
+					  				</div>
+					  			<% else %>
+					  				<%= render 'users/follower_index' %>
+				  				<% end %>
+				  			</div>
+			  			</div>
+					</div>
+				</li>
+
+				<li>
+					<div class="ui compact menu" style="border-radius:none; border:none; box-shadow:none; background-color:black;">
+				  		<div class="ui dropdown item sub-header-buttons">
+				  			<% unless current_user.followers_count == 0 %>
+				  				<b><font color="white"><%= current_user.followers_count %></font></b>
+				  			<% end %>
+				  			<font color="white">Follower</font>
+				  			<i class="dropdown icon" style="color: white;"></i>
+				  			<div class="menu" style="max-height:250px; overflow-y: auto;">
+				  				<div class="ui header" align="center">あなたをフォローしているユーザー</div>
+				  				<% if current_user.followers_count == 0 %>
+				  					<div class="item">
+			  							<font color="gray">フォロワーはいません</font>
+				  					</div>
+				  				<% else %>
+					  				<%= render 'users/followed_by_index' %>
+				  				<% end %>
+				  			</div>
+			  			</div>
+					</div>
+				</li>
+
+			</ul>
+		</nav>
+	</div>

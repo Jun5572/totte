@@ -1,0 +1,27 @@
+
+	<div class="swiper-container gallery-top" style="width:100%; height:550px;">
+        <div class="swiper-wrapper">
+			<% album_items.each do |album_item| %>
+	            <div class="swiper-slide">
+	              	<font color="white"><%= album_item.photo.title %></font>
+	              	<%= attachment_image_tag album_item.photo, :image, style: "width:100%; height:100%;object-fit:fill;"%>
+	            </div>
+    		<% end %>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+
+    <div class="swiper-container gallery-thumbs" style="padding-top:5px;">
+    	<div class="swiper-wrapper">
+    		<% album_items.each do |album_item| %>
+    		<div class="swiper-slide">
+    			<%= link_to user_photo_path(album_item.photo.user, album_item.photo) do %>
+              		<%= attachment_image_tag album_item.photo, :image, style:"width:100%; height:100%;" %>
+              	<% end %>
+    		</div>
+    		<% end %>
+    	</div>
+    </div>

@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./js/zdo_drawer_menu.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-
-    <!-- <script src="jquery.js"></script> -->
-    <!-- <script src="jquery.infinitescroll.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.scss"> -->
+    <link rel="stylesheet" href="./css/zdo_drawer_menu.css">
   </head>
 
   <body>
@@ -39,22 +40,21 @@
             <% end %>
           </div>
         </div>
-        <% if flash[:caution] %>
-          <div class="ui negative floating message">
+        <%# if flash[:caution] %>
+          <!-- <div class="ui negative floating message">
             <i class="ui close icon"></i>
             <a class="ui red circular label">!</a>
-            <%= flash[:caution] %>
-          </div>
-        <% elsif flash[:notice] %>
-          <div class="ui positive floating message">
+            <%#= flash[:caution] %>
+          </div> -->
+        <%# elsif flash[:notice] %>
+          <!-- <div class="ui positive floating message">
             <i class="ui close icon"></i>
-            <%= flash[:notice] %>
-          </div>
-        <% end %>
-
+            <%#= flash[:notice] %>
+          </div> -->
+        <%# end %>
   <!-- 検索フォームここから -->
   <%= form_tag user_search_path, method: :post do %>
-        <div style="display:flex; justify-content:space-between; width: 350px;">
+        <div class="header-contents">
           <div class="ui tiny search" style="margin: auto;">
             <div class="ui input">
               <input class="prompt" name="search" id="search" type="text" placeholder= "ニックネームで検索">
@@ -81,7 +81,7 @@
             <% end %>
 
             <div class="menu">
-              <div class="ui message">
+              <div class="ui message header-message">
                 <% unless current_user.notices.where(read: false).count > 0 %>
                   <div class="header" align="center"><i class="bell outline icon"></i>お知らせ</div>
                 <% else %>
@@ -94,62 +94,69 @@
           </div>
   <!-- お知らせアイコンここまで -->
   <!-- ドロップダウンアイコンここから -->
-          <div class="ui icon top right pointing dropdown">
-              <%= attachment_image_tag current_user, :thumbnail, fallback: 'user_preset_image.png', :size => "40x40", class: "headline-user-icon" %>
-            <div class="menu" style="box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);padding-bottom:15px;">
-              <div class="header" style="display: flex; flex-direction: row;">
-                <%= link_to user_path(current_user) do %>
-                  <%= attachment_image_tag current_user, :thumbnail, fallback: 'user_preset_image.png', :size => "40x40", class: "headline-user-icon" %>
-                <% end %>
-                <div style="padding-top: 25px;font-size: 15px;margin-left:10px;"><%= current_user.nickname %></div>
-                <div class="item">User Infomation</div>
-              </div>
-              <div class="ui divider"></div>
-              <div class="header" align="center"><h4>Setting</h4></div>
-              <div class="header">
-                <%= link_to edit_user_path(current_user) do %>
-                  <div class="ui inverted purple fluid button" style="margin-bottom: 10px;">
-                    プロフィール編集
-                  </div>
-                <% end %>
-              </div>
-              <% if session[:album_id] != nil %>
-                <div class="header">
-                  <button id="modal-confirm" class="ui inverted secondary fluid tiny button" type="button">ログアウト</button>
-                  <div class=" ui basic mini modal">
-                    <div class="ui icon header">
-                        <i class="ui icon fas fa-images fa-2x"></i>
-                        作成中のアルバムがあります！
-                    </div>
-                    <div class="content">
-                      <p align= "center">
-                        このままログアウトすると、作成中のアルバムの内容が破棄されます。よろしいですか？
-                      </p>
-                    </div>
-                    <div class="actions" align= "center">
-                      <%= link_to new_my_album_path do %>
-                      <div class="ui gray inverted inverted deny button">
-                         確認する
-                      </div>
-                      <% end %>
-                    <%= link_to destroy_user_session_path, method: :delete do %>
-                        <div class="ui purple ok inverted button">
-                        ログアウト
-                        </div>
-                    <% end %>
-                    </div>
-                  </div>
+          <div class="personal-icon">
+            <div class="ui icon top right pointing dropdown">
+                <%= attachment_image_tag current_user, :thumbnail, fallback: 'user_preset_image.png', :size => "40x40", class: "headline-user-icon" %>
+              <div class="menu" style="box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);padding-bottom:15px;">
+                <div class="header" style="display: flex; flex-direction: row;">
+                  <%= link_to user_path(current_user) do %>
+                    <%= attachment_image_tag current_user, :thumbnail, fallback: 'user_preset_image.png', :size => "40x40", class: "headline-user-icon" %>
+                  <% end %>
+                  <div style="padding-top: 25px;font-size: 15px;margin-left:10px;"><%= current_user.nickname %></div>
+                  <div class="item">User Infomation</div>
                 </div>
-              <% else %>
+                <div class="ui divider"></div>
+                <div class="header" align="center"><h4>Setting</h4></div>
                 <div class="header">
-                  <%= link_to destroy_user_session_path, class: "ui inverted secondary fluid tiny button", data: { confirm: "ログアウトします。よろしいですか？" }, method: :delete do %>
-                  ログアウト
+                  <%= link_to edit_user_path(current_user) do %>
+                    <div class="ui inverted purple fluid button" style="margin-bottom: 10px;">
+                      プロフィール編集
+                    </div>
                   <% end %>
                 </div>
-              <% end %>
+                <%# if session[:album_id] != nil %>
+                  <!-- <div class="header">
+                    <button id="modal-confirm" class="ui inverted secondary fluid tiny button" type="button">ログアウト</button>
+                    <div class=" ui basic mini modal">
+                      <div class="ui icon header">
+                          <i class="ui icon fas fa-images fa-2x"></i>
+                          作成中のアルバムがあります！
+                      </div>
+                      <div class="content">
+                        <p align= "center">
+                          このままログアウトすると、作成中のアルバムの内容が破棄されます。よろしいですか？
+                        </p>
+                      </div>
+                      <div class="actions" align= "center">
+                        <%#= link_to new_my_album_path do %>
+                        <div class="ui gray inverted inverted deny button">
+                           確認する
+                        </div>
+                        <%# end %>
+                      <%#= link_to destroy_user_session_path, method: :delete do %>
+                          <div class="ui purple ok inverted button">
+                          ログアウト
+                          </div>
+                      <%# end %>
+                      </div>
+                    </div>
+                  </div> -->
+                <%# else %>
+                  <div class="header">
+                    <%= link_to destroy_user_session_path, class: "ui inverted secondary fluid tiny button", data: { confirm: "作成中のアルバムがある場合は、その内容が破棄されます。ログアウトしてよろしいですか？" }, method: :delete do %>
+                    ログアウト
+                    <% end %>
+                  </div>
+                <%# end %>
+              </div>
             </div>
           </div>
   <!-- ドロップダウンアイコンここまで -->
+  <!-- レスポンシブ　ハンバーガーメニューここから -->
+  <div class="responsive-humburger-menu">
+    <%= render 'layouts/humburger' %>
+  </div>
+  <!-- ハンバーガーメニューここまで -->
         </div>
       </div>
     <% else %>
@@ -164,13 +171,12 @@
   </header><!-- /header -->
       <%= yield %>
     <%= render 'layouts/footer' %>
+
   </body>
 </html>
 
 
 
-<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzZ0PKG68JfsiFmA2jrlBBUPXyjtrJqzU&callback=initMap"
-  type="text/javascript"></script> -->
 <script>
 
   var users =[
@@ -195,30 +201,6 @@
             },
     minCharacters: 2,
   });
-
-
-
-  $('.ui.dropdown')
-  .dropdown();
-
-
-  $('#modal-confirm').click(function(){
-    $('.ui.basic.modal')
-    .modal('show');
-  });
-
-
-  $('#test')
-  .transition('bounce');
-
-
-  $('.message .close')
-  .on('click', function() {
-    $(this)
-      .closest('.message')
-      .transition('fade');
-  });
-
 
 </script>
 
