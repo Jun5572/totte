@@ -37,7 +37,8 @@
 		<div class="user-info-box">
 			<h2><%= @user.nickname %></h2>
 			<h3 class="user-name">
-				<p><%= @user.first_name %> <%= @user.last_name %></p>
+				<p class="laptop-name"><%= @user.first_name %> <%= @user.last_name %></p>
+				<p class="responsive-name"><%= @user.nickname %></p>
 			</h3>
 			<div class="user-join-year">
 				<font color="gray">Joined in <%= @user.created_at.strftime('%Y') %></font>
@@ -67,6 +68,18 @@
 				</tbody>
 			</table>
 		</div>
+		<!-- レスポンシブ時出現-->
+		<div class="responsive-table-box">
+			<div style="margin-left:10px;">
+				<div>投稿枚数 <%= @photo_cnt %></div>
+				<div>アルバム投稿数 <%= @user.albums.count %></div>
+				<div>いいねした数 <%= @user.likes.count %></div>
+				<div>いいねされた数 <%= @user.photos.pluck(:like_count).sum %></div>
+				<div>フォロワー数 <%= @user.follow_count %></div>
+				<div>フォロー数 <%= @user.followers_count %></div>
+			</div>
+		</div>
+		<!-- レスポンシブここまで -->
 	</div>
 	<div class="photo-details">
 		<div class="comments-box">

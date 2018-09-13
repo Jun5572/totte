@@ -23,13 +23,13 @@
 			</div>
 
 			<%= link_to users_path do %>
-				<div class="sub-header-buttons" style="padding:20px;">
+				<div class="sub-header-buttons">
 					<p>All Photos</p>
 				</div>
 			<% end %>
 
 			<%= link_to my_albums_path do %>
-				<div class="sub-header-buttons" style="padding:20px;">
+				<div class="sub-header-buttons">
 					<p>All Albums</p>
 				</div>
 			<% end %>
@@ -39,7 +39,7 @@
 		  			Post
 		  			<i class="dropdown icon"></i>
 		  			<div class="menu">
-		  				<div id="post-photo-modal">
+		  				<div class="post-photo-modal" style="cursor:pointer;">
 		  					<div class="item sub-header-buttons">
 			      				Post Photo
 		      				</div>
@@ -57,7 +57,7 @@
 		  		<div class="ui dropdown item sub-header-buttons">
 		  			Your Activity
 		  			<i class="dropdown icon"></i>
-		  			<div class="menu" style="height:300px; overflow-y:auto;">
+		  			<div class="menu" style="max-height:300px; overflow-y:auto;">
 		  				<div class=" ui header" align="center">最近のアクティビティ</div>
 			  			<%= render 'users/my_activity' %>
 		  			</div>
@@ -71,11 +71,11 @@
 		  			<% end %>
 		  			Follows
 		  			<i class="dropdown icon"></i>
-		  			<div class="menu" style="height:250px; overflow-y:auto;">
+		  			<div class="menu" style="max-height:250px; overflow-y:auto;">
 		  				<div class="ui header" align="center">あなたがフォローしているユーザー</div>
 		  				<% if current_user.follow_count == 0 %>
 			  				<div class="item">
-			  					<font color="gray">フォローしているユーザーはいません</font>
+			  					<font color="gray">フォロー中のユーザーはいません</font>
 			  				</div>
 			  			<% else %>
 			  				<%= render 'users/follower_index' %>
@@ -91,7 +91,7 @@
 		  			<% end %>
 		  			Follower
 		  			<i class="dropdown icon"></i>
-		  			<div class="menu" style="height:250px; overflow-y: auto;">
+		  			<div class="menu" style="max-height:250px; overflow-y: auto;">
 		  				<div class="ui header" align="center">あなたをフォローしているユーザー</div>
 		  				<% if current_user.followers_count == 0 %>
 		  					<div class="item">
@@ -108,7 +108,7 @@
 
 
 
-	<div id="modal" class="ui mini modal" style="padding-bottom:10px;">
+	<div id="mini-modal" class="ui mini modal" style="padding-bottom:10px;">
 		<div class="header" align="center">写真投稿</div>
 		<i class="close icon"></i>
 		<div class="content">
@@ -126,7 +126,7 @@
 			<button class="ui deny secondary inverted button">戻る</button>
 		</div>
 	  </div>
-	</div>
+	</div><!-- mini-modal end -->
 </div><!-- id end -->
 
 
@@ -135,14 +135,7 @@
 
 <script>
 
-	$('#post-photo-modal').click(function() {
-		  $('#modal')
-  			.modal('show');
-	});
 
-</script>
-
-<script>
 	$(function(){
 
 	var nav = $('#chaser');

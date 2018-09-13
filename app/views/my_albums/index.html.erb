@@ -1,17 +1,17 @@
 <title>Album Index</title>
 <div class="main-box">
 	<div class="main-visual">
-		<img id="a-m-v" src="album-header99.jpg" style="width:100%; height:300px; object-fit:cover; display:none;">
+		<img id="a-m-v" src="album-header99.jpg" class="header-image">
 	</div>
 	<%= render 'layouts/sub_header', photo: @photo %>
 	<h2 align="center">All User Albums</h2>
-	<div class="photo-contents-box" style="padding-bottom:100px;">
-	<% if @albums.blank? %>
+	<div class="photo-contents-box" style="padding-bottom:200px;">
+	<% if @albums.blank? || @albums.count == 1 && session[:album_id] != nil %>
 		<div class="">
 			<font size="6" color="gray">No Albums</font>
 		</div>
 	<% else %>
-		<div class="ui special cards">
+		<div class="ui special cards" style="justify-content: center;">
 			<% @albums.each do |album| %>
 				<% if album.album_items.count == 0 %>
 				<% else %>
@@ -32,9 +32,9 @@
 						<div class="content">
 							<div>
 								<%= link_to user_path(album.user) do %>
-								<%= attachment_image_tag album.user, :thumbnail, fallback: 'user_preset_image.png', style: "width:40px;height:40px;object-fit:cover;", class: "ui avatar" %>
+								<%= attachment_image_tag album.user, :thumbnail, fallback: 'user_preset_image.png', style: "width:40px;height:40px;object-fit:cover;", class: "ui avatar user-icon-background" %>
 								<% end %>
-								<span class="header"><%= album.title %></span>
+								<span class="header" style="font-size:15px;"><%= album.title %></span>
 							</div>
 							<div class="meta">
 								<div class="date" align="right"><%= album.created_at.strftime('%Y年%-m月%-d日') %>に作成</div>

@@ -1,28 +1,27 @@
 <title>HOME全ユーザー写真投稿一覧</title>
-<div class="main-box">
+<div class="main-box" style="position:relative;">
 	<div class="main-visual">
 		<%#= attachment_image_tag @rand_photo, :image, class: "main-visual" %>
-		<img id="t-m-v" src="/header-image.jpg" style="width:100%; height:300px; object-fit:cover;display:none;">
+		<img id="t-m-v" src="/header-image.jpg" class="header-image">
 	</div>
-	<%= render 'layouts/sub_header', photo: @photo %>
-	<div id ="index">
-		<%= render 'index', photos: @photos %>
-	</div>
-	<div style="padding-bottom:50px;" align="center">
-		<%= link_to_next_page @photos, "more", remote: true, id: "more_link", class: "ui inverted secondary button" %>
-	</div>
+		<%= render 'layouts/sub_header', photo: @photo %>
+		<h2 align="center">All User Photos</h2>
+		<div class ="index">
+			<%= render 'index', photos: @photos %>
+		</div>
+		<div style="padding-bottom:50px;" align="center">
+			<%= link_to_next_page @photos, "more", remote: true, id: "more_link", class: "ui inverted secondary button" %>
+		</div>
 </div>
 
 
-
 <script>
+
 
 	$(function() {
 
 
 		$('#t-m-v').fadeIn(2000);
-
-		
 		// $('#index').click(function(){
 		// 	$('#more_link').fadeIn(1000);
 		// });

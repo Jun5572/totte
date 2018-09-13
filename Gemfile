@@ -103,3 +103,5 @@ gem 'cocoon'
 
 # フォロー、フォロワー機能
 gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
+
+gem 'jquery-turbolinks'

@@ -35,3 +35,20 @@ background: linear-gradient(135deg, #64EFA5, #1B87F4);
 .hover:hover{
 	background-color: gray;
 }
+
+
+@media screen and (max-width:1024px){
+
+}
+
+@media screen and (max-width:768px){
+
+}
+
+@media screen and (max-width:425px){
+
+		.comments-box {
+		    width: 90%;
+		    margin: 0 auto;
+		}
+}

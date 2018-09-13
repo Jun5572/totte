@@ -3,35 +3,60 @@
 		<div class="content-box">
 			<div class="photo-box">
 				<div class="img">
-				<%= link_to user_photo_path( photo.user, photo ), style: "display:inline-block;
-				position:absolute;
-				top: 0;
-				left: 0;
-				width:100%;
-				height:100%;" do
-				%>
-					<%= attachment_image_tag photo, :image, :style => "border-radius:5px; width:400px;height:300px;"%>
-					<div class="overlay-fillter">
-						<div class="post-user-box2">
-							<%= link_to user_path(photo.user) do %>
-								<%= attachment_image_tag photo.user, :thumbnail, fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
-							<% end %>
-							<div class="img-summ"><%= photo.title %>
-								<% if photo.user == current_user %>
-									<p class="postphoto-user-name" style="font-size: 13px;">あなた</p>
-								<% else %>
-									<p class="postphoto-user-name" style="font-size: 13px;">by <%= photo.user.nickname %></p>
+					<%= link_to user_photo_path( photo.user, photo ), style: "display:inline-block;
+						position:absolute;
+						top: 0;
+						left: 0;
+						width:100%;
+						height:100%;" do
+					%>
+						<%= attachment_image_tag photo, :image, :style => "border-radius:5px; width:400px;height:300px;"%>
+						<div class="overlay-fillter">
+							<div class="post-user-box2">
+								<%= link_to user_path(photo.user) do %>
+									<%= attachment_image_tag photo.user, :thumbnail, fallback: 'user_preset_image.png', :size => "40x40", class: "photo-box-user-icon" %>
 								<% end %>
-								<div class="like-box">
-									<%= render 'likes/likes', photo: photo %>
+								<div class="img-summ"><%= photo.title %>
+									<% if photo.user == current_user %>
+										<p class="postphoto-user-name" style="font-size: 13px;">あなた</p>
+									<% else %>
+										<p class="postphoto-user-name" style="font-size: 13px;">by <%= photo.user.nickname %></p>
+									<% end %>
+									<div class="like-box">
+										<%= render 'likes/likes', photo: photo %>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				<% end %>
+					<% end %>
 				</div>
 			</div>
 		</div>
 	<% end %><!-- each end -->
 </div>
 <%#= paginate @photos %>
+<script>
+
+	$(function() {
+
+
+		$('#t-m-v').fadeIn(2000);
+		// $('#index').click(function(){
+		// 	$('#more_link').fadeIn(1000);
+		// });
+
+		$('.img').hover(
+			function() {
+				$(this).find($('.overlay-fillter')).stop().fadeIn(200);
+				//マウスカーソルが重なった時の処理
+			},
+			function() {
+				//マウスカーソルが離れた時の処理
+				$(this).find($('.overlay-fillter')).stop().fadeOut(200);
+			}
+		);
+
+	});
+
+
+</script>

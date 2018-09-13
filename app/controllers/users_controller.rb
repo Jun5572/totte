@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user!, except: [:top]
-
+  before_action :authenticate_user!, except: [:top, :show]
+  before_action :sign_in_required, only: [:show]
+  
 	def top
 	end
 

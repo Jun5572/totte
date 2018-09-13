@@ -10,18 +10,10 @@ class LikesController < ApplicationController
 		@user = @photo.user
 		@like = current_user.likes.new(photo_id: @photo.id)
 		if @like.save
-			# @likes = Like.where(photo_id: params[:photo_id])
-			# @photos = @user.photos.order(created_at: :desc)
-
 			# jsファイルを呼び出す記述
 			respond_to do |format|
 		      format.js
 		    end
-			# redirect_to user_path(@photo.user)
-			# render partial: 'users/likes', locals: { photo: @photo }
-			 # render partial: 'users/show', locals: {user: @photo.user, photo: @photo }
-			 # render 'users/show'
-
 		else
 			puts 'いいねされていない'
 		end
@@ -33,15 +25,10 @@ class LikesController < ApplicationController
   		@user = @photo.user
 		@like = current_user.likes.find_by(photo_id: params[:photo_id])
 		if @like.destroy
-			# @likes = Like.where(photo_id: params[:photo_id])
-			# @photos = @user.photos.order(created_at: :desc)
-
 			# jsファイルを呼び出す記述
 			respond_to do |format|
 		      format.js
 		    end
-			# redirect_to user_path(@photo.user)
-			# render partial: 'users/likes', locals: { photo: @photo }
 		else
 			puts 'いいね削除失敗'
 		end

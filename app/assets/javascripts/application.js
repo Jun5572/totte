@@ -17,9 +17,8 @@
 // Loads all Semantic javascripts
 //= require semantic-ui
 //= require activestorage
-//= require turbolinks
-// require jquery.infinitescroll
-// require "infinite-scroll.pkgd.min"
+//= require jquery.turbolinks
+// require turbolinks
 //= require_tree .
 
 
@@ -50,10 +49,50 @@ $(function() {
     $('#ajax-comments').html(e.detail[2]["response"]);
     $("textarea").val('')
   });
+  // アルバム写真追加Ajax
+  // $(document).on("ajax:success", "#ajax", function(e) {
+  //   $('#ajax-comments').html(e.detail[2]["response"]);
+  //   $("textarea").val('')
+  // });
 // いいね投稿Ajax
 // $(document).on("ajax:success", "#like", function(e) {
 //   $('#like).html(e.detail[2]["response"]);
 // });
+
+  $('.ui.dropdown')
+  .dropdown();
+
+
+  $('#modal-confirm').click(function(){
+    $('.ui.basic.modal')
+    .modal('show');
+  });
+
+
+  $('#test')
+  .transition('bounce');
+
+
+  $('.message .close')
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade');
+  });
+
+  $('.post-photo-modal').on('click',(function() {
+      $('#mini-modal')
+        .modal('show');
+  }));
+
+$('#post-photo-modal').on('click',(function() {
+      $('#mini-modal')
+        .modal('show');
+  }));
+
+$('#edit').click(function(){
+    $('#header-image-edit-modal').modal('show');
+  });
 
 });
 
