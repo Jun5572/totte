@@ -9,51 +9,56 @@
 			<% if @count == 0 %>
 				<div class="ui form" align="center">
 					<div class="field" style="width: 50%;">
-						<div align="center">選択中の写真　<%= @count %>枚</div>
+						<div style="margin-bottom:10px;" align="center">選択中の写真　<%= @count %>枚</div>
 						<%= form_for @album, url: my_album_path(current_album), id: "button", method: :patch do |f| %>
-							<div align="left"><%= f.label :title, "アルバムのタイトル" %></div>
+							<div align="left"><%= f.label :title, "アルバムのタイトル(写真を選択すると入力できるようになります)" %></div>
 							<%= f.text_field :title, disabled: true, placeholder: "アルバムのタイトルを入力", style: "margin-bottom:5px;" %>
-							<%= f.submit "画像を選択して下さい", class: "ui inverted violet disabled fluid button" %>
+							<%= f.submit "写真を選択して下さい", class: "ui inverted violet disabled fluid button" %>
 						<% end %>
 					</div>
 				</div>
 			<% else %>
 				<div class="ui form" align="center">
 					<div class="field" style="width: 50%;">
-						<div align="center">選択中の写真　<%= @count %>枚</div>
+						<div style="margin-bottom:10px;" align="center">選択中の写真　<%= @count %>枚</div>
 						<%= form_for @album, url: my_album_path(current_album), id: "button", method: :patch do |f| %>
 							<div align="left"><%= f.label :title, "アルバムのタイトル" %></div>
 							<%= f.text_field :title, placeholder: "アルバムのタイトルを入力", style: "margin-bottom:5px;" %>
-							<%= f.submit "アルバムにする", class: "ui violet fluid button" %>
+							<%= f.submit "アルバム作成", class: "ui violet fluid button" %>
 						<% end %>
 					</div>
 				</div>
 			<% end %>
 		</div>
-		<div class="album-item-index-box">
-			<% @photos.reverse.each do |photo| %>
-				<%#= render 'album_item', photo: photo, num: @num %>
-				<% if session[:photo][@num] == photo.id %>
-					<!-- 選択中の画像の表示 -->
-					<% session[:photo][@num] %>
-					<% @num %>
-					<% @num = @num + 1 %>
-					<div class="selected-filter">
-						<%= attachment_image_tag photo, :image, style: "width: 100%; height: 100%;object-fit:fill;" %>
-						<div class="filter-overlay">
-							<%= link_to del_my_album_item_path(current_album, photo), method: :delete, class: "overlay-trashbox-icon" do %>
-								<i class="far fa-trash-alt fa-2x" style="color: rgba(255, 255, 255, 0.7);"></i>
-							<% end %>
+		<% if @photos.blank? %>
+			<div style= "padding:120px;text-align:center;">
+				<font size="6" color="gray">No Photo</font>
+			</div>
+		<% else %>
+			<div class="album-item-index-box">
+				<% @photos.reverse.each do |photo| %>
+					<%#= render 'album_item', photo: photo, num: @num %>
+					<% if session[:photo][@num] == photo.id %>
+						<!-- 選択中の画像の表示 -->
+						<% session[:photo][@num] %>
+						<% @num %>
+						<% @num = @num + 1 %>
+						<div class="selected-filter">
+							<%= attachment_image_tag photo, :image, :fill, 400, 400, style: "width:100%; height:100%; object-fit:cover;" %>
+							<div class="filter-overlay">
+								<%= link_to del_my_album_item_path(current_album, photo), data: { no_turbolink: true }, method: :delete, class: "overlay-trashbox-icon" do %>
+									<i class="far fa-trash-alt fa-2x" style="color: rgba(255, 255, 255, 0.7);"></i>
+								<% end %>
+							</div>
 						</div>
-					</div>
-					<% next %>
-				<% end %>
-				<%= link_to add_my_album_item_path(current_album, photo), method: :post do %>
-					<div><%= attachment_image_tag photo, :image, class: "your-photos-mini" %></div>
-				<% end %>
-
-			<% end %>
-		</div>
+						<% next %>
+					<% end %>
+					<%= link_to add_my_album_item_path(current_album, photo), data: { no_turbolink: true }, method: :post do %>
+						<div><%= attachment_image_tag photo, :image, :fill, 400, 400, class: "your-photos-mini" %></div>
+					<% end %>
+				<% end %><!-- end @photos.reverse.each -->
+			</div>
+		<% end %><!-- end @photos.blank? -->
 	</div>
 </div>
 

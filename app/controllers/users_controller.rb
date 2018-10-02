@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user!, except: [:top, :show]
-  before_action :sign_in_required, only: [:show]
-  
+  before_action :authenticate_user!, except: [:top]
+  before_action :sign_in_required, only: [:show, :welcome]
+  # protect_from_forgery except: :search
+
 	def top
 	end
 
+  def welcome
+    @photo = Photo.new
+  end
 
   def index
     @user = current_user
@@ -22,18 +26,18 @@ class UsersController < ApplicationController
       redirect_back(fallback_location: user_path(current_user))
     else
       redirect_to user_path(@result.id)
-    end 
+    end
   end
 
   def show
       @photo = Photo.new
-    if User.exists?(id: params[:id])
+    # if User.exists?(id: params[:id])
       @user = User.find(params[:id])
       @photos = @user.photos.order(created_at: :desc)
       # @like_hash = Like.where(user_id: current_user.id ).pluck(:id, :photo_id).size
       @likes_count = Photo.where(user_id: @user.id).pluck(:like_count).sum
-    else
-    end
+    # else
+    # end
   end
 
   def edit
@@ -48,14 +52,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-
-  end
 
   private
 
-
   def user_params
-    params.require(:user).permit(:first_mane, :last_name, :nickname, :email, :header_image, :thumbnail)
+    params.require(:user).permit(:first_name, :last_name, :nickname, :email, :header_image, :thumbnail)
   end
 end

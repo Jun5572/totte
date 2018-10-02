@@ -1,49 +1,57 @@
 <!-- コメントeach start -->
-<% unless photo.post_comments.count == 0 %>
-	<% photo.post_comments.reverse.each do |pstcmt| %>
-		<div class="comment-selected">
-			<div class="comment" style="padding-top:15px;">
-				<div class="avatar">
-					<%= link_to user_path(pstcmt.user) do %>
-						<%= attachment_image_tag pstcmt.user, :thumbnail,fallback: 'user_preset_image.png', class: "icon-shadow",
-																style: "width: 40px;
-															 			height: 40px;
-															 			border-radius: 50%;
-															 			background: linear-gradient(135deg, #64EFA5, #1B87F4);"
-						%>
-					<% end %>
-				</div>
-			  	<div class="content">
-				    <span class="author">
-					    <% if pstcmt.user == current_user %>
-					    	<span>あなた</span>
-					    <% else %>
-					    	<%= pstcmt.user.nickname %>
-					    <% end %>
-				    </span>
-				    <div class="metadata">
-				    	<% if pstcmt.created_at.strftime('%m%d') == Date.today.strftime('%m%d') %>
-				      		<span class="date">今日 <%= pstcmt.created_at.strftime('%H:%M') %> </span>
-				    	<% elsif pstcmt.created_at.tomorrow.strftime('%m%d') > Date.today.strftime('%m%d') %>
-				    		<span class="date">昨日 <%= pstcmt.created_at.strftime('%H:%M') %></span>
-				    	<% else %>
-				      		<span class="date"><%= pstcmt.created_at.strftime('%-m月%-d日') %></span>
-				      	<% end %>
-				    </div>
-				    <div class="text" style="padding-bottom:15px;"><%= simple_format(pstcmt.comment) %>
-				    	<% if pstcmt.user == current_user %>
-				    		<%= link_to photo_post_comments_path(pstcmt.photo), method: :delete, remote: true do%>
-					      		<a class="reply ui tiny black right floated button"><font color="white">削除</font></a>
-					      	<% end %>
-				    	<% else %>
-				   	 		<!-- <a class="ui purple label">コメント</a> -->
-				      <% end %>
-				    </div>
-			  	</div>
-			</div>
-		</div>
+<div class="ui dividing header" style="margin-top:10px;">コメント
+	<% if photo.post_comments.count > 0 %>
+		<span class="ajax-comments-count"><%= photo.post_comments.count %>件</span>
 	<% end %>
-<!-- each end -->
-<% else %>
-	<p align="center" style="margin-top:10px;font-size: 15px;color:gray;">まだコメントはありません</p>
-<% end %>
+</div>
+<div style="max-height:350px; overflow-x:auto; overflow-y:auto; background-color:rgba(200, 200, 200, 0.1);">
+	<% unless photo.post_comments.count == 0 %>
+		<% photo.post_comments.reverse.each do |pstcmt| %>
+			<div class="comment-selected">
+				<div class="comment" style="padding: 15px 0px 0px 5px;">
+					<div class="avatar">
+						<%= link_to user_path(pstcmt.user) do %>
+							<%= attachment_image_tag pstcmt.user, :thumbnail,fallback: 'user_preset_image.png', class: "icon-shadow",
+																	style: "width: 40px;
+																 			height: 40px;
+																 			border-radius: 50%;
+																 			background: linear-gradient(135deg, #64EFA5, #1B87F4);"
+							%>
+						<% end %>
+					</div>
+				  	<div class="content">
+					    <span class="author">
+						    <% if pstcmt.user == current_user %>
+						    	<span>あなた</span>
+						    <% else %>
+						    	<%= pstcmt.user.nickname %>
+						    <% end %>
+					    </span>
+					    <div class="metadata">
+					    	<% if pstcmt.created_at.strftime('%m%d') == Date.today.strftime('%m%d') %>
+					      		<span class="date">今日 <%= pstcmt.created_at.strftime('%H:%M') %> </span>
+					    	<% elsif pstcmt.created_at.tomorrow.strftime('%m%d') > Date.today.strftime('%m%d') %>
+					    		<span class="date">昨日 <%= pstcmt.created_at.strftime('%H:%M') %></span>
+					    	<% else %>
+					      		<span class="date"><%= pstcmt.created_at.strftime('%-m月%-d日') %></span>
+					      <% end %>
+					      <% if pstcmt.user == current_user %>
+					    		<%= link_to photo_post_comment_path(pstcmt.photo.id, pstcmt.id), class: "delete-comment", method: :delete, remote: true do%>
+					      		<div style="margin-left:10px; color:rgba(0, 0, 0, 0.4);">
+					      			<i class="far fa-trash-alt"></i>削除
+					      		</div>
+						      <% end %>
+					    	<% else %>
+					   	 		<!-- <a class="ui purple label">コメント</a> -->
+					      <% end %>
+					    </div>
+					    <div class="text" style="padding-bottom:15px;"><%= simple_format(pstcmt.comment) %></div>
+				  	</div>
+				</div>
+			</div>
+		<% end %>
+	<!-- each end -->
+	<% else %>
+		<p align="center" style="margin-top:10px;font-size: 15px;color:gray;">まだコメントはありません</p>
+	<% end %>
+</div>

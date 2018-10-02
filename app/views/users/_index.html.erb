@@ -10,7 +10,7 @@
 						width:100%;
 						height:100%;" do
 					%>
-						<%= attachment_image_tag photo, :image, :style => "border-radius:5px; width:400px;height:300px;"%>
+						<%= attachment_image_tag photo, :image, :fill, 800, 600, :style => "border-radius:5px; width:400px;height:300px;"%>
 						<div class="overlay-fillter">
 							<div class="post-user-box2">
 								<%= link_to user_path(photo.user) do %>
@@ -22,6 +22,12 @@
 									<% else %>
 										<p class="postphoto-user-name" style="font-size: 13px;">by <%= photo.user.nickname %></p>
 									<% end %>
+									<div class="comments-count">
+										<span><font size="3"><%= photo.post_comments.count if photo.post_comments.count > 0 %></font></span>
+										<%= link_to user_photo_path(photo.user, photo) do %>
+											<i class="far fa-comment fa-2x" style="color:rgba(255, 255, 255, 0.8);"></i>
+										<% end %>
+									</div>
 									<div class="like-box">
 										<%= render 'likes/likes', photo: photo %>
 									</div>
@@ -38,12 +44,6 @@
 <script>
 
 	$(function() {
-
-
-		$('#t-m-v').fadeIn(2000);
-		// $('#index').click(function(){
-		// 	$('#more_link').fadeIn(1000);
-		// });
 
 		$('.img').hover(
 			function() {

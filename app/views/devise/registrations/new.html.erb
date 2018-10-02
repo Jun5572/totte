@@ -1,4 +1,4 @@
-<div class="main-box">
+<div class="main-box top-bg">
   <div class="devise-main-box">
     <div class="devise-contents-box">
       <p align="center"><font size="6"><b>Welcome！</b></font></p>
@@ -16,6 +16,7 @@
           </div>
         </div>
         <div class="nickname-box">
+          <%= f.label :nickname, "ニックネーム" %>
           <%= f.text_field :nickname, autofocus: true, :placeholder => "ニックネーム", class: "devise-form-control devise-form-style" %>
         </div>
           <font color="black">誕生日</font>
@@ -34,6 +35,7 @@
           </div>
 
           <div class="field">
+            <%= f.label :email, "メールアドレス" %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "devise-form-control devise-form-style", placeholder: "totte@gmail.com" %>
           </div>
 
@@ -41,6 +43,7 @@
             <% if @minimum_password_length %>
             <em><%#= @minimum_password_length %></em>
             <% end %>
+            <%= f.label :password, "パスワード" %>
             <%= f.password_field :password, autocomplete: "off", class: "devise-form-control devise-form-style", placeholder: "パスワード(" + @minimum_password_length.to_s + "ケタ以上)" %>
           </div>
 
@@ -53,9 +56,8 @@
             <button type="submit" class="ui blue right floated fluid button">はじめる</button>
           </div>
         <% end %>
-
-      <%#= render "devise/shared/links" %>
       </div>
+      <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>

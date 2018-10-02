@@ -1,6 +1,6 @@
 class CreateExifs < ActiveRecord::Migration[5.2]
   def change
-    create_table :exifs do |t|
+    create_table :exifs, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
       t.string :make
       t.string :model
       t.string :lens_info

@@ -12,6 +12,7 @@ class AlbumsController < ApplicationController
     @user = User.find(params[:user_id])
     @albums = current_user.albums.reverse_order
     @albums_cnt = @albums.count
+    @likes_count = Photo.where(user_id: @user.id).pluck(:like_count).sum
   end
 
   def add_album_item

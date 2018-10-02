@@ -5,7 +5,7 @@
 	</div>
 	<%= render 'layouts/sub_header', photo: @photo %>
 	<h2 align="center">All User Albums</h2>
-	<div class="photo-contents-box" style="padding-bottom:200px;">
+	<div class="photo-contents-box" style="padding-bottom:100px;">
 	<% if @albums.blank? || @albums.count == 1 && session[:album_id] != nil %>
 		<div class="">
 			<font size="6" color="gray">No Albums</font>
@@ -43,7 +43,7 @@
 						</div>
 						<div class="extra content" style="display:flex;justify-content: space-between;">
 							<div>
-								<i class="large images outline icon"></i>アルバム枚数<%= album.album_items.count %>枚
+								<i class="large images outline icon"></i><%= album.album_items.count %>枚
 							</div>
 						</div>
 					</div>

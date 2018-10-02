@@ -5,7 +5,7 @@
 			<% if @photo.image == nil %>
 				<div class="showpage-photo">ImageFile broken</div>
 			<% else %>
-				<%= attachment_image_tag @photo, :image, class: "showpage-photo"%>
+				<%= attachment_image_tag @photo, :image, :fill, 900, 650, class: "showpage-photo"%>
 			<% end %>
 		</div>
 		<% if @photo_cnt > 1 %>
@@ -24,13 +24,29 @@
 				<% end %>
 			<% end %>
 		<% end %>
+
+		<div class="photos-show-sns-icons-box">
+			<a title="facebookでシェア" style="color:#305097;" href="https://www.facebook.com/share.php?url=<%= request.url %>&text=写真でつながるSNS totte" rel="nofollow" target="_blank">
+				<i class="fab fa-facebook-square fa-3x"></i>
+			</a>
+
+			<a title="twitterでシェア" style="color:#00aced;" href="https://twitter.com/share?url=<%= request.url %>&text=『<%= @photo.title %>』写真で繋がるSNS totte" rel="nofollow" target="_blank">
+				<i class="fab fa-twitter-square fa-3x"></i>
+			</a>
+
+			<a title="LINEでシェア" style="color:#5ae628;" href="http://line.me/R/msg/text/?『<%= @photo.title %>』写真で繋がるSNS totte" rel="nofollow" target="_blank">
+				<i class="fab fa-line fa-3x"></i>
+			</a>
+		</div>
+
+
 	</div>
 	<div class="photos-index">
 
 	</div>
 	<div class="user-details">
 		<div class="">
-			<%= link_to user_path(@user) do %>
+			<%= link_to user_path(@user), title: "My Photos" do %>
 				<%= attachment_image_tag @user, :thumbnail, fallback: 'user_preset_image.png', class: "user-icon-circle" %>
 			<% end %>
 		</div>
@@ -85,21 +101,15 @@
 		<div class="comments-box">
 			<div class="ui comments">
 				<!--- コメント投稿フォーム ---->
-				<% if @user == current_user %>
-				<% else %>
 					<div class="ui reply tiny form">
 					  <%= form_with model: @post_comment, url: photo_post_comments_path(@photo), id: "ajax" do |f| %>
-					  <%= f.text_area :comment, placeholder: "コメント100文字以内", style: "", minlength: 2, maxlength: 100 %>
-						<button data-remote="true" type="submit" class="ui purple labeled icon mini right floated button" style="margin-top:5px;"><i class="icon edit"></i> 送信 </button>
+					  <%= f.text_area :comment, placeholder: "コメント100文字以内", id:"text-memo" , class: "comment-form", minlength: 2, maxlength: 100 %>
+						<button data-remote="true" type="submit" id="comment-button" class="ui purple labeled icon mini right floated button" style="margin-top:5px; display:none;"><i class="icon edit"></i> 送信 </button>
 						<% end %>
 					</div>
-				<% end %>
+					<p>あと<span class="chara-count"></span>文字入力できます</p>
+
 				<!-- コメント投稿フォームend -->
-				<div class="ui dividing header" style="margin-top:10px;">コメント
-					<% if @photo.post_comments.count > 0 %>
-						<%= @photo.post_comments.count %>件
-					<% end %>
-				</div>
 				<!-- 以下Ajax -->
 				<div id ="ajax-comments" class="comments-scroll">
 					<%= render 'photos/comments', user: @user, photo: @photo %>
@@ -159,9 +169,50 @@
 	</div>
 </div>
 
-
-
 <script>
+
+	// コメント文字数のリアルタイムカウント
+$(function(){
+
+    var text_max = 100; // 最大入力値
+    $(".chara-count").text(text_max - $("#text-memo").val().length);
+
+    $("#text-memo").on("keydown keyup keypress change",function(){
+        var text_length = $(this).val().length;
+        var countdown = text_max - text_length;
+        $(".chara-count").text(countdown);
+        // if(text_max = countdown){
+        //     $('#comment-button').css({
+        //           display: 'none'
+        //     });
+        // }
+        if(countdown < 0){
+            $('.chara-count').css({
+                color:'#ff0000',
+                fontWeight:'bold'
+            });
+        } else {
+            $('.chara-count').css({
+                color:'#000000',
+                fontWeight:'normal'
+            });
+            if(text_length > 0){
+              $('#comment-button').css({
+                display:'inline-block'
+              });
+            }else{
+              $('#comment-button').fadeOut(200);
+            }
+        }
+    });
+// コメントの送信ボタンを押した後のボタン非表示と文字数カウントリセット
+    $('#comment-button').click(function(){
+      $('#comment-button').fadeOut(200);
+      $('.chara-count').text(text_max);
+    })
+});
+
+	
 
 	$('#exif-popup')
   .popup({

@@ -3,6 +3,6 @@ class Notice < ApplicationRecord
 	belongs_to :user
 	belongs_to :photo
 	belongs_to :follow, optional: true
-	has_one :like
-	has_one :post_comment
+	belongs_to :like, optional: true
+	belongs_to :post_comment, optional: true
 end
