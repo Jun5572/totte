@@ -1,24 +1,34 @@
-<div class="first-contact-box">
+<div class="first-contact-box" style="display:none;">
 		<img src="/album-header13.jpg" alt="" style="width: 100%;
 													width: 100%;
     												height: 700px;
     												object-fit: cover;">
 			<div class="overlay-box">
-				<div class="lets-massage-box">
+				<div class="lets-massage-box" style="display:none;">
 					<p align="center"><font size="7">Hallo, totte!</font></p>
 					<div align="center"><font size="5">さあ、はじめよう</font></div>
 					<div class="lets-massage">
-						<p style="font-size:15px; text-align:center;">こんにちは <%= current_user.nickname %>さん</p>
+						<p style="font-size:18px; text-align:center;">
+							<% if Date.today.strftime('%-H') >= 5.to_s && Date.today.strftime('%-H') <= 18.to_s %>
+								こんにちは！ <%= current_user.nickname %>さん
+							<% else %>
+								こんばんは！ <%= current_user.nickname %>さん
+							<% end %>
+						</p>
 						<p style="font-size:15px;">
-							はじめまして。<br>
-							totteにようこそ！<br>
+							はじめまして。	ようこそtotteへ！<br>
 							世界中の人が <%= current_user.nickname %>さんの撮った作品を心待ちにしているでしょう。<br>
 							<%= current_user.nickname %>さんの何気ない１枚も、素敵な作品の１枚です。<br>
-							下のボタンからまずは作品をアップロードしてみましょう。<br>
+							まずは下のボタンから写真をアップロードしてみましょう。<br>
 						</p>
 					</div>
 					<div style="text-align: center;">
-							<button id="post-photo-modal" class="ui inverted purple button">写真を投稿する</button>
+						<button id="post-photo-modal" class="ui inverted purple button">写真を投稿する</button>
+						<div style="margin-top:15px;">
+							<%= link_to user_path(current_user) do %>
+								<div class="ui button">あとで投稿する</div>
+							<% end %>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -29,7 +39,7 @@
 			<div class="header" align="center">写真投稿</div>
 				<i class="close icon"></i>
 				<div class="content">
-			  			<%= form_for photo, url: photos_path do |f| %>
+			  			<%= form_for @photo, url: photos_path do |f| %>
 						<%= f.attachment_field :image, style: "" %>
 						<div class="ui form" style="margin: 10px auto;">
 							<%= f.label :title, "写真のタイトル" %>
@@ -50,5 +60,11 @@
 		  $('#modal')
   			.modal('show');
 	});
+
+	$('.first-contact-box').fadeIn(1500);
+
+    setTimeout(function(){
+    	$('.lets-massage-box').fadeIn(1000);
+    },1500);
 
 </script>

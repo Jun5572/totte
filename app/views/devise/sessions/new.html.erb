@@ -1,4 +1,4 @@
-<div class="main-box">
+<div class="main-box top-bg">
   <div class="devise-main-box">
     <div class="devise-contents-box">
       <p align="center"><font size="6"><b>Login</b></font></p>
@@ -7,7 +7,7 @@
           <%= devise_error_messages! %>
         <div class="nickname-box">
           <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "devise-form-control devise-form-style" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "totte@gmail.com", class: "devise-form-control devise-form-style" %>
           <%#= f.label :nickname, "ニックネーム" %>
           <%#= f.text_field :nickname, autofocus: true, :placeholder => "ニックネーム", class: "devise-form-control devise-form-style" %>
 

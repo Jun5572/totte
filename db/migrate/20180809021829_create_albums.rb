@@ -1,6 +1,6 @@
 class CreateAlbums < ActiveRecord::Migration[5.2]
   def change
-    create_table :albums do |t|
+    create_table :albums, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
       t.string :title
       t.text :introduction
       t.string :thumbnail_id

@@ -16,11 +16,12 @@ class PostCommentsController < ApplicationController
 	end
 
 	def destroy
-		photo = Photo.find(params[:photo_id])
-		user = photo.user
-		comment = PostComment.find(params[:id])
-		if comment.destroy
-			# redirect_to user_photo_path(user, photo)
+		@photo = Photo.find(params[:photo_id])
+		@user = @photo.user
+		@comment = PostComment.find(params[:id])
+		if @comment.destroy
+			@photo = Photo.find(params[:photo_id])
+			@user = @photo.user
 			render partial: 'photos/comments', locals: { photo: @photo, user: @user }
 		else
 		end

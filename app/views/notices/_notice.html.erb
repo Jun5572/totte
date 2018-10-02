@@ -2,25 +2,29 @@
 	<div class="notice-list">
 		<% if notice.read == false && notice.notice_type == "コメント" || notice.notice_type == "いいね！" %>
 			<div style="display:flex;justify-content: space-between;">
-				<div style="margin: auto 5px;"><b><%= notice.notice_by.nickname %>さん</b>があなたの投稿に「 <b><%= notice.notice_type %></b> 」しました！</div>
+				<div style="margin: auto 5px;">
+					<%= link_to user_path(notice.notice_by), style: "color:black;" do %>
+						<b><%= notice.notice_by.nickname %>さん</b>
+					<% end %>
+					があなたの投稿に「 <b><%= notice.notice_type %></b> 」しました！</div>
 				<%= link_to link_through_path(notice) do %>
-					<%= attachment_image_tag notice.photo, :image, style: "width:40px; height:40px;object-fit:cover;" %>
+					<%= attachment_image_tag notice.photo, :image, :fill, 100, 100, style: "width:40px; height:40px;object-fit:cover;" %>
 				<% end %>
 			</div>
 			<%#= link_to "確認する", link_through_path(notice), class: "ui mini inverted purple button"%>
 		<% elsif notice.read == false && notice.notice_type == "フォロー" %>
 			<div style="display:flex;justify-content: space-between;">
 				<%= link_to user_path(notice.notice_by) do %>
-					<%= attachment_image_tag notice.notice_by, :thumbnail, style: "width:40px; height:40px;object-fit:cover;border-radius:50%;"%>
+					<%= attachment_image_tag notice.notice_by, :thumbnail, fallback: 'user_preset_image.png', style: "width:40px; height:40px;object-fit:cover;border-radius:50%;"%>
 				<% end %>
 				<div style="margin: auto 10px;"><b><%= notice.notice_by.nickname %>さん</b>があなたを <b><%= notice.notice_type %></b> しました！</div>
 				<% unless current_user.following? notice.notice_by %>
 					<%= link_to link_through_path(notice) do %>
-						<button class="ui inverted violet mini button">フォローバック</button>
+						<div class="ui inverted violet mini button">フォローバック</div>
 					<% end %>
 				<% else %>
 					<%= link_to link_through_path(notice) do %>
-						<button class="ui inverted secondary mini button">確認</button>
+						<div class="ui inverted secondary mini button">確認</div>
 					<% end %>
 				<% end %>
 			</div>

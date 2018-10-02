@@ -38,6 +38,11 @@ td, th {
 td{
 	font-size: 25px;
 }
+
+canvas {
+  width: 300px;
+}
+
 /*-----------------------------------*/
 .responsive-humburger-menu{
 	display:none;
@@ -115,7 +120,7 @@ td{
 	/*justify-content: space-around;*/
 	width: 40%;
 	margin: 0 auto;
-	padding: 60px;
+	padding: 30px;
 }
 .field{
 
@@ -193,6 +198,46 @@ footer{
 	height: 100px;
 	background: linear-gradient(aliceblue, 30%, black);
 }
+/*トップページ*/
+.catch-copy{
+	color: white;
+    text-align: center;
+    position: relative;
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    font-size: 20px;
+}
+.sns-icons-box{
+	text-decoration-color: white;
+	color: white;
+	padding: 50px;
+	width: 50%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
+.fa-facebook-square, .fa-twitter-square, .fa-line {
+	opacity: 0.7;
+	filter:drop-shadow(0px 0px 2px white);
+	transition: opacity 200ms, filter 200ms;
+}
+.fa-facebook-square:hover{
+	filter:none;
+	opacity:1;
+}
+.fa-twitter-square:hover{
+	filter:none;
+	opacity: 1;
+}
+.fa-line:hover{
+	filter:none;
+	opacity:1;
+}
+/*トップページここまで*/
 
 .modal-change-header-image-form{
 	width:500px;
@@ -321,6 +366,16 @@ footer{
 .subheader-contents{
 	width:80%;
 	margin:0 auto;
+}
+.subheader-sns-icons-box{
+    padding: 0px;
+    width: 25%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    margin-left: 100px;
+    filter: drop-shadow(0px 0px 1px gray);
+    opacity: 1;
 }
 .sub-header-dropdown-user-icon{
 	width: 30px!important;
@@ -492,6 +547,12 @@ footer{
     /*width: 30px;*/
     /*height: 10px;*/
     z-index: 1;
+}
+.comments-count{
+	position:absolute;
+	bottom: 15px;
+	right: 100px;
+	color: 	white;
 }
 .create-like-icon{
 	filter: none;
@@ -678,6 +739,35 @@ footer{
 		height: 100px;
 		background: linear-gradient(aliceblue, 30%, black);
 	}
+
+	/*トップページ*/
+	.sns-icons-box{
+		text-decoration-color: white;
+		color: white;
+		padding: 50px;
+		width: 50%;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+	}
+	.fa-facebook-square, .fa-twitter-square, .fa-line {
+		opacity: 0.7;
+		filter:drop-shadow(0px 0px 2px white);
+		transition: opacity 200ms, filter 200ms;
+	}
+	.fa-facebook-square:hover{
+		filter:none;
+		opacity:1;
+	}
+	.fa-twitter-square:hover{
+		filter:none;
+		opacity: 1;
+	}
+	.fa-line:hover{
+		filter:none;
+		opacity:1;
+	}
+	/*トップページここまで*/
 
 	.modal-change-header-image-form{
 		width:500px;
@@ -1011,6 +1101,22 @@ footer{
 		td{
 			font-size: 25px;
 		}
+
+		/*トップページ*/
+		.sns-icons-box{
+			text-decoration-color: white;
+			color: white;
+			padding: 30px 0px;
+			width: 100%;
+			margin: 0 auto;
+			display: flex;
+			justify-content: space-between;
+		}
+		.fa-facebook-square, .fa-twitter-square, .fa-line {
+			filter:drop-shadow(0px 0px 2px black);
+		}
+		/*トップページここまで*/
+
 		.display{
 			display:none;
 		}
@@ -1080,7 +1186,16 @@ footer{
 			padding: 2px;
 			/*transition: color 100ms, background-color 100ms;*/
 		}
-
+		.subheader-sns-icons-box{
+		    padding: 0px;
+		    width: 25%;
+		    margin: auto;
+		    display: flex;
+		    justify-content: space-around;
+		    margin-left: 100px;
+		    filter: drop-shadow(0px 0px 1px gray);
+		    opacity: 1;
+		}
 
 
 
@@ -1109,7 +1224,7 @@ footer{
 			font-size: 40px;
 		}
 		.devise-contents-box{
-			width: 425px;
+			width: 100%;
 			margin: 0 auto;
 			padding: 35px;
 		}

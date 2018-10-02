@@ -45,9 +45,9 @@ $(function() {
   // .popup();
 
 // コメント投稿Ajax
-  $(document).on("ajax:success", "#ajax", function(e) {
+  $(document).on("ajax:success", "#ajax, .delete-comment", function(e) {
     $('#ajax-comments').html(e.detail[2]["response"]);
-    $("textarea").val('')
+    $(".comment-form").val('');
   });
   // アルバム写真追加Ajax
   // $(document).on("ajax:success", "#ajax", function(e) {
@@ -86,16 +86,68 @@ $(function() {
   }));
 
 $('#post-photo-modal').on('click',(function() {
-      $('#mini-modal')
-        .modal('show');
-  }));
+    $('#mini-modal')
+      .modal('show');
+}));
 
 $('#edit').click(function(){
-    $('#header-image-edit-modal').modal('show');
-  });
+  $('#header-image-edit-modal').modal('show');
+});
+
+$('#index').click(function(){
+  $('#more_link').fadeIn(1000);
+});
 
 });
 
+
+
+// onload = function() {
+//   var input = document.getElementById('file');
+//   var dst = document.getElementById('dst');
+//   input.onchange = function() {
+//     // 選択中のファイルの一つ目
+//     var file = this.files[0];
+//     // ファイルを選択しなかった場合
+//     if(!file) return;
+//     // ファイル形式
+//     console.log(file.type);
+//     // ファイル形式の中にimageが含まれない場合
+//     if(!/image/.test(file.type)) {
+//       alert('画像を選択してください。');
+//       return;
+//     }
+
+//     // 読み込み用の関数で読み込み完了時に、HTMLにcanvas追加
+//     load(file, function(canvas) {
+//       dst.appendChild(canvas);
+
+//       // canvas がクリックされた時に、別ウィンドウで画像を開く
+//       canvas.onclick = function() {
+//         open(this.toDataURL('image/png'));
+//       };
+//     });
+
+//   };
+
+//   function load(file, callback) {
+//     // canvas: true にすると canvas に画像を描画する(回転させる場合は必須オプション)
+//     var options = {canvas: true};
+
+//     loadImage.parseMetaData(file, function (data) {
+//       if (data.exif) {
+//         console.log("exifに格納されている情報:\n", data.exif.getAll());
+
+//         // options の orientation は小文字。 exif.getの 'Orientation' は先頭大文字
+//         // ここでcanvasの回転を指定している
+//         options.orientation = data.exif.get('Orientation');
+//         console.log('Orientation: ' + options.orientation);
+//       }
+//       // 画像の読み込み。完了時に callback が呼び出される
+//       loadImage(file, callback, options);
+//     });
+//   }
+// };
 
 // $('.button')
 //   .popup({
@@ -126,7 +178,6 @@ $('#edit').click(function(){
 // $(function() {
 //     $(window).scroll(function(){
 //         var y = $(this).scrollTop(); // スクロール値を取得（=Y座標=縦位置）
-        
 //         $('.main-visual').css('background-position', '0 ' + parseInt( -y / 2 ) + 'px'); // 1/2のスピード
 //     });
 // });

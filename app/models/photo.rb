@@ -1,5 +1,7 @@
 class Photo < ApplicationRecord
+  # include Refile::MiniMagick
 	attachment :image
+  # process :fix_exif_rotation
   # attachment :thumbnail
 
 	belongs_to :user

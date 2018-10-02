@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html>
-<title>Totte</title>
-  <head>
+<title>totte</title>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <!-- OGP設定 -->
+    <meta property="og:title" content="totte" />
+    <meta property="og:type" content="application" />
+    <meta property="og:url" content="http://totte.biz" />
+    <meta property="og:image" content="public/album-header13.jpg" />
+    <meta property="og:site_name" content="totte" />
+    <meta property="og:description" content="写真で繋がるSNS" />
+    <meta name="twitter:card" content="photo" />
+    <!-- OGP設定end -->
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <%= csp_meta_tag %>
-
+    <%= favicon_link_tag 'user_preset_image.png'%>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="./js/zdo_drawer_menu.js"></script>
+    <!-- <script src="./js/zdo_drawer_menu.js"></script> -->
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.scss"> -->
-    <link rel="stylesheet" href="./css/zdo_drawer_menu.css">
+    <!-- <link rel="stylesheet" href="./css/zdo_drawer_menu.css"> -->
+    <script src="https://cdn.rawgit.com/blueimp/JavaScript-Load-Image/v2.6.2/js/load-image.all.min.js"></script>
   </head>
 
   <body>
@@ -31,11 +41,11 @@
 
   <% else %>
 
-    <% if user_signed_in? && current_user.photos.present? %>
+    <% if user_signed_in? %>
       <div class="headline-box">
         <div class="headline-icons">
           <div class="">
-            <%= link_to users_path do %>
+            <%= link_to users_path, title: "All User Photos" do %>
               <img src="/assets/totte-logo.png" class="brand-logo">
             <% end %>
           </div>
@@ -143,7 +153,7 @@
                   </div> -->
                 <%# else %>
                   <div class="header">
-                    <%= link_to destroy_user_session_path, class: "ui inverted secondary fluid tiny button", data: { confirm: "作成中のアルバムがある場合は、その内容が破棄されます。ログアウトしてよろしいですか？" }, method: :delete do %>
+                    <%= link_to destroy_user_session_path, class: "ui inverted secondary fluid tiny button", data: { confirm: "作成中のアルバムがある場合は、その内容が破棄されます。ログアウトしてよろしいですか？" }, method: :get do %>
                     ログアウト
                     <% end %>
                   </div>
@@ -153,9 +163,9 @@
           </div>
   <!-- ドロップダウンアイコンここまで -->
   <!-- レスポンシブ　ハンバーガーメニューここから -->
-  <div class="responsive-humburger-menu">
-    <%= render 'layouts/humburger' %>
-  </div>
+          <div class="responsive-humburger-menu">
+            <%= render 'layouts/humburger' %>
+          </div>
   <!-- ハンバーガーメニューここまで -->
         </div>
       </div>

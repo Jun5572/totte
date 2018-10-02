@@ -28,7 +28,7 @@ ja:
         password: "パスワード"
         password_confirmation: "パスワード（確認用）"
         remember_created_at: "ログイン記憶時刻"
-        remember_me: "ログインを記憶する"
+        remember_me: "ログイン状態を保持する"
         reset_password_sent_at: "パスワードリセット送信時刻"
         reset_password_token: "パスワードリセット用トークン"
         sign_in_count: "ログイン回数"
@@ -36,8 +36,14 @@ ja:
         unlock_token: "ロック解除用トークン"
         updated_at: "更新日"
         camera: "カメラ"
-    models:
-      users: "ユーザー"
+      models:
+        users: "ユーザー"
+        notice: "通知"
+        attributes:
+          follow: "フォロー"
+          like: "いいね！"
+          post_comment: "コメント"
+
   devise:
     confirmations:
       confirmed: "アカウントを登録しました。"
@@ -150,3 +156,7 @@ ja:
       not_saved:
         one: "エラーが発生したため %{resource} は保存されませんでした。"
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+      models:
+        notice:
+          attributes:
+            post_comment: "コメント"

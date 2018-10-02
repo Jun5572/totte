@@ -1,6 +1,6 @@
 class CreateNotice < ActiveRecord::Migration[5.2]
   def change
-    create_table :notices do |t|
+    create_table :notices, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
       t.references :user, index: true, foreign_key: true
       t.references :notice_by, index: true
       t.references :photo, index: true, foreign_key: true

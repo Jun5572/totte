@@ -1,15 +1,16 @@
 <title>Users#show</title>
 <section>
 	<div class="main-box">
-		<% if current_user.sign_in_count <= 1 && @photos.blank? %>
-	<!-- 初回リンク　ウェルカムページ -->
-			<%= render 'photos/welcome', photo: @photo %>
+		<% if @photos.blank? %>
+			<%= render 'layouts/user_main_visual', user: @user%>
+			<%= render 'layouts/sub_header', photo: @photo %>
+			<h2 align="center">My Photos</h2>
+			<div class="main-contents-box">
+				<div style= "padding:150px;text-align:center;">
+					<font size="6" color="gray">No Photo</font>
+				</div>
+			</div>
 		<% else %>
-			<% if @photos.blank? %>
-				<%= render 'layouts/user_main_visual', user: @user%>
-				<%= render 'layouts/sub_header', photo: @photo %>
-				No Photo
-			<% end %>
 			<%= render 'layouts/user_main_visual', user: @user%>
 			<%= render 'layouts/sub_header', photo: @photo%>
 			<% if @user == current_user %>
@@ -18,15 +19,22 @@
 				<h2 align="center">Photos</h2>
 			<% end %>
 			<div class="main-contents-box" style="display:flex; justify-content:space-around;">
-				<div class="my-photos-box" style="padding-bottom: 100px;">
+				<div class="my-photos-box" style="padding-bottom: 80px;">
 					<!-- each start -->
 					<% @photos.each do |photo| %>
 						<div class="my-photo-img">
 							<%= link_to user_photo_path(photo.user, photo),  class: "user-show-photo-box" do%>
-								<%= attachment_image_tag photo, :image, :style => "width:100%; height:100%;" %>
+								<%= attachment_image_tag photo, :image, :fill, 600, 400, style: "width:100%; height:100%;" %>
+								<%#= attachment_image_tag photo, :image, :style => "width:100%; height:100%;", fomat:"jpg" %>
 								<div class="overlay-fillter-radius-none">
 									<div class="post-user-box">
 										<p class="photo-title"><%= photo.title %></p>
+										<div class="comments-count" style="display:flex;">
+											<span><font size="3" color="white"><%= photo.post_comments.count if photo.post_comments.count > 0 %></font></span>
+											<%= link_to user_photo_path(photo.user, photo) do %>
+												<i class="far fa-comment fa-2x" style="color:rgba(255, 255, 255, 0.8);"></i>
+											<% end %>
+										</div>
 										<!-- いいねAjax -->
 										<div class="like-box">
 											<%= render 'likes/likes', photo: photo %>
@@ -46,7 +54,7 @@
 					<% end %><!-- each end -->
 				</div>
 			</div>
-		<% end %><!-- end if current_user.sign_in_count <= 1 && @photos.blank? -->
+		<% end %>
 	</div>
 </section>
 

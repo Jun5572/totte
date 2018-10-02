@@ -1,6 +1,6 @@
 class CreateCompanies < ActiveRecord::Migration[5.2]
   def change
-    create_table :companies do |t|
+    create_table :companies, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
       t.string :name
       t.string :staff
       t.string :url
